@@ -1,4 +1,6 @@
-<x-app-layout title="Contacts">
+<x-app-layout>
+
+    <x-heading title="Contacts"/>
 
     <div class="container mx-auto">
 

@@ -40,4 +40,30 @@ class ContactTest extends TestCase
         $response->assertSee("/contacts/{$contacts[105]->id}");
         $response->assertSee("value=\"{$contacts[105]->email}\"", false);
     }
+
+    public function test_contact_can_be_edited()
+    {
+        $contact = Contact::factory()->create();
+
+        $response = $this->whileLoggedIn()->get("/contacts/{$contact->id}");
+        $response->assertSee($contact->email);
+        $response->assertSee('Save');
+    }
+
+    public function test_contact_can_be_saved()
+    {
+        $contact = Contact::factory()->create();
+
+        $response = $this->whileLoggedIn()->put("/contacts/{$contact->id}", [
+            'email' => 'updated@example.com',
+            'unsubscribed' => 'true',
+        ]);
+        $response->assertRedirect("/contacts/{$contact->id}");
+        $response->assertSee('Contact updated!');
+        $this->assertDatabaseHas('contacts', [
+            'id' => $contact->id,
+            'email' => 'updated@example.com',
+            'unsubscribed' => 'true',
+        ]);
+    }
 }

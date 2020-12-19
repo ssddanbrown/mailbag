@@ -20,16 +20,14 @@
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
-            @if($title ?? false)
-                <div class="container pt-8 pb-4 mt-8">
-                    <h2 class="font-bold text-4xl text-gray-800 leading-tight">
-                        {{ $title }}
-                    </h2>
+            @if(session()->has('success'))
+                <div class="container pt-8 -mb-4">
+                    <x-notification-success>{{ session()->get('success') }}</x-notification-success>
                 </div>
             @endif
 
             <!-- Page Content -->
-            <main class="py-3">
+            <main>
                 {{ $slot }}
             </main>
         </div>

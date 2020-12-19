@@ -24,7 +24,9 @@ Route::group(['middleware' => 'auth'], function() {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::resource('contacts', ContactController::class);
+    Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+    Route::get('/contacts/{contact}', [ContactController::class, 'edit'])->name('contacts.edit');
+    Route::put('/contacts/{contact}', [ContactController::class, 'update'])->name('contacts.update');
 
 });
 

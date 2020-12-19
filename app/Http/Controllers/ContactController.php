@@ -48,17 +48,6 @@ class ContactController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Contact $contact)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Contact  $contact
@@ -66,7 +55,7 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        //
+        return view('contacts.edit', ['contact' => $contact]);
     }
 
     /**
@@ -78,7 +67,18 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        //
+        $this->validate($request, [
+            'email' => 'required|email',
+            'unsubscribed' => 'boolean',
+        ]);
+
+        $contact->update([
+            'email' => $request->get('email'),
+            'unsubscribed' => $request->get('unsubscribed') === '1',
+        ]);
+
+        $this->showSuccessMessage('Contact updated!');
+        return redirect()->route('contacts.edit', compact('contact'));
     }
 
     /**
