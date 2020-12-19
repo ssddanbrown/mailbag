@@ -9,7 +9,7 @@
     </div>
 
     <div class="flex-auto px-3">
-        <!-- Email Address -->
+        <!-- Unsubscribe Status -->
         <div class="pt-5">
             <div class="relative flex justify-center items-start pt-5">
                 <div class="flex items-center h-5">
