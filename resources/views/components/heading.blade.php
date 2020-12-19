@@ -1,12 +1,14 @@
 @if($title ?? false)
-    <div {{ $attributes->merge(['class' => 'container py-5 mt-8']) }}>
-        <h2 class="font-bold text-4xl text-gray-800 leading-tight">
-            {{ $title }}
-        </h2>
-        @if($subtitle ?? false)
-            <h2 class="font-semibold text-xl mt-1 text-gray-600 leading-tight">
-                {{ $subtitle }}
+    <div {{ $attributes->merge(['class' => 'container mt-8']) }}>
+        <div class="border-b border-gray-300 py-5 pb-5 mb-5">
+            <h2 class="font-bold text-4xl text-gray-800 leading-tight">
+                {{ $title }}
             </h2>
-        @endif
+            @if($subtitle ?? false)
+                <h2 class="font-semibold text-xl mt-1 mb-1 text-gray-600 leading-tight">
+                    {{ $subtitle }}
+                </h2>
+            @endif
+        </div>
     </div>
 @endif

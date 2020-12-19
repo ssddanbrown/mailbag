@@ -54,16 +54,50 @@ class ContactTest extends TestCase
     {
         $contact = Contact::factory()->create();
 
-        $response = $this->whileLoggedIn()->put("/contacts/{$contact->id}", [
+        $response = $this->whileLoggedIn()->followingRedirects()->put("/contacts/{$contact->id}", [
             'email' => 'updated@example.com',
-            'unsubscribed' => 'true',
+            'unsubscribed' => '1',
         ]);
-        $response->assertRedirect("/contacts/{$contact->id}");
+        $response->assertSee('updated@example.com');
         $response->assertSee('Contact updated!');
         $this->assertDatabaseHas('contacts', [
             'id' => $contact->id,
             'email' => 'updated@example.com',
-            'unsubscribed' => 'true',
+            'unsubscribed' => true,
+        ]);
+    }
+
+    public function test_contact_can_be_deleted()
+    {
+        $contact = Contact::factory()->create();
+
+        $this->assertDatabaseHas('contacts', ['id' => $contact->id]);
+
+        $response = $this->whileLoggedIn()->delete("/contacts/{$contact->id}");
+        $response->assertRedirect(route('contacts.index'));
+
+        $this->assertDatabaseMissing('contacts', ['id' => $contact->id]);
+    }
+
+    public function test_new_contact_view()
+    {
+        $response = $this->whileLoggedIn()->get("/contacts/create");
+        $response->assertStatus(200);
+        $response->assertSee('Create new contact');
+        $response->assertDontSeeText('Delete');
+    }
+
+    public function test_contact_create_request()
+    {
+        $response = $this->whileLoggedIn()->followingRedirects()->post("/contacts", [
+            'email' => 'barry@example.com',
+        ]);
+
+        $response->assertSee('barry@example.com');
+        $response->assertSee('Contact created');
+        $this->assertDatabaseHas('contacts', [
+            'email' => 'barry@example.com',
+            'unsubscribed' => false,
         ]);
     }
 }

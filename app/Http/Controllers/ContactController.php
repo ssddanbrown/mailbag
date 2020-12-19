@@ -28,30 +28,35 @@ class ContactController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        $default = new Contact(['unsubscribed' => false]);
+        return view('contacts.create', ['contact' => $default]);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'email' => 'required|email|unique:contacts,email',
+            'unsubscribed' => 'boolean',
+        ]);
+
+        $contact = new Contact([
+            'email' => $request->get('email'),
+            'unsubscribed' => $request->get('unsubscribed') === '1',
+        ]);
+        $contact->save();
+
+        $this->showSuccessMessage('Contact created!');
+        return redirect()->route('contacts.edit', compact('contact'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
      */
     public function edit(Contact $contact)
     {
@@ -60,15 +65,11 @@ class ContactController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Contact $contact)
     {
         $this->validate($request, [
-            'email' => 'required|email',
+            'email' => "required|email|unique:contacts,email,{$contact->id}",
             'unsubscribed' => 'boolean',
         ]);
 
@@ -83,12 +84,11 @@ class ContactController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Contact $contact)
     {
-        //
+        $contact->delete();
+        $this->showSuccessMessage("Contact deleted!");
+        return redirect()->route('contacts.index');
     }
 }

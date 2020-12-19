@@ -4,7 +4,14 @@
 
     <div class="container mx-auto">
 
-        <x-search-input/>
+        <div class="flex align-middle -mx-5">
+            <div class="flex-auto px-5">
+                <x-search-input/>
+            </div>
+            <div class="flex-auto px-5 text-right">
+                <x-button-secondary-link :href="route('contacts.create')">Create New</x-button-secondary-link>
+            </div>
+        </div>
 
         <div class="pb-5">{{ $contacts->links() }}</div>
 

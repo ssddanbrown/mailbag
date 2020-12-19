@@ -1,10 +1,9 @@
 <x-app-layout>
-    <x-heading title="Contact" :subtitle="$contact->email"/>
+    <x-heading title="Contact" subtitle="Create new contact"/>
 
     <div class="container">
 
-        <form action="{{ route('contacts.update', ['contact' => $contact]) }}" method="post" id="contact-form">
-            {{ method_field('put') }}
+        <form action="{{ route('contacts.store') }}" method="post" id="contact-form">
             {{ csrf_field() }}
             <x-form-errors :errors="$errors"/>
 
@@ -13,9 +12,6 @@
 
         <div class="pt-10 text-right">
             <x-button-secondary-link href="{{ route('contacts.index') }}" class="mr-1">Cancel</x-button-secondary-link>
-            <x-delete-dropdown :route="route('contacts.destroy', ['contact' => $contact])">
-                Are you sure you want to delete this contact?
-            </x-delete-dropdown>
             <x-button form="contact-form">Save</x-button>
         </div>
 
