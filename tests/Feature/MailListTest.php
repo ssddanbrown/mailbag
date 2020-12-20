@@ -93,8 +93,7 @@ class MailListTest extends TestCase
             'display_name' => 'My cool list',
         ];
         $response = $this->whileLoggedIn()->followingRedirects()->post("/lists", $details);
-
-        $response->assertSee('barry@example.com');
+        
         $response->assertSee('List created');
         $this->assertDatabaseHas('mail_lists', array_merge($details, ['slug' => 'my-cool-list']));
     }

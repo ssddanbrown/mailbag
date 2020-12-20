@@ -3,6 +3,8 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactListController;
 use App\Http\Controllers\MailListController;
+use App\Http\Controllers\SignupConfirmationController;
+use App\Http\Controllers\SignupController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +21,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get("/signup-confirm/{signupKey}", [SignupConfirmationController::class, 'show'])->name('signup.confirm.show');
+Route::post("/signup-confirm/{signup:key}", [SignupConfirmationController::class, 'confirm'])->name('signup.confirm.confirm');
+Route::get("/signup-confirm/{list:slug}/thanks", [SignupConfirmationController::class, 'thanks'])->name('signup.confirm.thanks');
+
+Route::get('/signup/{list:slug}', [SignupController::class, 'show'])->name('signup.show');
+Route::post('/signup/{list:slug}', [SignupController::class, 'signup'])->name('signup.signup');
+Route::get('/signup/{list:slug}/thanks', [SignupController::class, 'thanks'])->name('signup.thanks');
 
 Route::group(['middleware' => 'auth'], function() {
 
