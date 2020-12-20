@@ -3,6 +3,8 @@
 
     <div class="container">
 
+        <x-subheading>Details</x-subheading>
+
         <form action="{{ route('contacts.update', ['contact' => $contact]) }}" method="post" id="contact-form">
             {{ method_field('put') }}
             {{ csrf_field() }}
@@ -17,6 +19,11 @@
                 Are you sure you want to delete this contact?
             </x-delete-dropdown>
             <x-button form="contact-form">Save</x-button>
+        </div>
+
+        <div class="border-t border-gray-300 mt-10">
+            <x-subheading>Lists</x-subheading>
+            @include('contacts.lists')
         </div>
 
     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\MailList;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -58,7 +59,18 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        return view('contacts.edit', ['contact' => $contact]);
+        $allListOptions = MailList::query()->whereNotIn('id', $contact->lists()->pluck('id'))
+            ->orderBy('name')
+            ->get()
+            ->mapWithKeys(function($list) {
+            return [$list->id => $list->name];
+        })->toArray();
+
+
+        return view('contacts.edit', [
+            'contact' => $contact,
+            'listOptions' => $allListOptions,
+        ]);
     }
 
     /**
@@ -85,6 +97,7 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
+        $contact->lists()->detach();
         $contact->delete();
         $this->showSuccessMessage("Contact deleted!");
         return redirect()->route('contacts.index');

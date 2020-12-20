@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContactListController;
 use App\Http\Controllers\MailListController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,13 +33,15 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('/contacts/{contact}', [ContactController::class, 'update'])->name('contacts.update');
     Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
 
+    Route::put('/contacts/{contact}/lists', [ContactListController::class, 'add'])->name('contacts.lists.add');
+    Route::delete('/contacts/{contact}/lists', [ContactListController::class, 'remove'])->name('contacts.lists.remove');
+
     Route::get('/lists', [MailListController::class, 'index'])->name('lists.index');
     Route::get('/lists/create', [MailListController::class, 'create'])->name('lists.create');
     Route::post('/lists', [MailListController::class, 'store'])->name('lists.store');
     Route::get('/lists/{list}', [MailListController::class, 'edit'])->name('lists.edit');
     Route::put('/lists/{list}', [MailListController::class, 'update'])->name('lists.update');
     Route::delete('/lists/{list}', [MailListController::class, 'destroy'])->name('lists.destroy');
-
 });
 
 require __DIR__.'/auth.php';

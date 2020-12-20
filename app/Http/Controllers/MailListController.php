@@ -13,7 +13,7 @@ class MailListController extends Controller
      */
     public function index(Request  $request)
     {
-        $query = MailList::query()->orderBy('name');
+        $query = MailList::query()->orderBy('name')->withCount('contacts');
         $search = $request->get('search');
         if ($search) {
             $query->where('name', 'like', '%' . $search . '%')
@@ -90,6 +90,7 @@ class MailListController extends Controller
      */
     public function destroy(MailList $list)
     {
+        $list->contacts()->detach();
         $list->delete();
         $this->showSuccessMessage('List deleted!');
         return redirect()->route('lists.index');
