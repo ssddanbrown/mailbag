@@ -10,7 +10,7 @@ class MailList extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'display_name', 'slug'];
+    protected $fillable = ['name', 'display_name', 'slug', 'description'];
 
     /**
      * Get the contacts subscribed to this list.

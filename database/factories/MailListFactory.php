@@ -27,6 +27,7 @@ class MailListFactory extends Factory
             'name' => $name,
             'slug' => Str::slug($name),
             'display_name' => 'The great ' . $name,
+            'description' => $this->faker->sentence,
         ];
     }
 }

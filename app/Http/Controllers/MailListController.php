@@ -53,7 +53,7 @@ class MailListController extends Controller
         $list->save();
 
         $this->showSuccessMessage('List created!');
-        return redirect('lists.edit', compact('list'));
+        return redirect()->route('lists.edit', compact('list'));
     }
 
     /**
@@ -82,7 +82,7 @@ class MailListController extends Controller
         $list->save();
 
         $this->showSuccessMessage('List updated!');
-        return redirect('lists.edit', compact('list'));
+        return redirect()->route('lists.edit', compact('list'));
     }
 
     /**
