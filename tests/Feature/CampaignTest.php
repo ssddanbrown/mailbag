@@ -1,6 +1,7 @@
 <?php namespace Tests\Feature;
 
 use App\Models\Campaign;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class CampaignTest extends TestCase
@@ -28,14 +29,14 @@ class CampaignTest extends TestCase
 
     public function test_campaigns_index_can_be_searched()
     {
-        $campaigns = Campaign::factory()->count(500)->create()->sortBy('name');
+        $campaigns = Campaign::factory()->count(500)->create()->sortBy('name')->values();
 
         $response = $this->whileLoggedIn()->get('/campaigns');
         $response->assertDontSee($campaigns[105]->name);
 
         $response = $this->get('/campaigns?search=' . $campaigns[105]->name);
         $response->assertSee("/campaigns/{$campaigns[105]->id}");
-        $response->assertSee("value=\"{$campaigns[105]->name}\"", false);
+        $response->assertSee("value=\"". e($campaigns[105]->name)."\"", false);
     }
 
     public function test_campaign_can_be_edited()

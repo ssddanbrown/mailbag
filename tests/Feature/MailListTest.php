@@ -31,14 +31,14 @@ class MailListTest extends TestCase
 
     public function test_lists_index_can_be_searched()
     {
-        $lists = MailList::factory()->count(500)->create()->sortBy('name');
+        $lists = MailList::factory()->count(500)->create()->sortBy('name')->values();
 
         $response = $this->whileLoggedIn()->get('/lists');
         $response->assertDontSee($lists[105]->name);
 
         $response = $this->get('/lists?search=' . $lists[105]->name);
         $response->assertSee("/lists/{$lists[105]->id}");
-        $response->assertSee("value=\"{$lists[105]->name}\"", false);
+        $response->assertSee("value=\"" . e($lists[105]->name) . "\"", false);
     }
 
     public function test_list_can_be_edited()
