@@ -31417,6 +31417,15 @@ select {
   white-space: nowrap;
 }
 
+.link {
+  --tw-text-opacity: 1;
+  color: rgba(79, 70, 229, var(--tw-text-opacity));
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

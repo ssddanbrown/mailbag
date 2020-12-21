@@ -32,9 +32,9 @@ class Send extends Model
     }
 
     /**
-     * Get the list assigned to this list.
+     * Get the list assigned to this send.
      */
-    public function maillist(): BelongsTo
+    public function mailList(): BelongsTo
     {
         return $this->belongsTo(MailList::class);
     }

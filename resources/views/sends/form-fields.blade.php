@@ -56,7 +56,7 @@
 <div class="pt-5">
     <x-label for="content" value="Content" class="mb-1" />
     <div class="rounded-md overflow-hidden shadow-sm border border-gray-300">
-        <x-textarea id="content" class="block mt-1 w-full" name="content" :value="old('content') ?? $send->content ?? ''" required />
+        <x-textarea id="content" class="block mt-1 w-full" name="content" :value="old('content') ?? $send->content ?? ''" />
     </div>
     <script>
         const textarea = document.getElementById('content');
