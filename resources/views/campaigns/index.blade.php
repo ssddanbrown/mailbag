@@ -20,6 +20,8 @@
                 <tr>
                     <td class="table-cell">{{ $campaign->name }}</td>
                     <td class="table-cell text-sm font-medium">
+                        <a href="{{ route('campaigns.show', ['campaign' => $campaign]) }}" class="text-indigo-600 hover:text-indigo-900">View</a>
+                        <span class="text-gray-400 px-2">|</span>
                         <a href="{{ route('campaigns.edit', ['campaign' => $campaign]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                     </td>
                 </tr>

@@ -23,6 +23,14 @@ class CampaignController extends Controller
     }
 
     /**
+     * Display this particular campaign.
+     */
+    public function show(Campaign $campaign)
+    {
+        return view('campaigns.show', compact('campaign'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

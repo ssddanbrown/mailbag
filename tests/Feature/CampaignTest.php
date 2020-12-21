@@ -1,7 +1,6 @@
 <?php namespace Tests\Feature;
 
 use App\Models\Campaign;
-use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class CampaignTest extends TestCase
@@ -39,11 +38,20 @@ class CampaignTest extends TestCase
         $response->assertSee("value=\"". e($campaigns[105]->name)."\"", false);
     }
 
-    public function test_campaign_can_be_edited()
+    public function test_campaign_can_be_viewed()
     {
         $campaign = Campaign::factory()->create();
 
         $response = $this->whileLoggedIn()->get("/campaigns/{$campaign->id}");
+        $response->assertStatus(200);
+        $response->assertSee($campaign->name);
+    }
+
+    public function test_campaign_can_be_edited()
+    {
+        $campaign = Campaign::factory()->create();
+
+        $response = $this->whileLoggedIn()->get("/campaigns/{$campaign->id}/edit");
         $response->assertStatus(200);
         $response->assertSee($campaign->name);
         $response->assertSee('Save');
