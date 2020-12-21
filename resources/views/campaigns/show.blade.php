@@ -3,7 +3,7 @@
 
     <div class="container">
 
-        <div class="flex -mx-2">
+        <div class="flex -mx-2 mb-5">
             <div class="flex-auto px-2">
 
             </div>
@@ -12,6 +12,10 @@
             </div>
         </div>
 
+        <div class="border-t border-gray-300">
+            <x-subheading>Sends</x-subheading>
+            @include('campaigns.send-list')
+        </div>
     </div>
 
 </x-app-layout>

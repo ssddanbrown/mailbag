@@ -4,6 +4,7 @@ use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactListController;
 use App\Http\Controllers\MailListController;
+use App\Http\Controllers\SendController;
 use App\Http\Controllers\SignupConfirmationController;
 use App\Http\Controllers\SignupController;
 use Illuminate\Support\Facades\Route;
@@ -62,6 +63,13 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/campaigns/{campaign}/edit', [CampaignController::class, 'edit'])->name('campaigns.edit');
     Route::put('/campaigns/{campaign}', [CampaignController::class, 'update'])->name('campaigns.update');
     Route::delete('/campaigns/{campaign}', [CampaignController::class, 'destroy'])->name('campaigns.destroy');
+
+    Route::get('/sends/create', [SendController::class, 'create'])->name('sends.create');
+    Route::post('/sends', [SendController::class, 'store'])->name('sends.store');
+    Route::get('/sends/{send}', [SendController::class, 'show'])->name('sends.show');
+    Route::get('/sends/{send}/edit', [SendController::class, 'edit'])->name('sends.edit');
+    Route::put('/sends/{send}', [SendController::class, 'update'])->name('sends.update');
+    Route::delete('/sends/{send}', [SendController::class, 'destroy'])->name('sends.destroy');
 });
 
 require __DIR__.'/auth.php';

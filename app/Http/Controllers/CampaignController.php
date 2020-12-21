@@ -25,9 +25,17 @@ class CampaignController extends Controller
     /**
      * Display this particular campaign.
      */
-    public function show(Campaign $campaign)
+    public function show(Request $request, Campaign $campaign)
     {
-        return view('campaigns.show', compact('campaign'));
+        $sendQuery = $campaign->sends()->orderBy('name');
+        $search = $request->get('search');
+        if ($search) {
+            $sendQuery->where('name', 'like', '%' . $search . '%');
+        }
+
+        $sends = $sendQuery->paginate(100)->withQueryString();
+
+        return view('campaigns.show', compact('campaign', 'sends'));
     }
 
     /**
@@ -88,6 +96,8 @@ class CampaignController extends Controller
     public function destroy(Campaign $campaign)
     {
         $campaign->delete();
+        $campaign->sends()->delete();
+        // TODO - Handle sub-send relations
         $this->showSuccessMessage("Campaign deleted!");
         return redirect()->route('campaigns.index');
     }

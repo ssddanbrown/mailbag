@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-heading title="Edit Campaign" :subtitle="$campaign->email"/>
+    <x-heading title="Edit Campaign" :subtitle="$campaign->name"/>
 
     <div class="container">
 

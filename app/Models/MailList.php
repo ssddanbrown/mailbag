@@ -19,4 +19,14 @@ class MailList extends Model
     {
         return $this->belongsToMany(Contact::class)->withTimestamps();
     }
+
+    /**
+     * Get all the lists formatted for a select list
+     */
+    public static function getAllForSelect(): array
+    {
+        return static::query()->orderBy('name')->get(['id', 'name'])->mapWithKeys(function($list) {
+            return [$list->id => $list->name];
+        })->toArray();
+    }
 }
