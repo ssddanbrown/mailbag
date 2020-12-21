@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactListController;
 use App\Http\Controllers\MailListController;
@@ -53,6 +54,13 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/lists/{list}', [MailListController::class, 'edit'])->name('lists.edit');
     Route::put('/lists/{list}', [MailListController::class, 'update'])->name('lists.update');
     Route::delete('/lists/{list}', [MailListController::class, 'destroy'])->name('lists.destroy');
+
+    Route::get('/campaigns', [CampaignController::class, 'index'])->name('campaigns.index');
+    Route::get('/campaigns/create', [CampaignController::class, 'create'])->name('campaigns.create');
+    Route::post('/campaigns', [CampaignController::class, 'store'])->name('campaigns.store');
+    Route::get('/campaigns/{campaign}', [CampaignController::class, 'edit'])->name('campaigns.edit');
+    Route::put('/campaigns/{campaign}', [CampaignController::class, 'update'])->name('campaigns.update');
+    Route::delete('/campaigns/{campaign}', [CampaignController::class, 'destroy'])->name('campaigns.destroy');
 });
 
 require __DIR__.'/auth.php';
