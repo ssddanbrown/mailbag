@@ -19,4 +19,13 @@ class Contact extends Model
     {
         return $this->belongsToMany(MailList::class)->withTimestamps();
     }
+
+    /**
+     * Unsubscribe a contact in the system.
+     */
+    public function markUnsubscribed()
+    {
+        $this->update(['unsubscribed' => true]);
+        $this->lists()->detach();
+    }
 }

@@ -30,7 +30,7 @@ class MailContentParser
             $this->content .= "\n\n" . '{{unsubscribe_link}}';
         }
 
-        $unsubLink = route('unsubscribe.show', ['key' => $record->key]);
+        $unsubLink = route('unsubscribe.show', ['sendRecord' => $record]);
         $this->replaceTag('unsubscribe_link', $unsubLink);
     }
 

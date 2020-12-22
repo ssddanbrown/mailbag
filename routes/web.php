@@ -8,6 +8,7 @@ use App\Http\Controllers\MailListController;
 use App\Http\Controllers\SendController;
 use App\Http\Controllers\SignupConfirmationController;
 use App\Http\Controllers\SignupController;
+use App\Http\Controllers\UnsubscribeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +35,10 @@ Route::get('/signup/{list:slug}', [SignupController::class, 'show'])->name('sign
 Route::post('/signup/{list:slug}', [SignupController::class, 'signup'])->name('signup.signup');
 Route::get('/signup/{list:slug}/thanks', [SignupController::class, 'thanks'])->name('signup.thanks');
 
-Route::get('/unsubscribe/{key}', [])->name('unsubscribe.show');
+Route::get('/unsubscribe/confirm', [UnsubscribeController::class, 'confirm'])->name('unsubscribe.confirm');
+Route::get('/unsubscribe/{sendRecord:key}', [UnsubscribeController::class, 'show'])->name('unsubscribe.show');
+Route::post('/unsubscribe/{sendRecord:key}/all', [UnsubscribeController::class, 'fromAll'])->name('unsubscribe.all');
+Route::post('/unsubscribe/{sendRecord:key}/list', [UnsubscribeController::class, 'fromList'])->name('unsubscribe.list');
 
 Route::group(['middleware' => 'auth'], function() {
 

@@ -35,6 +35,14 @@ class SendRecord extends Model
     }
 
     /**
+     * Check if this send record has expired.
+     */
+    public function hasExpired(): bool
+    {
+        return is_null($this->sent_at) || $this->sent_at < now()->subMonths(1);
+    }
+
+    /**
      * Generate a set of new unique keys to use
      */
     public static function generateNewKeys($count = 1): Collection

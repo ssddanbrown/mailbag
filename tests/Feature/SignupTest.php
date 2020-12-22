@@ -98,6 +98,20 @@ class SignupTest extends TestCase
         ]);
     }
 
+    public function test_signup_subscribes_existing_unsubscribed_contact()
+    {
+        $contact = Contact::factory()->unsubscribed()->create(['email' => 'test@example.com']);
+        $list = MailList::factory()->create();
+        $this->assertTrue(boolval($contact->unsubscribed));
+
+        $this->post("/signup/{$list->slug}", ['email' => 'test@example.com']);
+        $signup = Signup::query()->where('email', '=', 'test@example.com')->first();
+        $this->post("/signup-confirm/{$signup->key}");
+
+        $contact->refresh();
+        $this->assertFalse(boolval($contact->unsubscribed));
+    }
+
     public function test_signup_confirmation_with_nonexisting_token_shows_nice_message()
     {
         $resp = $this->get("/signup-confirm/abc12345");
