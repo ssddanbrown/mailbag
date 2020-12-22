@@ -27,6 +27,11 @@
                     <x-notification-success>{{ session()->get('success') }}</x-notification-success>
                 </div>
             @endif
+            @if(session()->has('error'))
+                <div class="container pt-8 -mb-4">
+                    <x-notification-success>{{ session()->get('error') }}</x-notification-success>
+                </div>
+            @endif
 
             <!-- Page Content -->
             <main>

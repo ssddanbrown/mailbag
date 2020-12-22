@@ -3,6 +3,7 @@
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactListController;
+use App\Http\Controllers\LaunchSendController;
 use App\Http\Controllers\MailListController;
 use App\Http\Controllers\SendController;
 use App\Http\Controllers\SignupConfirmationController;
@@ -32,6 +33,8 @@ Route::get("/signup-confirm/{list:slug}/thanks", [SignupConfirmationController::
 Route::get('/signup/{list:slug}', [SignupController::class, 'show'])->name('signup.show');
 Route::post('/signup/{list:slug}', [SignupController::class, 'signup'])->name('signup.signup');
 Route::get('/signup/{list:slug}/thanks', [SignupController::class, 'thanks'])->name('signup.thanks');
+
+Route::get('/unsubscribe/{key}', [])->name('unsubscribe.show');
 
 Route::group(['middleware' => 'auth'], function() {
 
@@ -70,6 +73,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/sends/{send}/edit', [SendController::class, 'edit'])->name('sends.edit');
     Route::put('/sends/{send}', [SendController::class, 'update'])->name('sends.update');
     Route::delete('/sends/{send}', [SendController::class, 'destroy'])->name('sends.destroy');
+
+    Route::post('/sends/{send}/launch', [LaunchSendController::class, 'launch'])->name('sends.launch');
 });
 
 require __DIR__.'/auth.php';

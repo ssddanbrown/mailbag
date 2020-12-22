@@ -15,4 +15,9 @@ class Controller extends BaseController
     {
         session()->flash('success', $message);
     }
+
+    protected function showErrorMessage(string $message)
+    {
+        session()->flash('error', $message);
+    }
 }

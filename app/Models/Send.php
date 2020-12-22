@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int id
@@ -37,6 +38,14 @@ class Send extends Model
     public function mailList(): BelongsTo
     {
         return $this->belongsTo(MailList::class);
+    }
+
+    /**
+     * Get the per-contact records for this send.
+     */
+    public function records(): HasMany
+    {
+        return $this->hasMany(SendRecord::class);
     }
 
     /**

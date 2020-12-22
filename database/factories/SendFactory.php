@@ -29,6 +29,7 @@ class SendFactory extends Factory
             'subject' => $this->faker->company . ' ' . $this->faker->sentence,
             'mail_list_id' => MailList::factory(),
             'campaign_id' => Campaign::factory(),
+            'activated_at' => null,
         ];
     }
 }

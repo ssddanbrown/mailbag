@@ -20,8 +20,10 @@
             </td>
             <td class="table-cell text-sm font-medium text-right">
                 <a href="{{ route('sends.show', ['send' => $send]) }}" class="text-indigo-600 hover:text-indigo-900">View</a>
-                <span class="text-gray-400 px-2">|</span>
-                <a href="{{ route('sends.edit', ['send' => $send]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                @if(!$send->activated)
+                    <span class="text-gray-400 px-2">|</span>
+                    <a href="{{ route('sends.edit', ['send' => $send]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                @endif
             </td>
         </tr>
     @endforeach
