@@ -23,6 +23,10 @@ class SendController extends Controller
     {
         $default = new Send();
 
+        if ($request->has('copy_from')) {
+            $default->fill(Send::query()->findOrNew($request->get('copy_from'))->getAttributes());
+        }
+
         $campaign = null;
         if ($request->has('campaign')) {
             $campaign = Campaign::query()->find($request->get('campaign'));

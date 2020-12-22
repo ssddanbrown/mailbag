@@ -13,6 +13,7 @@
                 </x-status-pill-large>
             </div>
             <div class="flex-auto px-2 text-right">
+                <x-button-secondary-link :href="route('sends.create', ['copy_from' => $send->id])">Copy Send</x-button-secondary-link>
                 @if(!$send->activated)
                     <x-button-secondary-link :href="route('sends.edit', compact('send'))">Edit Send</x-button-secondary-link>
                     @include('sends.launch-button')

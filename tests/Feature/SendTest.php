@@ -110,4 +110,16 @@ class SendTest extends TestCase
         $this->assertDatabaseHas('sends', array_merge($details, ['activated_at' => null]));
     }
 
+    public function test_create_send_via_copy()
+    {
+        /** @var Send $existingSend */
+        $existingSend = Send::factory()->create(['name' => 'send to copy']);
+        $response = $this->whileLoggedIn()->get("/sends/create?copy_from={$existingSend->id}");
+
+        $response->assertStatus(200);
+        $response->assertSee('Create new send');
+        $response->assertSee('send to copy');
+        $response->assertSee($existingSend->subject);
+    }
+
 }
