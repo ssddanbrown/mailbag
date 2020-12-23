@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Jobs\ClearExpiredSignupsJob;
+use App\Jobs\ScrubSignupsJob;
 use App\Models\Signup;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Bus;
@@ -18,7 +18,7 @@ class ClearExpiredSignupsTest extends TestCase
             'created_at' => now()->subDays(8)
         ]);
 
-        dispatch_now(new ClearExpiredSignupsJob());
+        dispatch_now(new ScrubSignupsJob());
 
         $this->assertDatabaseHas('signups', ['id' => $validSignUp->id]);
         $this->assertDatabaseMissing('signups', ['id' => $expiredSignUp->id]);
@@ -27,7 +27,7 @@ class ClearExpiredSignupsTest extends TestCase
     public function test_command_calls_job()
     {
         Bus::fake();
-        Artisan::call('mailbag:clear-expired-signups');
-        Bus::assertDispatchedTimes(ClearExpiredSignupsJob::class, 1);
+        Artisan::call('mailbag:scrub-signups');
+        Bus::assertDispatchedTimes(ScrubSignupsJob::class, 1);
     }
 }

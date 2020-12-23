@@ -2,17 +2,17 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\DeleteUnsubscribedContactsJob;
+use App\Jobs\ScrubUnsubscribesJob;
 use Illuminate\Console\Command;
 
-class DeleteUnsubscribedContactsCommand extends Command
+class ScrubUnsubscribesCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'mailbag:delete-unsubscribed-contacts';
+    protected $signature = 'mailbag:scrub-unsubscribes';
 
     /**
      * The console command description.
@@ -38,7 +38,7 @@ class DeleteUnsubscribedContactsCommand extends Command
      */
     public function handle()
     {
-        dispatch_now(new DeleteUnsubscribedContactsJob);
+        dispatch_now(new ScrubUnsubscribesJob);
         return 0;
     }
 }

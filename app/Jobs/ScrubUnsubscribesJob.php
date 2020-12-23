@@ -14,7 +14,7 @@ use Illuminate\Queue\SerializesModels;
  * It adds a buffer of a day since last change so that any accidental
  * changes can be responded to within that time before the contact is deleted.
  */
-class DeleteUnsubscribedContactsJob implements ShouldQueue
+class ScrubUnsubscribesJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 

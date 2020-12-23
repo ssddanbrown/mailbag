@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Jobs\DeleteUnsubscribedContactsJob;
+use App\Jobs\ScrubUnsubscribesJob;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Bus;
@@ -16,7 +16,7 @@ class DeleteUnsubscribedContactsTest extends TestCase
         $subscribedContact = Contact::factory()->subscribed()->create(['updated_at' => $weekAgo]);
         $unsubscribedContact = Contact::factory()->unsubscribed()->create(['updated_at' => $weekAgo]);
 
-        dispatch_now(new DeleteUnsubscribedContactsJob());
+        dispatch_now(new ScrubUnsubscribesJob());
 
         $this->assertDatabaseHas('contacts', ['id' => $subscribedContact->id]);
         $this->assertDatabaseMissing('contacts', ['id' => $unsubscribedContact->id]);
@@ -27,7 +27,7 @@ class DeleteUnsubscribedContactsTest extends TestCase
         $recent = now()->subHours(22);
         $unsubscribedContact = Contact::factory()->unsubscribed()->create(['updated_at' => $recent]);
 
-        dispatch_now(new DeleteUnsubscribedContactsJob());
+        dispatch_now(new ScrubUnsubscribesJob());
 
         $this->assertDatabaseHas('contacts', ['id' => $unsubscribedContact->id]);
     }
@@ -35,7 +35,7 @@ class DeleteUnsubscribedContactsTest extends TestCase
     public function test_command_calls_job()
     {
         Bus::fake();
-        Artisan::call('mailbag:delete-unsubscribed-contacts');
-        Bus::assertDispatchedTimes(DeleteUnsubscribedContactsJob::class, 1);
+        Artisan::call('mailbag:scrub-unsubscribes');
+        Bus::assertDispatchedTimes(ScrubUnsubscribesJob::class, 1);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Console;
 
-use App\Jobs\ClearExpiredSignupsJob;
-use App\Jobs\DeleteUnsubscribedContactsJob;
+use App\Jobs\ScrubSignupsJob;
+use App\Jobs\ScrubUnsubscribesJob;
 use App\Jobs\FindRssFeedsToReviewJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -28,8 +28,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->job(new FindRssFeedsToReviewJob)->everyFifteenMinutes();
-        $schedule->job(new ClearExpiredSignupsJob)->daily();
-        $schedule->job(new DeleteUnsubscribedContactsJob)->daily();
+        $schedule->job(new ScrubSignupsJob)->daily();
+        $schedule->job(new ScrubUnsubscribesJob)->daily();
     }
 
     /**

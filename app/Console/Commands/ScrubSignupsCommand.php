@@ -2,17 +2,17 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\ClearExpiredSignupsJob;
+use App\Jobs\ScrubSignupsJob;
 use Illuminate\Console\Command;
 
-class ClearExpiredSignupsCommand extends Command
+class ScrubSignupsCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'mailbag:clear-expired-signups';
+    protected $signature = 'mailbag:scrub-signups';
 
     /**
      * The console command description.
@@ -38,7 +38,7 @@ class ClearExpiredSignupsCommand extends Command
      */
     public function handle()
     {
-        dispatch_now(new ClearExpiredSignupsJob());
+        dispatch_now(new ScrubSignupsJob());
         return 0;
     }
 }
