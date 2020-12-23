@@ -31,7 +31,7 @@ class ContactTest extends TestCase
 
     public function test_contacts_index_can_be_searched()
     {
-        $contacts = Contact::factory()->count(500)->create()->sortBy('email');
+        $contacts = Contact::factory()->count(500)->create()->sortBy('email')->values();
 
         $response = $this->whileLoggedIn()->get('/contacts');
         $response->assertDontSee($contacts[105]->email);

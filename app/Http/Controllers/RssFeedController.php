@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Campaign;
 use App\Models\RssFeed;
+use App\Rules\ValidRssFeedRule;
 use Illuminate\Http\Request;
 
 class RssFeedController extends Controller
@@ -25,7 +26,7 @@ class RssFeedController extends Controller
     {
         $validated = $this->validate($request, [
             'active' => 'required|bool',
-            'url' => 'required|url|max:250', // TODO - Add feed validation
+            'url' => ['required', 'url', 'max:250', new ValidRssFeedRule],
             'template_send_id' => 'required|exists:sends,id',
             'send_frequency' => 'required|integer|min:1|max:366',
         ]);
@@ -52,7 +53,7 @@ class RssFeedController extends Controller
     {
         $validated = $this->validate($request, [
             'active' => 'required|bool',
-            'url' => 'required|url|max:250', // TODO - Add feed validation
+            'url' => ['required', 'url', 'max:250', new ValidRssFeedRule],
             'template_send_id' => 'required|exists:sends,id',
             'send_frequency' => 'required|integer|min:1|max:366',
         ]);
