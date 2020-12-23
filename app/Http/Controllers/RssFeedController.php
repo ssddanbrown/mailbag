@@ -29,9 +29,11 @@ class RssFeedController extends Controller
             'url' => ['required', 'url', 'max:250', new ValidRssFeedRule],
             'template_send_id' => 'required|exists:sends,id',
             'send_frequency' => 'required|integer|min:1|max:366',
+            'target_hour' => 'required|integer|min:0|max:23',
         ]);
 
         $feed = new RssFeed($validated);
+        $feed->updateNextReviewDate();
         $campaign->rssFeeds()->save($feed);
 
         $this->showSuccessMessage("RSS feed created!");
@@ -56,8 +58,11 @@ class RssFeedController extends Controller
             'url' => ['required', 'url', 'max:250', new ValidRssFeedRule],
             'template_send_id' => 'required|exists:sends,id',
             'send_frequency' => 'required|integer|min:1|max:366',
+            'target_hour' => 'required|integer|min:0|max:23',
         ]);
 
+        $feed->fill($validated);
+        $feed->updateNextReviewDate();
         $feed->update($validated);
 
         $this->showSuccessMessage("RSS feed updated!");

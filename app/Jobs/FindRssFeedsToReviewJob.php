@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Jobs;
+
+use App\Models\RssFeed;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+
+/**
+ * Finds pending RSS feeds to process and creates new
+ * jobs for each that needs to be processed.
+ */
+class FindRssFeedsToReviewJob implements ShouldQueue, ShouldBeUnique
+{
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    /**
+     * Execute the job.
+     *
+     * @return void
+     */
+    public function handle()
+    {
+        $activeFeeds = RssFeed::query()
+            ->where('active', '=', true)
+            ->where('next_review_at', '<', now())
+            ->get();
+
+        $activeFeeds->each(function($feed) {
+            dispatch(new ReviewRssFeedJob($feed));
+        });
+    }
+}

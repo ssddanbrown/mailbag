@@ -40,6 +40,7 @@ class RssFeedTest extends TestCase
             'campaign_id' => $feed->campaign->id,
             'template_send_id' => $feed->templateSend->id,
             'send_frequency' => 7,
+            'target_hour' => 15,
         ];
 
         $response = $this->whileLoggedIn()->put("/campaigns/{$feed->campaign->id}/rss/{$feed->id}", $details);
@@ -86,6 +87,7 @@ class RssFeedTest extends TestCase
             'campaign_id' => $campaign->id,
             'template_send_id' => $send->id,
             'send_frequency' => 7,
+            'target_hour' => 13,
         ];
         $response = $this->whileLoggedIn()->followingRedirects()->post("/campaigns/{$campaign->id}/rss", $details);
 

@@ -15,8 +15,7 @@
 </div>
 
 <div class="flex -mx-3">
-
-    <div class="flex-auto w-1/2 px-3 pt-5">
+    <div class="flex-auto w-1/3 px-3 pt-5">
         <!-- Template Send -->
         <x-label for="template_send_id" value="Template Send" />
         <p class="text-sm py-1 text-gray-600">
@@ -27,6 +26,24 @@
                        name="template_send_id"
                        :options="$campaign->getSendsForSelect()"
                        :value="old('template_send_id') ?? $feed->template_send_id ?? ''" required />
+    </div>
+</div>
+
+<div class="flex -mx-3">
+
+    <div class="flex-auto w-1/2 px-3 pt-5">
+        <!-- Send Frequency -->
+        <x-label for="target_hour" value="Target Hour (24 hr)" />
+        <p class="text-sm py-1 text-gray-600">
+            Set an hour to send the mail in. Not a guarantee but the system uses this as a target
+            so mail is sent around the same time each send.
+        </p>
+        <x-input id="target_hour"
+                 class="block mt-1 w-full"
+                 name="target_hour"
+                 type="number" required
+                 min="0" step="1" max="23"
+                 :value="old('target_hour') ?? $feed->target_hour ?? '14'" />
     </div>
 
     <div class="flex-auto w-1/2 px-3 pt-5">

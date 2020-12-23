@@ -30,6 +30,8 @@ class RssFeedFactory extends Factory
             'campaign_id' => $campaign->id,
             'template_send_id' => Send::factory()->for($campaign),
             'send_frequency' => 7,
+            'target_hour' => 12,
+            'next_review_at' => now()->addDays(7),
         ];
     }
 }

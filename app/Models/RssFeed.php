@@ -14,7 +14,9 @@ use Illuminate\Support\Carbon;
  * @property Campaign $campaign
  * @property Send $templateSend
  * @property int $send_frequency
+ * @property int $target_hour
  * @property Carbon $last_reviewed_at
+ * @property Carbon $next_review_at
  * @property Carbon $updated_at
  * @property Carbon $created_at
  */
@@ -22,8 +24,8 @@ class RssFeed extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['url', 'active', 'template_send_id', 'send_frequency'];
-    public $timestamps = ['last_reviewed_at'];
+    protected $fillable = ['url', 'active', 'template_send_id', 'send_frequency', 'target_hour'];
+    public $timestamps = ['last_reviewed_at', 'next_review_at'];
 
     /**
      * Get the campaign that this rss feed sits in.
@@ -39,5 +41,37 @@ class RssFeed extends Model
     public function templateSend(): BelongsTo
     {
         return $this->belongsTo(Send::class, 'template_send_id');
+    }
+
+    /**
+     * Check if this feed is pending.
+     * Checks the raw data fields instead of any computed fields
+     * such as next_review_at.
+     */
+    public function isPending(): bool
+    {
+        return boolval($this->active)
+            && $this->getNextReviewDate() < now();
+    }
+
+    /**
+     * Update the time when this feed should be next reviewed.
+     */
+    public function updateNextReviewDate()
+    {
+        $this->next_review_at = $this->getNextReviewDate();
+    }
+
+    protected function getNextReviewDate(): Carbon
+    {
+        if (is_null($this->last_reviewed_at)) {
+            return now()->addDays(
+                $this->target_hour > now()->hour ? 1 : 0
+            )->setHour($this->target_hour);
+        }
+
+         return $this->last_reviewed_at->clone()
+             ->addDays($this->send_frequency)
+             ->setHour($this->target_hour);
     }
 }

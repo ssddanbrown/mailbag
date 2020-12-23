@@ -20,7 +20,9 @@ class CreateRssFeedsTable extends Migration
             $table->foreignId('campaign_id')->index();
             $table->foreignId('template_send_id');
             $table->integer('send_frequency');
+            $table->integer('target_hour');
             $table->timestamp('last_reviewed_at')->nullable()->index();
+            $table->timestamp('next_review_at')->index();
             $table->timestamps();
         });
     }
