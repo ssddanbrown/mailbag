@@ -97,8 +97,7 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        $contact->lists()->detach();
-        $contact->delete();
+        $contact->deleteWithRelations();
         $this->showSuccessMessage("Contact deleted!");
         return redirect()->route('contacts.index');
     }

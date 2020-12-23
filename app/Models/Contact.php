@@ -28,4 +28,13 @@ class Contact extends Model
         $this->update(['unsubscribed' => true]);
         $this->lists()->detach();
     }
+
+    /**
+     * Delete this contact along with any relations.
+     */
+    public function deleteWithRelations(): void
+    {
+        $this->lists()->detach();
+        $this->delete();
+    }
 }

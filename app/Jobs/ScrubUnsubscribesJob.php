@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Models\Contact;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
@@ -28,6 +29,10 @@ class ScrubUnsubscribesJob implements ShouldQueue
         Contact::query()
             ->where('unsubscribed', '=', true)
             ->where('updated_at', '<', now()->subDay())
-            ->delete();
+            ->chunk(500, function(Collection $contacts) {
+                $contacts->each(function(Contact $contact) {
+                    $contact->deleteWithRelations();
+                });
+            });
     }
 }
