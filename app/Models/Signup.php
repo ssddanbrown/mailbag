@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,7 +21,7 @@ class Signup extends Model
     /**
      * The lifetime of signup requests in days.
      */
-    protected $lifetime = 7;
+    protected static $lifetime = 7;
 
     public function maillist(): BelongsTo
     {
@@ -32,8 +33,17 @@ class Signup extends Model
      */
     public function hasExpired(): bool
     {
-        $expireTime = now()->subDays($this->lifetime);
+        $expireTime = now()->subDays(static::$lifetime);
         return $this->created_at <= $expireTime;
+    }
+
+    /**
+     * Start a query for expired sign-ups.
+     */
+    public static function whereExpired(): Builder
+    {
+        $expireTime = now()->subDays(static::$lifetime);
+        return self::query()->where('created_at', '<', $expireTime);
     }
 
     /**
