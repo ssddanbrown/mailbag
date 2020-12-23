@@ -9,7 +9,7 @@
 
 <div class="pb-5">{{ $sends->links() }}</div>
 
-<x-table :headers="['Name', 'Status', '']">
+<x-table :headers="['Name', 'Status', '', '']">
     @foreach($sends as $send)
         <tr>
             <td class="table-cell">{{ $send->name }}</td>
@@ -17,6 +17,11 @@
                 <x-status-pill :color="$send->activated ? 'green' : 'blue'">
                     {{ $send->activated ? 'Launched' : 'Draft' }}
                 </x-status-pill>
+            </td>
+            <td class="table-cell text-sm text-gray-800">
+                @if($send->activated)
+                    <span title="{{ $send->activated_at }}">Sent {{ $send->activated_at->diffForHumans() }}</span>
+                @endif
             </td>
             <td class="table-cell text-sm font-medium text-right">
                 <a href="{{ route('sends.show', ['send' => $send]) }}" class="text-indigo-600 hover:text-indigo-900">View</a>

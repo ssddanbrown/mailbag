@@ -19,10 +19,21 @@
             @foreach($campaigns as $campaign)
                 <tr>
                     <td class="table-cell">{{ $campaign->name }}</td>
-                    <td class="table-cell text-sm font-medium">
-                        <a href="{{ route('campaigns.show', ['campaign' => $campaign]) }}" class="text-indigo-600 hover:text-indigo-900">View</a>
+                    <td class="table-cell text-right">
+                        @if($campaign->rss_feeds_count > 0)
+                            <x-status-pill color="yellow" class="ml-2">
+                                RSS
+                            </x-status-pill>
+                        @endif
+                        <x-status-pill color="blue">
+                            {{ $campaign->sends_count }}
+                            {{ \Illuminate\Support\Str::plural('sends', $campaign->sends_count) }}
+                        </x-status-pill>
+                    </td>
+                    <td class="table-cell text-sm text-right font-medium">
+                        <a href="{{ route('campaigns.show', ['campaign' => $campaign]) }}" class="link">View</a>
                         <span class="text-gray-400 px-2">|</span>
-                        <a href="{{ route('campaigns.edit', ['campaign' => $campaign]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                        <a href="{{ route('campaigns.edit', ['campaign' => $campaign]) }}" class="link">Edit</a>
                     </td>
                 </tr>
             @endforeach

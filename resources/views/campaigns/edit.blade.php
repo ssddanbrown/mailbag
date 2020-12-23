@@ -14,7 +14,7 @@
         </form>
 
         <div class="pt-10 text-right">
-            <x-button-secondary-link href="{{ route('campaigns.index') }}" class="mr-1">Cancel</x-button-secondary-link>
+            <x-button-secondary-link href="{{ route('campaigns.show', compact('campaign')) }}" class="mr-1">Cancel</x-button-secondary-link>
             <x-delete-dropdown :route="route('campaigns.destroy', ['campaign' => $campaign])">
                 Are you sure you want to delete this campaign?
             </x-delete-dropdown>

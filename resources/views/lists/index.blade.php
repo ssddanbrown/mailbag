@@ -15,23 +15,22 @@
 
         <div class="pb-5">{{ $lists->links() }}</div>
 
-        <x-table :headers="['Name', '', '', '']">
+        <x-table :headers="['Name', '', '']">
             @foreach($lists as $list)
                 <tr>
                     <td class="table-cell">
                         {{ $list->name }} <br>
                         <span class="text-gray-500 text-sm">{{ $list->display_name }}</span>
                     </td>
-                    <td class="table-cell text-sm font-medium">
-                        <a href="{{ route('signup.show', ['list' => $list]) }}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Signup Form</a>
-                    </td>
-                    <td class="table-cell">
+                    <td class="table-cell ">
                         <x-status-pill :color="$list->contacts_count == 0 ? 'red' : 'blue'">
                             {{ $list->contacts_count }} {{ \Illuminate\Support\Str::plural('contact', $list->contacts_count) }}
                         </x-status-pill>
                     </td>
-                    <td class="table-cell text-sm font-medium">
-                        <a href="{{ route('lists.edit', ['list' => $list]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                    <td class="table-cell text-sm font-medium text-right">
+                        <a href="{{ route('signup.show', ['list' => $list]) }}" target="_blank" class="link">Signup Form</a>
+                        <span class="text-gray-500 px-1">|</span>
+                        <a href="{{ route('lists.edit', ['list' => $list]) }}" class="link">Edit</a>
                     </td>
                 </tr>
             @endforeach

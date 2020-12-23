@@ -12,7 +12,7 @@ class CampaignController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Campaign::query()->orderBy('name');
+        $query = Campaign::query()->withCount(['sends', 'rssFeeds'])->orderBy('name');
         $search = $request->get('search');
         if ($search) {
             $query->where('name', 'like', '%' . $search . '%');

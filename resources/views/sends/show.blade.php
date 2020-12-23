@@ -56,7 +56,7 @@
         </div>
 
         <x-label>Content</x-label>
-        <div class="bg-white p-3 mt-1 border-gray-300 border rounded whitespace-pre">{{ $send->content }}</div>
+        <div class="bg-white p-3 mt-1 border-gray-300 border rounded whitespace-pre-wrap">{{ $send->content }}</div>
 
     </div>
 
