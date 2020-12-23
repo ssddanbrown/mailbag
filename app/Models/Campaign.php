@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property int id
  * @property string name
+ * @property Collection<Send> $sends
+ * @property Collection<RssFeed> $rssFeeds
  */
 class Campaign extends Model
 {
@@ -22,6 +25,24 @@ class Campaign extends Model
     public function sends(): HasMany
     {
         return $this->hasMany(Send::class);
+    }
+
+    /**
+     * Get the RSS feeds created within this campaign.
+     */
+    public function rssFeeds(): HasMany
+    {
+        return $this->hasMany(RssFeed::class);
+    }
+
+    /**
+     * Get all the campaign sends formatted for a select list
+     */
+    public function getSendsForSelect(): array
+    {
+        return $this->sends()->orderBy('name')->get(['id', 'name'])->mapWithKeys(function($send) {
+            return [$send->id => $send->name];
+        })->toArray();
     }
 
     /**

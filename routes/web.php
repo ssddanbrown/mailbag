@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactListController;
 use App\Http\Controllers\LaunchSendController;
 use App\Http\Controllers\MailListController;
+use App\Http\Controllers\RssFeedController;
 use App\Http\Controllers\SendController;
 use App\Http\Controllers\SignupConfirmationController;
 use App\Http\Controllers\SignupController;
@@ -70,6 +71,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/campaigns/{campaign}/edit', [CampaignController::class, 'edit'])->name('campaigns.edit');
     Route::put('/campaigns/{campaign}', [CampaignController::class, 'update'])->name('campaigns.update');
     Route::delete('/campaigns/{campaign}', [CampaignController::class, 'destroy'])->name('campaigns.destroy');
+
+    Route::get('/campaigns/{campaign}/rss/create', [RssFeedController::class, 'create'])->name('rss.create');
+    Route::post('/campaigns/{campaign}/rss', [RssFeedController::class, 'store'])->name('rss.store');
+    Route::get('/campaigns/{campaign}/rss/{feed}', [RssFeedController::class, 'edit'])->name('rss.edit');
+    Route::put('/campaigns/{campaign}/rss/{feed}', [RssFeedController::class, 'update'])->name('rss.update');
+    Route::delete('/campaigns/{campaign}/rss/{feed}', [RssFeedController::class, 'destroy'])->name('rss.destroy');
 
     Route::get('/sends/create', [SendController::class, 'create'])->name('sends.create');
     Route::post('/sends', [SendController::class, 'store'])->name('sends.store');
