@@ -32,6 +32,7 @@ class RssFeedFactory extends Factory
             'send_frequency' => 7,
             'target_hour' => 12,
             'next_review_at' => now()->addDays(7),
+            'last_reviewed_at' => now(),
         ];
     }
 }

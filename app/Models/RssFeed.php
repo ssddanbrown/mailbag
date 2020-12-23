@@ -25,7 +25,7 @@ class RssFeed extends Model
     use HasFactory;
 
     protected $fillable = ['url', 'active', 'template_send_id', 'send_frequency', 'target_hour'];
-    public $timestamps = ['last_reviewed_at', 'next_review_at'];
+    public $dates = ['last_reviewed_at', 'next_review_at'];
 
     /**
      * Get the campaign that this rss feed sits in.
@@ -64,14 +64,8 @@ class RssFeed extends Model
 
     protected function getNextReviewDate(): Carbon
     {
-        if (is_null($this->last_reviewed_at)) {
-            return now()->addDays(
-                $this->target_hour > now()->hour ? 1 : 0
-            )->setHour($this->target_hour);
-        }
-
          return $this->last_reviewed_at->clone()
              ->addDays($this->send_frequency)
-             ->setHour($this->target_hour);
+             ->setHour($this->target_hour)->setMinutes(0);
     }
 }

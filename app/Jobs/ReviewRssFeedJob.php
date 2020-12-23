@@ -3,6 +3,9 @@
 namespace App\Jobs;
 
 use App\Models\RssFeed;
+use App\Services\MailContentParser;
+use App\Services\Rss\RssArticle;
+use App\Services\Rss\RssParser;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -41,17 +44,25 @@ class ReviewRssFeedJob implements ShouldQueue, ShouldBeUnique
      *
      * @return void
      */
-    public function handle()
+    public function handle(RssParser $rssParser)
     {
         if (!$this->feed->isPending()) {
             return;
         }
 
-        // TODO - Do send stuff
-        // TODO - Filter updates between the actual dates we're working with
-        //  So between last_reviewed_at and next_review_at
-        //  So we don't cause trouble with the below and re-check the same date range
-        //  in future.
+        $articles = $rssParser->getArticles($this->feed->url);
+        $articlesToUse = $articles->filter(function(RssArticle $article) {
+            return $article->pubDate > ($this->feed->last_reviewed_at ?? $this->feed->created_at)
+                && $article->pubDate <= now();
+        });
+
+        if ($articlesToUse->isNotEmpty()) {
+             $send = $this->feed->templateSend->replicate();
+             $send->content = (new MailContentParser($send->content))->parseForRss($articlesToUse);
+             $send->activated_at = now();
+             $send->save();
+             dispatch(new SendActivationJob($send));
+        }
 
         $this->feed->last_reviewed_at = now();
         $this->feed->updateNextReviewDate();

@@ -33,6 +33,7 @@ class RssFeedController extends Controller
         ]);
 
         $feed = new RssFeed($validated);
+        $feed->last_reviewed_at = now();
         $feed->updateNextReviewDate();
         $campaign->rssFeeds()->save($feed);
 

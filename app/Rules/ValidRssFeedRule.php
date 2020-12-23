@@ -21,8 +21,7 @@ class ValidRssFeedRule implements Rule
             return true;
         }
 
-        $parser = new RssParser($value);
-        $articles = $parser->getArticles();
+        $articles = (new RssParser)->getArticles($value);
         return !is_null($articles) && $articles->count() > 0;
     }
 

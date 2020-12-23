@@ -21,7 +21,7 @@ class CreateRssFeedsTable extends Migration
             $table->foreignId('template_send_id');
             $table->integer('send_frequency');
             $table->integer('target_hour');
-            $table->timestamp('last_reviewed_at')->nullable()->index();
+            $table->timestamp('last_reviewed_at')->index();
             $table->timestamp('next_review_at')->index();
             $table->timestamps();
         });

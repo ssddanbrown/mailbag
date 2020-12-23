@@ -14,8 +14,7 @@ class RssParserTest extends TestCase
             'https://example.com/feed.xml' => Http::response($rss, 200)
         ]);
 
-        $parser = new RssParser('https://example.com/feed.xml');
-        $articles = $parser->getArticles();
+        $articles = (new RssParser)->getArticles('https://example.com/feed.xml');
         $this->assertInstanceOf(Collection::class, $articles);
         $this->assertEquals(3, $articles->count());
         $this->assertEquals('Recent blog post 1', $articles->first()->title);
@@ -28,11 +27,22 @@ class RssParserTest extends TestCase
             'https://example.com/feed.xml' => Http::response($rss, 200)
         ]);
 
-        $parser = new RssParser('https://example.com/feed.xml');
-        $articles = $parser->getArticles();
+        $articles = (new RssParser)->getArticles('https://example.com/feed.xml');
         $this->assertInstanceOf(Collection::class, $articles);
         $this->assertEquals(1, $articles->count());
         $this->assertEquals('Recent blog post 1', $articles->first()->title);
+    }
+
+    public function test_encoded_entities_are_decoded()
+    {
+        $rss = $this->getRssContent(1);
+        $rss = str_replace('Recent blog post 1', 'This &amp;amp; that', $rss);
+        Http::fake([
+            'https://example.com/feed.xml' => Http::response($rss, 200)
+        ]);
+
+        $articles = (new RssParser)->getArticles('https://example.com/feed.xml');
+        $this->assertEquals('This & that', $articles->first()->title);
     }
 
     public function test_get_articles_returns_null_on_request_failure()
@@ -41,8 +51,7 @@ class RssParserTest extends TestCase
             'https://example.com/feed.xml' => Http::response('', 500)
         ]);
 
-        $parser = new RssParser('https://example.com/feed.xml');
-        $articles = $parser->getArticles();
+        $articles = (new RssParser)->getArticles('https://example.com/feed.xml');
         $this->assertNull($articles);
     }
 
@@ -52,8 +61,7 @@ class RssParserTest extends TestCase
             'https://example.com/feed.xml' => Http::response('<html><p>Hello</p></html>', 200)
         ]);
 
-        $parser = new RssParser('https://example.com/feed.xml');
-        $articles = $parser->getArticles();
+        $articles = (new RssParser)->getArticles('https://example.com/feed.xml');
         $this->assertNull($articles);
     }
 
@@ -63,8 +71,7 @@ class RssParserTest extends TestCase
             'https://example.com/feed.xml' => Http::response('{"cat": "dog"}', 200)
         ]);
 
-        $parser = new RssParser('https://example.com/feed.xml');
-        $articles = $parser->getArticles();
+        $articles = (new RssParser)->getArticles('https://example.com/feed.xml');
         $this->assertNull($articles);
     }
 

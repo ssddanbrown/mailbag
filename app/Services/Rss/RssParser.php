@@ -9,20 +9,13 @@ use SimpleXMLElement;
 
 class RssParser
 {
-    protected $url;
-
-    public function __construct(string $url)
-    {
-        $this->url = $url;
-    }
-
     /**
      * Get articles from the RSS URL.
      * @returns ?Collection<RssArticle>
      */
-    public function getArticles(): ?Collection
+    public function getArticles(string $url): ?Collection
     {
-        $response = Http::get($this->url);
+        $response = Http::get($url);
         if (!$response->ok()) {
             return null;
         }
@@ -42,9 +35,9 @@ class RssParser
         $articles = collect();
         foreach ($rss->channel->item as $item) {
             $articles->push(new RssArticle(
-                strval($item->title) ?? '',
-                strval($item->link) ?? '',
-                strval($item->description) ?? '',
+                html_entity_decode(strval($item->title ?? '')),
+                html_entity_decode(strval($item->link ?? '')),
+                html_entity_decode(strval($item->description ?? '')),
                 Carbon::createFromFormat(DateTime::RSS, strval($item->pubDate)),
             ));
         }

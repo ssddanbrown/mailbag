@@ -19,9 +19,9 @@ class LaunchSendController extends Controller
             return redirect()->route('sends.show', compact('send'));
         }
 
-        $this->dispatch(new SendActivationJob($send));
         $send->activated_at = now();
         $send->save();
+        $this->dispatch(new SendActivationJob($send));
 
         $this->showSuccessMessage('Send activated and queued for mailing!');
         return redirect()->route('sends.show', compact('send'));

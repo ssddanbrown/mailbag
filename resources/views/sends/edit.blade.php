@@ -21,6 +21,8 @@
             <x-button form="send-form">Save</x-button>
         </div>
 
+        @include('sends.content-syntax')
+
     </div>
 
 </x-app-layout>
