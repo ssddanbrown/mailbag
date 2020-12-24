@@ -15,6 +15,7 @@
                     <x-nav-link :href="route('campaigns.index')" :active="request()->routeIs('campaigns.*')">Campaigns</x-nav-link>
                     <x-nav-link :href="route('lists.index')" :active="request()->routeIs('lists.*')">Lists</x-nav-link>
                     <x-nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.*')">Contacts</x-nav-link>
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">Users</x-nav-link>
                 </div>
             </div>
 
