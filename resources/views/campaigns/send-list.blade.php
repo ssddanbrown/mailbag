@@ -10,6 +10,11 @@
 <div class="pb-5">{{ $sends->links() }}</div>
 
 <x-table :headers="['Name', 'Status', '', '']">
+    @if (count($sends) === 0)
+        <tr>
+            <td colspan="4" class="table-cell italic text-gray-600">No sends found!</td>
+        </tr>
+    @endif
     @foreach($sends as $send)
         <tr>
             <td class="table-cell">
