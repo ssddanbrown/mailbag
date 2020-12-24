@@ -87,7 +87,7 @@ php artisan migrate
 
 # Install and build JS/CSS Dependancies
 npm install
-npm run production
+npm run build
 
 # Check the storage/ and boostrap/cache (and all subfolders) are writable by the webserver, Commands reflect ubuntu common defaults
 chown -R www-data:www-data storage/ boostrap/cache/
