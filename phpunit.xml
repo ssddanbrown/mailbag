@@ -20,6 +20,7 @@
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="APP_URL" value="http://localhost"/>
+        <server name="HOME_REDIRECT_URL" value=""/>
         <server name="BCRYPT_ROUNDS" value="4"/>
         <server name="CACHE_DRIVER" value="array"/>
         <server name="DB_CONNECTION" value="sqlite"/>
