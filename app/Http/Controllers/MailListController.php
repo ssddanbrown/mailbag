@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MailList;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class MailListController extends Controller
 {
@@ -65,12 +66,12 @@ class MailListController extends Controller
 
         $list = new MailList($request->all());
         if (empty($list->slug)) {
-            $list->slug = \Illuminate\Support\Str::slug($list->display_name);
+            $list->slug = Str::slug($list->display_name);
         }
         $list->save();
 
         $this->showSuccessMessage('List created!');
-        return redirect()->route('lists.edit', compact('list'));
+        return redirect()->route('lists.show', compact('list'));
     }
 
     /**
@@ -94,12 +95,12 @@ class MailListController extends Controller
 
         $list->fill($request->all());
         if (empty($list->slug)) {
-            $list->slug = \Illuminate\Support\Str::slug($list->display_name);
+            $list->slug = Str::slug($list->display_name);
         }
         $list->save();
 
         $this->showSuccessMessage('List updated!');
-        return redirect()->route('lists.edit', compact('list'));
+        return redirect()->route('lists.show', compact('list'));
     }
 
     /**
