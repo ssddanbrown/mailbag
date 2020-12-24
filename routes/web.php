@@ -3,6 +3,7 @@
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactListController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaunchSendController;
 use App\Http\Controllers\MailListController;
 use App\Http\Controllers\RssFeedController;
@@ -43,9 +44,7 @@ Route::post('/unsubscribe/{sendRecord:key}/list', [UnsubscribeController::class,
 
 Route::group(['middleware' => 'auth'], function() {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
     Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create');

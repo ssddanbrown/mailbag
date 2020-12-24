@@ -15,7 +15,7 @@
 
         <div class="pb-5">{{ $campaigns->links() }}</div>
 
-        <x-table :headers="['Name', '']">
+        <x-table :headers="['Name', '', '']">
             @foreach($campaigns as $campaign)
                 <tr>
                     <td class="table-cell">
