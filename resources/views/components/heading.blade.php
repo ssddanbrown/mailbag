@@ -36,7 +36,7 @@
             </h2>
             @if($subtitle ?? false)
                 @push('titles') | {{ $subtitle }}@endpush
-                <h2 class="font-semibold text-xl mt-1 mb-1 text-gray-600 leading-tight">
+                <h2 class="font-medium text-xl mt-1 mb-1 text-gray-600 leading-tight">
                     {{ $subtitle }}
                 </h2>
             @endif

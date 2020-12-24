@@ -5,7 +5,7 @@
                 Total Contacts
             </dt>
             <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-                <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
+                <div class="flex items-baseline text-2xl font-medium text-indigo-600">
                     {{ $counts['contacts'] }}
                 </div>
             </dd>
@@ -18,7 +18,7 @@
                 Sends Created
             </dt>
             <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-                <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
+                <div class="flex items-baseline text-2xl font-medium text-indigo-600">
                     {{ $counts['sends'] }}
                 </div>
             </dd>
@@ -31,7 +31,7 @@
                 Emails Sent
             </dt>
             <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-                <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
+                <div class="flex items-baseline text-2xl font-medium text-indigo-600">
                     {{ $counts['sent'] }}
                 </div>
             </dd>

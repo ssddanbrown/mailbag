@@ -10,22 +10,22 @@
 
         <div class="flex -mx-5 mb-5">
             <div class="flex-auto w-1/2 px-5">
-                <x-subheading class="mb-4">Recent Sends</x-subheading>
+                <h3 class="mb-4 text-2xl font-medium mt-10">Recent Sends</h3>
                 @include('dashboard.recent-sends')
             </div>
             <div class="flex-auto w-1/2 px-5">
-                <x-subheading class="mb-4">Latest Contacts</x-subheading>
+                <h3 class="mb-4 text-2xl font-medium mt-10">Latest Contacts</h3>
                 @include('dashboard.latest-contacts')
             </div>
         </div>
 
         <div class="flex -mx-5 mb-5">
             <div class="flex-auto w-1/2 px-5">
-                <x-subheading class="mb-4">Popular Lists</x-subheading>
+                <h3 class="mb-4 text-2xl font-medium mt-10">Popular Lists</h3>
                 @include('dashboard.popular-lists')
             </div>
             <div class="flex-auto w-1/2 px-5">
-                <x-subheading class="mb-4">Upcoming RSS Checks</x-subheading>
+                <h3 class="mb-4 text-2xl font-medium mt-10">Upcoming RSS Checks</h3>
                 @include('dashboard.upcoming-rss')
             </div>
         </div>

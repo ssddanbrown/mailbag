@@ -1,6 +1,7 @@
 # MailBag
 
 ![PHPUnit](https://github.com/ssddanbrown/mailbag/workflows/PHPUnit/badge.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/303b6c55a668b92adb5a/maintainability)](https://codeclimate.com/github/ssddanbrown/mailbag/maintainability)
 
 MailBag is a simple plaintext-focused email manager. The application has been purpose-built for a fairly simple use-case. Due to limited time, I don't have much of a desire to widen the scope.
 
@@ -19,6 +20,7 @@ MailBag is a simple plaintext-focused email manager. The application has been pu
 - No scheduled sends.
 - Limited built-in customization.
 - Requires SMTP service for actual email sending.
+- Weak mobile support within admin interface.
 
 ## Alternative Apps
 
@@ -38,7 +40,7 @@ As said above, Due to limited time I don't want to widen the scope and stack on 
 MailBag is built using the following great projects:
 
 - [Laravel](https://laravel.com)
-- [Tailwind](https://tailwindcss.com)
+- [Tailwind](https://tailwindcss.com) / [TailwindUI](https://tailwindui.com)
 - [CodeMirror](https://codemirror.net/)
 - [SQLite](https://sqlite.org/index.html)
 

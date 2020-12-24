@@ -2,6 +2,57 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+/* roboto-regular - latin */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+    url('../fonts/roboto-v20-latin-regular.woff2') format('woff2'),
+    url('../fonts/roboto-v20-latin-regular.woff') format('woff');
+}
+
+/* roboto-italic - latin */
+@font-face {
+    font-family: 'Roboto';
+    font-style: italic;
+    font-weight: 400;
+    src: local(''),
+    url('../fonts/roboto-v20-latin-italic.woff2') format('woff2'),
+    url('../fonts/roboto-v20-latin-italic.woff') format('woff');
+}
+
+/* roboto-500 - latin */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    src: local(''),
+    url('../fonts/roboto-v20-latin-500.woff2') format('woff2'),
+    url('../fonts/roboto-v20-latin-500.woff') format('woff');
+}
+
+/* roboto-700 - latin */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    src: local(''),
+    url('../fonts/roboto-v20-latin-700.woff2') format('woff2'),
+    url('../fonts/roboto-v20-latin-700.woff') format('woff');
+}
+
+/* roboto-700italic - latin */
+@font-face {
+    font-family: 'Roboto';
+    font-style: italic;
+    font-weight: 700;
+    src: local(''),
+    url('../fonts/roboto-v20-latin-700italic.woff2') format('woff2'),
+    url('../fonts/roboto-v20-latin-700italic.woff') format('woff');
+}
+
+
 .table-cell {
     @apply px-6 py-4 whitespace-nowrap;
 }
