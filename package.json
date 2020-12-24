@@ -1,9 +1,9 @@
 {
     "private": true,
     "scripts": {
-        "dev": "tailwindcss build ./resources/css/app.css -o ./public/css/app.css",
+        "dev": "tailwindcss-cli build ./resources/css/app.css -o ./public/css/app.css",
         "livereload": "livereload ./resources -w 200",
-        "build": "cross-env NODE_ENV=production tailwindcss build ./resources/css/app.css -o ./public/css/app.css"
+        "build": "cross-env NODE_ENV=production tailwindcss-cli build ./resources/css/app.css -o ./public/css/app.css"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.2.1",
