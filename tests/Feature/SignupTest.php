@@ -40,7 +40,7 @@ class SignupTest extends TestCase
         ]);
 
         $signup = Signup::query()->where('email', '=', 'tester@example.com')->first();
-        Mail::assertSent(SignupConfirmationMail::class, function(Mailable $mail) use ($list, $signup, $mailer) {
+        Mail::assertQueued(SignupConfirmationMail::class, function(Mailable $mail) use ($list, $signup, $mailer) {
             Mail::swap($mailer);
             $mail->render();
             $this->assertStringContainsString($list->display_name, $mail->subject);

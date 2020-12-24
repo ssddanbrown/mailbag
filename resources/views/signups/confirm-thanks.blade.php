@@ -7,7 +7,7 @@
 
         <p class="">As a reminder, here are the details of this list:</p>
 
-        <p class="mb-5 text-gray-600 italic">{{ $list->description }}"</p>
+        <p class="mb-5 text-gray-600 italic">{{ $list->description }}</p>
     </div>
 
 </x-guest-layout>

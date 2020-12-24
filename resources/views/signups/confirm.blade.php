@@ -7,7 +7,7 @@
 
         <p class="">As a reminder, here are the details of this list:</p>
 
-        <p class="mb-5 text-gray-600 italic">{{ $signup->maillist->description }}"</p>
+        <p class="mb-5 text-gray-600 italic">{{ $signup->maillist->description }}</p>
 
         <form action="{{ route('signup.confirm.confirm', compact('signup')) }}" method="post">
             {{ csrf_field() }}

@@ -66,7 +66,7 @@ class CampaignController extends Controller
         $campaign->save();
 
         $this->showSuccessMessage('Campaign created!');
-        return redirect()->route('campaigns.edit', compact('campaign'));
+        return redirect()->route('campaigns.show', compact('campaign'));
     }
 
     /**
@@ -91,7 +91,7 @@ class CampaignController extends Controller
         ]);
 
         $this->showSuccessMessage('Campaign updated!');
-        return redirect()->route('campaigns.edit', compact('campaign'));
+        return redirect()->route('campaigns.show', compact('campaign'));
     }
 
     /**

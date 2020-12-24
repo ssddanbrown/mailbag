@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<x-table :headers="['Email', 'Status', '', '']">
+<x-table :headers="['Email', 'Status', '']">
     @foreach($contacts as $contact)
         <tr>
             <td class="table-cell">
@@ -16,12 +16,6 @@
             <td class="table-cell">
                 <x-status-pill color="{{ $contact->unsubscribed ? 'red' : 'green' }}">
                     {{ $contact->unsubscribed ? 'Unsubscribed' : 'Subscribed' }}
-                </x-status-pill>
-            </td>
-            <td class="table-cell text-sm text-gray-700">
-                <x-status-pill color="blue">
-                    {{ $contact->lists_count }}
-                    {{ \Illuminate\Support\Str::plural('list', $contact->lists_count) }}
                 </x-status-pill>
             </td>
             <td class="table-cell text-sm text-right font-medium">

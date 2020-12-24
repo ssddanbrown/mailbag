@@ -79,8 +79,8 @@ cp .env.example .env # (Then go through each option in there)
 # Set the application key
 php artisan key:generate
 
-# Create the database/database.sqlite file
-touch database/database.sqlite
+# Create the storage/database/database.sqlite file
+touch storage/database/database.sqlite
 
 # Migrate the database
 php artisan migrate
