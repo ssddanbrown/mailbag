@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Contact;
 use App\Models\MailList;
 use Tests\TestCase;
 
@@ -41,11 +42,39 @@ class MailListTest extends TestCase
         $response->assertSee("value=\"" . e($lists[105]->name) . "\"", false);
     }
 
+    public function test_can_see_contacts_on_list_show_page()
+    {
+        /** @var Contact $contact */
+        $contact = Contact::factory()->create();
+        $list = MailList::factory()->create();
+        $contact->lists()->sync([$list->id]);
+
+        $response = $this->whileLoggedIn()->get("/lists/{$list->id}");
+        $response->assertSee($contact->email);
+    }
+
+    public function test_can_see_list_details_on_show_page()
+    {
+        /** @var MailList $list */
+        $list = MailList::factory()->create([
+            'name' => 'My test list',
+            'description' => 'A test list',
+            'display_name' => 'List display name',
+            'slug' => 'a-list-slug',
+        ]);
+
+        $response = $this->whileLoggedIn()->get("/lists/{$list->id}");
+        $response->assertSee('My test list');
+        $response->assertSee('A test list');
+        $response->assertSee('List display name');
+        $response->assertSee('http://localhost/signup/a-list-slug');
+    }
+
     public function test_list_can_be_edited()
     {
         $list = MailList::factory()->create();
 
-        $response = $this->whileLoggedIn()->get("/lists/{$list->id}");
+        $response = $this->whileLoggedIn()->get("/lists/{$list->id}/edit");
         $response->assertSee($list->name);
         $response->assertSee('Save');
     }

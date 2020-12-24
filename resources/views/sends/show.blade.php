@@ -50,7 +50,7 @@
             <div class="flex-auto w-1/2 px-2">
                 <x-label>Send List</x-label>
                 <div>
-                    <a href="{{ route('lists.edit', ['list' => $send->maillist]) }}" class="link">{{ $send->maillist->name }} &nbsp;<x-status-pill color="blue">{{ $send->maillist->contacts()->count() }} contacts</x-status-pill></a>
+                    <a href="{{ route('lists.show', ['list' => $send->maillist]) }}" class="link">{{ $send->maillist->name }} &nbsp;<x-status-pill color="blue">{{ $send->maillist->contacts()->count() }} contacts</x-status-pill></a>
                 </div>
             </div>
         </div>

@@ -19,7 +19,7 @@
             @foreach($lists as $list)
                 <tr>
                     <td class="table-cell">
-                        <a href="{{ route('lists.edit', compact('list')) }}" class="inline-block">
+                        <a href="{{ route('lists.show', compact('list')) }}" class="inline-block">
                             {{ $list->name }} <br>
                             <span class="text-gray-500 text-sm">{{ $list->display_name }}</span>
                         </a>
@@ -30,9 +30,11 @@
                         </x-status-pill>
                     </td>
                     <td class="table-cell text-sm font-medium text-right">
-                        <a href="{{ route('signup.show', ['list' => $list]) }}" target="_blank" class="link">Signup Form</a>
+                        <a href="{{ route('lists.show', compact('list')) }}" class="link">View</a>
                         <span class="text-gray-500 px-1">|</span>
-                        <a href="{{ route('lists.edit', ['list' => $list]) }}" class="link">Edit</a>
+                        <a href="{{ route('signup.show', compact('list')) }}" target="_blank" class="link">Signup Form</a>
+                        <span class="text-gray-500 px-1">|</span>
+                        <a href="{{ route('lists.edit', compact('list')) }}" class="link">Edit</a>
                     </td>
                 </tr>
             @endforeach

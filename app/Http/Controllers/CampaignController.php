@@ -27,7 +27,11 @@ class CampaignController extends Controller
      */
     public function show(Request $request, Campaign $campaign)
     {
-        $sendQuery = $campaign->sends()->orderByRaw('activated_at desc NULLS FIRST')->orderBy('name');
+        $sendQuery = $campaign->sends()
+            ->orderByRaw('activated_at desc NULLS FIRST')
+            ->orderBy('name')
+            ->with(['mailList'])
+            ->withCount(['feeds']);
         $search = $request->get('search');
         if ($search) {
             $sendQuery->where('name', 'like', '%' . $search . '%');

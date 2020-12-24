@@ -5,7 +5,7 @@
                 @foreach($contact->lists as $list)
                     <div class="px-3 py-2 flex">
                         <div class="flex-auto">
-                            <a href="{{ route('lists.edit', compact('list')) }}">{{ $list->name }}</a> <br>
+                            <a href="{{ route('lists.show', compact('list')) }}">{{ $list->name }}</a> <br>
                             <span class="text-sm text-gray-500">Subscribed {{ $list->pivot->created_at->format('Y-m-d') }}</span>
                         </div>
                         <div class="flex-shrink pl-1">

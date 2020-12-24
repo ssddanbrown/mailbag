@@ -18,12 +18,19 @@
     @foreach($sends as $send)
         <tr>
             <td class="table-cell">
-                <a href="{{ route('sends.show', compact('send')) }}">{{ $send->name }}</a>
+                <a href="{{ route('sends.show', compact('send')) }}">{{ $send->name }}</a> <br>
+                <a href="{{ route('lists.show', ['list' => $send->mailList]) }}" class="text-sm text-gray-600 hover:underline">List: {{ $send->mailList->name }}</a>
             </td>
             <td class="table-cell">
                 <x-status-pill :color="$send->activated ? 'green' : 'blue'">
                     {{ $send->activated ? 'Launched' : 'Draft' }}
                 </x-status-pill>
+                @if ($send->feeds_count > 0)
+                    <br>
+                    <x-status-pill color="yellow" class="mt-1">
+                        Used in RSS
+                    </x-status-pill>
+                @endif
             </td>
             <td class="table-cell text-sm text-gray-800">
                 @if($send->activated)
@@ -31,10 +38,10 @@
                 @endif
             </td>
             <td class="table-cell text-sm font-medium text-right">
-                <a href="{{ route('sends.show', ['send' => $send]) }}" class="text-indigo-600 hover:text-indigo-900">View</a>
+                <a href="{{ route('sends.show', ['send' => $send]) }}" class="link">View</a>
                 @if(!$send->activated)
                     <span class="text-gray-400 px-2">|</span>
-                    <a href="{{ route('sends.edit', ['send' => $send]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                    <a href="{{ route('sends.edit', ['send' => $send]) }}" class="link">Edit</a>
                 @endif
             </td>
         </tr>

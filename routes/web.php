@@ -59,7 +59,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/lists', [MailListController::class, 'index'])->name('lists.index');
     Route::get('/lists/create', [MailListController::class, 'create'])->name('lists.create');
     Route::post('/lists', [MailListController::class, 'store'])->name('lists.store');
-    Route::get('/lists/{list}', [MailListController::class, 'edit'])->name('lists.edit');
+    Route::get('/lists/{list}', [MailListController::class, 'show'])->name('lists.show');
+    Route::get('/lists/{list}/edit', [MailListController::class, 'edit'])->name('lists.edit');
     Route::put('/lists/{list}', [MailListController::class, 'update'])->name('lists.update');
     Route::delete('/lists/{list}', [MailListController::class, 'destroy'])->name('lists.destroy');
 

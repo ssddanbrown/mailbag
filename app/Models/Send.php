@@ -49,6 +49,14 @@ class Send extends Model
     }
 
     /**
+     * Get the feeds that are using this send.
+     */
+    public function feeds(): HasMany
+    {
+        return $this->hasMany(RssFeed::class, 'template_send_id');
+    }
+
+    /**
      * Check if this send has activated or not.
      */
     public function getActivatedAttribute(): bool

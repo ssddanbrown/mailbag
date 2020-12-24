@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\MailList;
 use Illuminate\Http\Request;
-use Psy\Util\Str;
 
 class MailListController extends Controller
 {
@@ -23,6 +22,24 @@ class MailListController extends Controller
         $lists = $query->paginate(100)->withQueryString();
         return view('lists.index', [
             'lists' => $lists,
+        ]);
+    }
+
+    /**
+     * Show a single list with the contacts within it.
+     */
+    public function show(MailList $list, Request $request)
+    {
+        $query = $list->contacts()->orderBy('email');
+        $search = $request->get('search');
+        if ($search) {
+            $query->where('email', 'like', '%' . $search . '%');
+        }
+
+        $contacts = $query->paginate(100)->withQueryString();
+        return view('lists.show', [
+            'list' => $list,
+            'contacts' => $contacts,
         ]);
     }
 
