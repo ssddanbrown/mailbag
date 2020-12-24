@@ -12,7 +12,9 @@
 <x-table :headers="['Name', 'Status', '', '']">
     @foreach($sends as $send)
         <tr>
-            <td class="table-cell">{{ $send->name }}</td>
+            <td class="table-cell">
+                <a href="{{ route('sends.show', compact('send')) }}">{{ $send->name }}</a>
+            </td>
             <td class="table-cell">
                 <x-status-pill :color="$send->activated ? 'green' : 'blue'">
                     {{ $send->activated ? 'Launched' : 'Draft' }}

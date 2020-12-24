@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-heading title="Edit Send" :subtitle="$send->name"/>
+    <x-heading title="Edit Send" :subtitle="$send->name" :breadcrumbs="['Campaigns' => route('campaigns.index'), $send->campaign->name => route('campaigns.show', ['campaign' => $send->campaign]), $send->name => route('sends.show', compact('send')), 'Edit Send' => route('sends.create')]"/>
 
     <div class="container">
 

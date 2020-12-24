@@ -97,7 +97,7 @@ class CampaignController extends Controller
     {
         $campaign->delete();
         $campaign->sends()->delete();
-        // TODO - Handle sub-send relations
+        $campaign->rssFeeds()->delete();
         $this->showSuccessMessage("Campaign deleted!");
         return redirect()->route('campaigns.index');
     }

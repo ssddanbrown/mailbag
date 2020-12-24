@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <x-heading title="Campaigns"/>
+    <x-heading title="Campaigns" :breadcrumbs="['Campaigns' => route('campaigns.index')]"/>
 
     <div class="container mx-auto">
 
@@ -18,7 +18,9 @@
         <x-table :headers="['Name', '']">
             @foreach($campaigns as $campaign)
                 <tr>
-                    <td class="table-cell">{{ $campaign->name }}</td>
+                    <td class="table-cell">
+                        <a href="{{ route('campaigns.show', compact('campaign')) }}">{{ $campaign->name }}</a>
+                    </td>
                     <td class="table-cell text-right">
                         @if($campaign->rss_feeds_count > 0)
                             <x-status-pill color="yellow" class="ml-2">

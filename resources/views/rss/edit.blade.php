@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-heading title="Edit RSS Feed" :subtitle="$feed->url"/>
+    <x-heading title="Edit RSS Feed" :subtitle="$feed->url" :breadcrumbs="['Campaigns' => route('campaigns.index'), $campaign->name => route('campaigns.show', compact('campaign')), 'Edit RSS Feed' => route('rss.edit', compact('campaign', 'feed'))]"/>
 
     <div class="container">
 

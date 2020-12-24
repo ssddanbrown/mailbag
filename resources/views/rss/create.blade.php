@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-heading title="RSS Feed" subtitle="Create new RSS Feed"/>
+    <x-heading title="RSS Feed" subtitle="Create new RSS Feed" :breadcrumbs="['Campaigns' => route('campaigns.index'), $campaign->name => route('campaigns.show', compact('campaign')), 'New RSS Feed' => route('rss.create', compact('campaign'))]"/>
 
     <div class="container">
 

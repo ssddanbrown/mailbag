@@ -13,7 +13,7 @@ class ContactController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Contact::query()->orderBy('email');
+        $query = Contact::query()->orderBy('email')->withCount(['lists']);
         $search = $request->get('search');
         if ($search) {
             $query->where('email', 'like', '%' . $search . '%');

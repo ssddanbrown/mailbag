@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-heading title="Campaign" subtitle="Create new campaign"/>
+    <x-heading title="Campaign" subtitle="Create new campaign" :breadcrumbs="['Campaigns' => route('campaigns.index'), 'Create' => route('campaigns.create')]"/>
 
     <div class="container">
 

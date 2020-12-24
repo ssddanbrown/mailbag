@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <x-heading title="Contacts"/>
+    <x-heading title="Contacts" :breadcrumbs="['Contacts' => route('contacts.index')]"/>
 
     <div class="container mx-auto">
 
@@ -15,13 +15,21 @@
 
         <div class="pb-5">{{ $contacts->links() }}</div>
 
-        <x-table :headers="['Email', 'Status', '']">
+        <x-table :headers="['Email', 'Status', '', '']">
             @foreach($contacts as $contact)
                 <tr>
-                    <td class="table-cell">{{ $contact->email }}</td>
+                    <td class="table-cell">
+                        <a href="{{ route('contacts.edit', compact('contact')) }}">{{ $contact->email }}</a>
+                    </td>
                     <td class="table-cell">
                         <x-status-pill color="{{ $contact->unsubscribed ? 'red' : 'green' }}">
                             {{ $contact->unsubscribed ? 'Unsubscribed' : 'Subscribed' }}
+                        </x-status-pill>
+                    </td>
+                    <td class="table-cell text-sm text-gray-700">
+                        <x-status-pill color="blue">
+                            {{ $contact->lists_count }}
+                            {{ \Illuminate\Support\Str::plural('list', $contact->lists_count) }}
                         </x-status-pill>
                     </td>
                     <td class="table-cell text-sm text-right font-medium">

@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <x-heading title="Lists"/>
+    <x-heading title="Lists" :breadcrumbs="['Lists' => route('lists.index')]"/>
 
     <div class="container mx-auto">
 
@@ -19,8 +19,10 @@
             @foreach($lists as $list)
                 <tr>
                     <td class="table-cell">
-                        {{ $list->name }} <br>
-                        <span class="text-gray-500 text-sm">{{ $list->display_name }}</span>
+                        <a href="{{ route('lists.edit', compact('list')) }}" class="inline-block">
+                            {{ $list->name }} <br>
+                            <span class="text-gray-500 text-sm">{{ $list->display_name }}</span>
+                        </a>
                     </td>
                     <td class="table-cell ">
                         <x-status-pill :color="$list->contacts_count == 0 ? 'red' : 'blue'">

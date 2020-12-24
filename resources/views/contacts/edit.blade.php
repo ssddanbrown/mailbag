@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-heading title="Contact" :subtitle="$contact->email"/>
+    <x-heading title="Contact" :subtitle="$contact->email" :breadcrumbs="['Contacts' => route('contacts.index'), 'Edit' => route('contacts.edit', compact('contact'))]"/>
 
     <div class="container">
 

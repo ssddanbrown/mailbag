@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-heading title="Contact" subtitle="Create new contact"/>
+    <x-heading title="Contact" subtitle="Create new contact" :breadcrumbs="['Contacts' => route('contacts.index'), 'Create' => route('contacts.create')]"/>
 
     <div class="container">
 

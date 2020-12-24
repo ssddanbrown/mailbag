@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-heading title="Send" subtitle="Create new send"/>
+    <x-heading title="Send" subtitle="Create new send" :breadcrumbs="array_merge($campaign ? ['Campaigns' => route('campaigns.index'), $campaign->name => route('campaigns.show', compact('campaign'))] : [], ['New Send' => route('sends.create')])"/>
 
     <div class="container">
 

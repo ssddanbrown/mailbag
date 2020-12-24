@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-heading title="List" subtitle="Create new list"/>
+    <x-heading title="List" subtitle="Create new list" :breadcrumbs="['Lists' => route('lists.index'), 'Create' => route('lists.create')]"/>
 
     <div class="container">
 
