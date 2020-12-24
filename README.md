@@ -5,3 +5,5 @@
 - Schedule cron
 - Queues
 
+- Requires sqlite 3.3+
+
