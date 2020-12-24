@@ -49,8 +49,8 @@
 <!-- Content -->
 
 @push('head')
-    <script src="{{ url('libs/codemirror/codemirror.js') }}"></script>
-    <link rel="stylesheet" href="{{ url('libs/codemirror/codemirror.css') }}">
+    <script src="{{ asset('libs/codemirror/codemirror.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('libs/codemirror/codemirror.css') }}">
 @endpush
 
 <div class="pt-5">

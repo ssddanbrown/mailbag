@@ -93,7 +93,7 @@ npm run build
 chown -R www-data:www-data storage/ boostrap/cache/
 
 # Set up your webserver with the root pointing at the `public/` folder. (Nginx "root" or Apache "DocumentRoot"). 
-# Done!
+# Done! Login at the `/login` path of the domain you configured mailbag on. (eg. http://domain/login)
 ```
 
 #### Scheduler Setup

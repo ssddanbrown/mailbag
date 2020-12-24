@@ -4,6 +4,7 @@ use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactListController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaunchSendController;
 use App\Http\Controllers\MailListController;
 use App\Http\Controllers\RssFeedController;
@@ -24,10 +25,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get("/signup-confirm/{signupKey}", [SignupConfirmationController::class, 'show'])->name('signup.confirm.show');
 Route::post("/signup-confirm/{signup:key}", [SignupConfirmationController::class, 'confirm'])->name('signup.confirm.confirm');

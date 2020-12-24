@@ -58,6 +58,8 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'home_redirect_url' => env('HOME_REDIRECT_URL', null),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
