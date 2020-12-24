@@ -58,6 +58,7 @@ MailBag has the following requirements:
 - [Composer](https://getcomposer.org/)
 - Ideally Nginx, Apache or similar kind of server to handling incoming requests.
 - SMTP service for sending the emails.
+- NodeJS v12+ & NPM
 
 You'll also need command-line access on the host including the ability to configure cron and process management. Using git will help with keeping the codebase versions for managing updates.
 
@@ -81,6 +82,10 @@ touch database/database.sqlite
 
 # Migrate the database
 php artisan migrate
+
+# Install and build JS/CSS Dependancies
+npm install
+npm run production
 
 # Check the storage/ and boostrap/cache (and all subfolders) are writable by the webserver, Commands reflect ubuntu common defaults
 chown -R www-data:www-data storage/ boostrap/cache/
