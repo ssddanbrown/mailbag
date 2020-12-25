@@ -121,7 +121,7 @@ Description=MailBag Queue
 [Service]
 User=www-data
 Group=www-data
-Restart=on-failure
+Restart=always
 ExecStart=/usr/bin/php /path-to-your-project/artisan queue:work --sleep=3 --tries=1
 
 [Install]
