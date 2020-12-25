@@ -5,6 +5,42 @@
 
 MailBag is a simple plaintext-focused email manager. The application has been purpose-built for a fairly simple use-case. Due to limited time, I don't have much of a desire to widen the scope.
 
+## Screenshots
+
+<table>
+	<tbody>
+		<tr>
+			<td width="33%">
+				Home Dashboard
+				<img src="https://github.com/ssddanbrown/mailbag/raw/master/screenshots/dashboard.png">
+			</td>
+			<td width="33%">
+				Campaign
+				<img src="https://github.com/ssddanbrown/mailbag/raw/master/screenshots/campaign.png">
+			</td>
+			<td width="33%">
+				Edit Send
+				<img src="https://github.com/ssddanbrown/mailbag/raw/master/screenshots/send.png">
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table>
+	<tbody>
+		<tr>
+			<td width="50%">
+				List Signup
+				<img src="https://github.com/ssddanbrown/mailbag/raw/master/screenshots/signup.png">
+			</td>
+			<td width="50%">
+				Unsubscribe
+				<img src="https://github.com/ssddanbrown/mailbag/raw/master/screenshots/unsubscribe.png">
+			</td>
+		</tr>
+	</tbody>
+</table>
+
 ## Features
 
 - One-off sends of plaintext emails.
