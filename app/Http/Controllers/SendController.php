@@ -82,7 +82,7 @@ class SendController extends Controller
         $send->update($validated);
 
         $this->showSuccessMessage('Send updated!');
-        return redirect()->route('sends.edit', compact('send'));
+        return redirect()->route('sends.show', compact('send'));
     }
 
     /**

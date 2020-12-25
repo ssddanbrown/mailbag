@@ -3,7 +3,13 @@
 
     <div class="container">
 
-        <div class="flex -mx-3">
+        <div class="flex -mx-2 mb-5">
+            <div class="flex-auto px-2 text-right">
+                <x-button-secondary-link :href="route('lists.edit', compact('list'))">Edit List</x-button-secondary-link>
+            </div>
+        </div>
+
+        <div class="flex -mx-3 border-t border-gray-300">
 
             <div class="flex-auto w-1/2 px-3">
                 <!-- List Name -->
