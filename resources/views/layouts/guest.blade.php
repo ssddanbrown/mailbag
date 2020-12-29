@@ -12,6 +12,8 @@
 
         <!-- Scripts -->
         <script src="{{ asset('libs/alpine/alpine.js') }}" defer></script>
+
+        @stack('scripts')
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">

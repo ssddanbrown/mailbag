@@ -1,7 +1,7 @@
 @props(['errors'])
 
 @if ($errors->any())
-    <div {{ $attributes }}>
+    <div {{ $attributes->merge(['class' => 'mb-5']) }}>
         <div class="font-medium text-red-600">
             Whoops! Something went wrong.
         </div>

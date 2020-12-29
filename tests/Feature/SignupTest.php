@@ -6,7 +6,9 @@ use App\Mail\SignupConfirmationMail;
 use App\Models\Contact;
 use App\Models\MailList;
 use App\Models\Signup;
+use Illuminate\Http\Client\Request;
 use Illuminate\Mail\Mailable;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -132,5 +134,49 @@ class SignupTest extends TestCase
         $resp->assertStatus(404);
         $resp->assertSee("Sorry, sign up not found");
         $this->assertDatabaseMissing('signups', ['id' => $signup->id]);
+    }
+
+    public function test_signup_with_hcaptcha_configured_has_hcaptcha_field_required()
+    {
+        $list = MailList::factory()->create();
+        config()->set('services.hcaptcha.sitekey', 'abc');
+        config()->set('services.hcaptcha.secretkey', '123');
+        config()->set('services.hcaptcha.active', true);
+
+        $this->post("/signup/{$list->slug}", ['email' => 'test@example.com']);
+        $resp = $this->get("/signup/{$list->slug}");
+        $resp->assertSee('The h-captcha-response field is required');
+
+        $this->assertDatabaseMissing('signups', [
+            'email' => 'test@example.com',
+        ]);
+    }
+
+    public function test_signup_with_hcaptcha_configured_makes_verification_call()
+    {
+        $list = MailList::factory()->create();
+        config()->set('services.hcaptcha.sitekey', 'abc');
+        config()->set('services.hcaptcha.secretkey', '123');
+        config()->set('services.hcaptcha.active', true);
+
+        Http::fake([
+            'https://hcaptcha.com/siteverify' => Http::response(['success' => true])
+        ]);
+
+        $this->post("/signup/{$list->slug}", [
+            'email' => 'test@example.com',
+            'h-captcha-response' => 'def456'
+        ]);
+
+        $this->assertDatabaseHas('signups', [
+            'email' => 'test@example.com',
+        ]);
+
+        Http::assertSent(function (Request $request) {
+            return $request->hasHeader('Content-Type', 'application/x-www-form-urlencoded')
+                && $request->data()['secret'] === '123'
+                && $request->data()['response'] === 'def456'
+                && $request->data()['sitekey'] === 'abc';
+        });
     }
 }

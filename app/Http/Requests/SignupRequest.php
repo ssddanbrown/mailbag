@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Signup;
+use App\Rules\ValidHCaptchaResult;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SignupRequest extends FormRequest
@@ -32,8 +33,14 @@ class SignupRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'email' => 'required|email|max:200'
+        $rules = [
+            'email' => 'required|email|max:200',
         ];
+
+        if (config('services.hcaptcha.active')) {
+            $rules['h-captcha-response'] = ['required', new ValidHCaptchaResult];
+        }
+
+        return $rules;
     }
 }

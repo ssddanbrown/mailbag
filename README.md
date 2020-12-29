@@ -48,6 +48,7 @@ MailBag is a simple plaintext-focused email manager. The application has been pu
 - List level & contact-level unsubscribe options via links in sends.
 - RSS feed sends, sending emails every set number of days with new items from the feed.
 - Auto-scheduled unsubscribed contact scrubbing.
+- [hCaptcha](https://www.hcaptcha.com/) integration on sign-up forms.
 
 ## Limitations
 

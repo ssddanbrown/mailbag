@@ -15,6 +15,15 @@
                 <x-input type="email" name="email" id="email" value="{{ old('email', '') }}" class="w-full" required/>
             </div>
 
+            @if(config('services.hcaptcha.active'))
+                <div class="mb-5">
+                    @push('scripts')
+                        <script src="https://hcaptcha.com/1/api.js" async defer></script>
+                    @endpush
+                        <div class="h-captcha" data-sitekey="{{ config('services.hcaptcha.sitekey') }}"></div>
+                </div>
+            @endif
+
             <p class="text-sm text-gray-700 mb-5">
                 You will receive an email to confirm you own the provided email address.
                 You will need to click through on this email and confirm your sign-up before you're actually subscribed.
