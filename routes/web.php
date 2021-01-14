@@ -6,7 +6,8 @@ use App\Http\Controllers\ContactListController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaunchSendController;
-use App\Http\Controllers\MailListController;
+use App\Http\Controllers\ListController;
+use App\Http\Controllers\ListImportController;
 use App\Http\Controllers\RssFeedController;
 use App\Http\Controllers\SendController;
 use App\Http\Controllers\SignupConfirmationController;
@@ -57,13 +58,16 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('/contacts/{contact}/lists', [ContactListController::class, 'add'])->name('contacts.lists.add');
     Route::delete('/contacts/{contact}/lists', [ContactListController::class, 'remove'])->name('contacts.lists.remove');
 
-    Route::get('/lists', [MailListController::class, 'index'])->name('lists.index');
-    Route::get('/lists/create', [MailListController::class, 'create'])->name('lists.create');
-    Route::post('/lists', [MailListController::class, 'store'])->name('lists.store');
-    Route::get('/lists/{list}', [MailListController::class, 'show'])->name('lists.show');
-    Route::get('/lists/{list}/edit', [MailListController::class, 'edit'])->name('lists.edit');
-    Route::put('/lists/{list}', [MailListController::class, 'update'])->name('lists.update');
-    Route::delete('/lists/{list}', [MailListController::class, 'destroy'])->name('lists.destroy');
+    Route::get('/lists', [ListController::class, 'index'])->name('lists.index');
+    Route::get('/lists/create', [ListController::class, 'create'])->name('lists.create');
+    Route::post('/lists', [ListController::class, 'store'])->name('lists.store');
+    Route::get('/lists/{list}', [ListController::class, 'show'])->name('lists.show');
+    Route::get('/lists/{list}/edit', [ListController::class, 'edit'])->name('lists.edit');
+    Route::put('/lists/{list}', [ListController::class, 'update'])->name('lists.update');
+    Route::delete('/lists/{list}', [ListController::class, 'destroy'])->name('lists.destroy');
+
+    Route::get('/lists/{list}/import', [ListImportController::class, 'show'])->name('lists.import.show');
+    Route::post('/lists/{list}/import', [ListImportController::class, 'import'])->name('lists.import.import');
 
     Route::get('/campaigns', [CampaignController::class, 'index'])->name('campaigns.index');
     Route::get('/campaigns/create', [CampaignController::class, 'create'])->name('campaigns.create');

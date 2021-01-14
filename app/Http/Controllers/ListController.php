@@ -6,7 +6,7 @@ use App\Models\MailList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class MailListController extends Controller
+class ListController extends Controller
 {
     /**
      * Display a listing of the resource.
