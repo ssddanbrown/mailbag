@@ -1,4 +1,4 @@
-<nav class="bg-white border-b border-gray-200">
+<nav class="bg-white shadow border-gray-200">
     <!-- Primary Navigation Menu -->
     <div class="container">
         <div class="flex justify-between h-16">
@@ -10,6 +10,9 @@
                     </a>
                 </div>
 
+            </div>
+
+            <div class="flex">
                 <!-- Navigation Links -->
                 <div class="space-x-8 sm:-my-px sm:ml-10 flex">
                     <x-nav-link :href="route('campaigns.index')" :active="request()->routeIs('campaigns.*')">Campaigns</x-nav-link>

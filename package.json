@@ -1,15 +1,16 @@
 {
     "private": true,
     "scripts": {
-        "dev": "cross-env NODE_ENV=development tailwindcss-cli build ./resources/css/app.css -o ./public/css/app.css",
+        "dev": "cross-env NODE_ENV=development postcss ./resources/css/app.css -o ./public/css/app.css -w",
         "livereload": "livereload ./resources -w 200",
-        "build": "cross-env NODE_ENV=production tailwindcss-cli build ./resources/css/app.css -o ./public/css/app.css"
+        "build": "cross-env NODE_ENV=production postcss ./resources/css/app.css -o ./public/css/app.css"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.3.2",
         "cross-env": "^7.0.3",
         "livereload": "^0.9.1",
-        "tailwindcss": "^2.1.2",
-        "tailwindcss-cli": "^0.1.2"
+        "postcss": "^8.2.13",
+        "postcss-cli": "^8.3.1",
+        "tailwindcss": "^2.1.2"
     }
 }
