@@ -15,10 +15,11 @@ class CampaignController extends Controller
         $query = Campaign::query()->withCount(['sends', 'rssFeeds'])->orderBy('name');
         $search = $request->get('search');
         if ($search) {
-            $query->where('name', 'like', '%' . $search . '%');
+            $query->where('name', 'like', '%'.$search.'%');
         }
 
         $campaigns = $query->paginate(100)->withQueryString();
+
         return view('campaigns.index', compact('campaigns'));
     }
 
@@ -34,7 +35,7 @@ class CampaignController extends Controller
             ->withCount(['feeds']);
         $search = $request->get('search');
         if ($search) {
-            $sendQuery->where('name', 'like', '%' . $search . '%');
+            $sendQuery->where('name', 'like', '%'.$search.'%');
         }
 
         $sends = $sendQuery->paginate(100)->withQueryString();
@@ -48,6 +49,7 @@ class CampaignController extends Controller
     public function create()
     {
         $default = new Campaign();
+
         return view('campaigns.create', ['campaign' => $default]);
     }
 
@@ -66,6 +68,7 @@ class CampaignController extends Controller
         $campaign->save();
 
         $this->showSuccessMessage('Campaign created!');
+
         return redirect()->route('campaigns.show', compact('campaign'));
     }
 
@@ -91,6 +94,7 @@ class CampaignController extends Controller
         ]);
 
         $this->showSuccessMessage('Campaign updated!');
+
         return redirect()->route('campaigns.show', compact('campaign'));
     }
 
@@ -102,7 +106,8 @@ class CampaignController extends Controller
         $campaign->delete();
         $campaign->sends()->delete();
         $campaign->rssFeeds()->delete();
-        $this->showSuccessMessage("Campaign deleted!");
+        $this->showSuccessMessage('Campaign deleted!');
+
         return redirect()->route('campaigns.index');
     }
 }

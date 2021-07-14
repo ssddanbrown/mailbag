@@ -22,7 +22,7 @@ class CampaignFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->country . ' Send ' . strval(rand(2000, 2040)),
+            'name' => $this->faker->country.' Send '.strval(rand(2000, 2040)),
         ];
     }
 }

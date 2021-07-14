@@ -34,6 +34,7 @@ class Signup extends Model
     public function hasExpired(): bool
     {
         $expireTime = now()->subDays(static::$lifetime);
+
         return $this->created_at <= $expireTime;
     }
 
@@ -43,6 +44,7 @@ class Signup extends Model
     public static function whereExpired(): Builder
     {
         $expireTime = now()->subDays(static::$lifetime);
+
         return self::query()->where('created_at', '<', $expireTime);
     }
 
@@ -54,6 +56,7 @@ class Signup extends Model
         do {
             $key = Str::random(32);
         } while (static::query()->where('key', '=', $key)->count() > 0);
+
         return $key;
     }
 }

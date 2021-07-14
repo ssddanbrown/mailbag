@@ -16,6 +16,7 @@ class RssFeedController extends Controller
     {
         $feed = new RssFeed();
         $feed->campaign = $campaign;
+
         return view('rss.create', compact('campaign', 'feed'));
     }
 
@@ -25,11 +26,11 @@ class RssFeedController extends Controller
     public function store(Request $request, Campaign $campaign)
     {
         $validated = $this->validate($request, [
-            'active' => 'required|bool',
-            'url' => ['required', 'url', 'max:250', new ValidRssFeedRule],
+            'active'           => 'required|bool',
+            'url'              => ['required', 'url', 'max:250', new ValidRssFeedRule()],
             'template_send_id' => 'required|exists:sends,id',
-            'send_frequency' => 'required|integer|min:1|max:366',
-            'target_hour' => 'required|integer|min:0|max:23',
+            'send_frequency'   => 'required|integer|min:1|max:366',
+            'target_hour'      => 'required|integer|min:0|max:23',
         ]);
 
         $feed = new RssFeed($validated);
@@ -37,7 +38,8 @@ class RssFeedController extends Controller
         $feed->updateNextReviewDate();
         $campaign->rssFeeds()->save($feed);
 
-        $this->showSuccessMessage("RSS feed created!");
+        $this->showSuccessMessage('RSS feed created!');
+
         return redirect()->route('campaigns.show', compact('campaign'));
     }
 
@@ -55,18 +57,19 @@ class RssFeedController extends Controller
     public function update(Request $request, Campaign $campaign, RssFeed $feed)
     {
         $validated = $this->validate($request, [
-            'active' => 'required|bool',
-            'url' => ['required', 'url', 'max:250', new ValidRssFeedRule],
+            'active'           => 'required|bool',
+            'url'              => ['required', 'url', 'max:250', new ValidRssFeedRule()],
             'template_send_id' => 'required|exists:sends,id',
-            'send_frequency' => 'required|integer|min:1|max:366',
-            'target_hour' => 'required|integer|min:0|max:23',
+            'send_frequency'   => 'required|integer|min:1|max:366',
+            'target_hour'      => 'required|integer|min:0|max:23',
         ]);
 
         $feed->fill($validated);
         $feed->updateNextReviewDate();
         $feed->update($validated);
 
-        $this->showSuccessMessage("RSS feed updated!");
+        $this->showSuccessMessage('RSS feed updated!');
+
         return redirect()->route('campaigns.show', compact('campaign'));
     }
 
@@ -77,7 +80,8 @@ class RssFeedController extends Controller
     {
         $feed->delete();
 
-        $this->showSuccessMessage("RSS feed deleted!");
+        $this->showSuccessMessage('RSS feed deleted!');
+
         return redirect()->route('campaigns.show', compact('campaign'));
     }
 }

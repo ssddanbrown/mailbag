@@ -21,11 +21,11 @@ class MailList extends Model
     }
 
     /**
-     * Get all the lists formatted for a select list
+     * Get all the lists formatted for a select list.
      */
     public static function getAllForSelect(): array
     {
-        return static::query()->orderBy('name')->get(['id', 'name'])->mapWithKeys(function($list) {
+        return static::query()->orderBy('name')->get(['id', 'name'])->mapWithKeys(function ($list) {
             return [$list->id => $list->name];
         })->toArray();
     }

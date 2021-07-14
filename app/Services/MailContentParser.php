@@ -1,4 +1,6 @@
-<?php namespace App\Services;
+<?php
+
+namespace App\Services;
 
 use App\Models\SendRecord;
 use App\Services\Rss\RssArticle;
@@ -6,7 +8,6 @@ use Illuminate\Support\Collection;
 
 class MailContentParser
 {
-
     protected $content;
 
     public function __construct(string $content)
@@ -20,6 +21,7 @@ class MailContentParser
     public function parseForSend(SendRecord $record): string
     {
         $this->addOrReplaceUnsubscribe($record);
+
         return $this->content;
     }
 
@@ -29,14 +31,14 @@ class MailContentParser
      */
     public function parseForRss(Collection $articles): string
     {
-        $rssSectionRegex = '/' . $this->tagRegex('rss_loop')
-            . '(.*?)' . $this->tagRegex('end_rss_loop') . '/s';
+        $rssSectionRegex = '/'.$this->tagRegex('rss_loop')
+            .'(.*?)'.$this->tagRegex('end_rss_loop').'/s';
         $matches = [];
         preg_match_all($rssSectionRegex, $this->content, $matches);
 
         foreach ($matches[1] as $index => $matchContent) {
             $rawContent = $matches[0][$index];
-            $newContent = collect($articles)->map(function(RssArticle $article) use ($matchContent) {
+            $newContent = collect($articles)->map(function (RssArticle $article) use ($matchContent) {
                 return $this->replaceArticleTags($matchContent, $article);
             })->join('');
             $this->content = str_replace($rawContent, $newContent, $this->content);
@@ -54,6 +56,7 @@ class MailContentParser
         $content = $this->replaceTag($content, 'rss_article_link', $article->link);
         $content = $this->replaceTag($content, 'rss_article_publish_date', $article->pubDate->format('jS \o\f F, Y'));
         $content = $this->replaceTag($content, 'rss_article_description', $article->description);
+
         return $content;
     }
 
@@ -63,11 +66,11 @@ class MailContentParser
     protected function addOrReplaceUnsubscribe(SendRecord $record)
     {
         if (!$this->hasTag($this->content, 'unsubscribe_link')) {
-            $this->content .= "\n\n" . 'Unsubscribe: {{unsubscribe_link}}';
+            $this->content .= "\n\n".'Unsubscribe: {{unsubscribe_link}}';
         }
 
         $unsubLink = route('unsubscribe.show', ['sendRecord' => $record]);
-        $this->content = $this->replaceTag($this->content,'unsubscribe_link', $unsubLink);
+        $this->content = $this->replaceTag($this->content, 'unsubscribe_link', $unsubLink);
     }
 
     /**
@@ -75,7 +78,7 @@ class MailContentParser
      */
     protected function hasTag(string $content, string $tagName): bool
     {
-        return preg_match('/' . $this->tagRegex($tagName) . '/', $content);
+        return preg_match('/'.$this->tagRegex($tagName).'/', $content);
     }
 
     /**
@@ -83,7 +86,7 @@ class MailContentParser
      */
     protected function replaceTag(string $content, string $tagName, string $replacement): string
     {
-        return preg_replace('/' . $this->tagRegex($tagName) . '/', $replacement, $content);
+        return preg_replace('/'.$this->tagRegex($tagName).'/', $replacement, $content);
     }
 
     /**
@@ -93,5 +96,4 @@ class MailContentParser
     {
         return '{{\s*?'.$tagName.'\s*?}}';
     }
-
 }

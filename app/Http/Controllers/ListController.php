@@ -11,16 +11,17 @@ class ListController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request  $request)
+    public function index(Request $request)
     {
         $query = MailList::query()->orderBy('name')->withCount('contacts');
         $search = $request->get('search');
         if ($search) {
-            $query->where('name', 'like', '%' . $search . '%')
-                ->orWhere('display_name', 'like', '%' . $search . '%');
+            $query->where('name', 'like', '%'.$search.'%')
+                ->orWhere('display_name', 'like', '%'.$search.'%');
         }
 
         $lists = $query->paginate(100)->withQueryString();
+
         return view('lists.index', [
             'lists' => $lists,
         ]);
@@ -34,12 +35,13 @@ class ListController extends Controller
         $query = $list->contacts()->orderBy('email');
         $search = $request->get('search');
         if ($search) {
-            $query->where('email', 'like', '%' . $search . '%');
+            $query->where('email', 'like', '%'.$search.'%');
         }
 
         $contacts = $query->paginate(100)->withQueryString();
+
         return view('lists.show', [
-            'list' => $list,
+            'list'     => $list,
             'contacts' => $contacts,
         ]);
     }
@@ -50,6 +52,7 @@ class ListController extends Controller
     public function create()
     {
         $default = new MailList();
+
         return view('lists.create', ['list' => $default]);
     }
 
@@ -59,9 +62,9 @@ class ListController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:250',
+            'name'         => 'required|max:250',
             'display_name' => 'required|max:250',
-            'slug' => 'max:250|alpha_dash|unique:mail_lists,slug',
+            'slug'         => 'max:250|alpha_dash|unique:mail_lists,slug',
         ]);
 
         $list = new MailList($request->all());
@@ -71,6 +74,7 @@ class ListController extends Controller
         $list->save();
 
         $this->showSuccessMessage('List created!');
+
         return redirect()->route('lists.show', compact('list'));
     }
 
@@ -88,9 +92,9 @@ class ListController extends Controller
     public function update(Request $request, MailList $list)
     {
         $this->validate($request, [
-            'name' => 'required|max:250',
+            'name'         => 'required|max:250',
             'display_name' => 'required|max:250',
-            'slug' => "max:250|alpha_dash|unique:mail_lists,slug,{$list->id}",
+            'slug'         => "max:250|alpha_dash|unique:mail_lists,slug,{$list->id}",
         ]);
 
         $list->fill($request->all());
@@ -100,6 +104,7 @@ class ListController extends Controller
         $list->save();
 
         $this->showSuccessMessage('List updated!');
+
         return redirect()->route('lists.show', compact('list'));
     }
 
@@ -111,6 +116,7 @@ class ListController extends Controller
         $list->contacts()->detach();
         $list->delete();
         $this->showSuccessMessage('List deleted!');
+
         return redirect()->route('lists.index');
     }
 }

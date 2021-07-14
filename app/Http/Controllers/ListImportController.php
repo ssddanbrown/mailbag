@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace App\Http\Controllers;
 
 use App\Models\MailList;
 use App\Services\EmailListImporter;
@@ -27,6 +29,7 @@ class ListImportController extends Controller
         $results = $importer->import($validated['email_list']);
 
         $this->showSuccessMessage("Imported {$results['total']} contacts. {$results['created']} new, {$results['updated']} existing.");
-        return redirect()->route("lists.show", compact('list'));
+
+        return redirect()->route('lists.show', compact('list'));
     }
 }

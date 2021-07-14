@@ -24,14 +24,15 @@ class RssFeedFactory extends Factory
     public function definition()
     {
         $campaign = Campaign::factory()->create();
+
         return [
-            'active' => true,
-            'url' => $this->faker->url . '.xml',
-            'campaign_id' => $campaign->id,
+            'active'           => true,
+            'url'              => $this->faker->url.'.xml',
+            'campaign_id'      => $campaign->id,
             'template_send_id' => Send::factory()->for($campaign),
-            'send_frequency' => 7,
-            'target_hour' => 12,
-            'next_review_at' => now()->addDays(7),
+            'send_frequency'   => 7,
+            'target_hour'      => 12,
+            'next_review_at'   => now()->addDays(7),
             'last_reviewed_at' => now(),
         ];
     }

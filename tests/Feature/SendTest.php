@@ -9,7 +9,6 @@ use Tests\TestCase;
 
 class SendTest extends TestCase
 {
-
     public function test_sends_visible_on_campaign()
     {
         $campaign = Campaign::factory()->create();
@@ -61,9 +60,9 @@ class SendTest extends TestCase
         $send = Send::factory()->create();
 
         $details = [
-            'name' => 'My new internal send',
+            'name'    => 'My new internal send',
             'subject' => 'My new subject',
-            'content' => 'Custom content'
+            'content' => 'Custom content',
         ];
 
         $response = $this->whileLoggedIn()->followingRedirects()->put("/sends/{$send->id}", $details);
@@ -87,7 +86,7 @@ class SendTest extends TestCase
 
     public function test_new_send_view()
     {
-        $response = $this->whileLoggedIn()->get("/sends/create");
+        $response = $this->whileLoggedIn()->get('/sends/create');
         $response->assertStatus(200);
         $response->assertSee('Create new send');
         $response->assertDontSeeText('Delete');
@@ -98,13 +97,13 @@ class SendTest extends TestCase
         $campaign = Campaign::factory()->create();
         $list = MailList::factory()->create();
         $details = [
-            'name' => 'My new internal send',
-            'subject' => 'My new subject',
-            'content' => 'Custom content',
-            'campaign_id' => $campaign->id,
+            'name'         => 'My new internal send',
+            'subject'      => 'My new subject',
+            'content'      => 'Custom content',
+            'campaign_id'  => $campaign->id,
             'mail_list_id' => $list->id,
         ];
-        $response = $this->whileLoggedIn()->followingRedirects()->post("/sends", $details);
+        $response = $this->whileLoggedIn()->followingRedirects()->post('/sends', $details);
 
         $response->assertSee('Send created');
         $this->assertDatabaseHas('sends', array_merge($details, ['activated_at' => null]));
@@ -121,5 +120,4 @@ class SendTest extends TestCase
         $response->assertSee('send to copy');
         $response->assertSee($existingSend->subject);
     }
-
 }

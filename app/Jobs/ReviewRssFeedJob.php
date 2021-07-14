@@ -15,7 +15,10 @@ use Illuminate\Queue\SerializesModels;
 
 class ReviewRssFeedJob implements ShouldQueue, ShouldBeUnique
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     protected $feed;
 
@@ -51,17 +54,17 @@ class ReviewRssFeedJob implements ShouldQueue, ShouldBeUnique
         }
 
         $articles = $rssParser->getArticles($this->feed->url);
-        $articlesToUse = $articles->filter(function(RssArticle $article) {
+        $articlesToUse = $articles->filter(function (RssArticle $article) {
             return $article->pubDate > ($this->feed->last_reviewed_at ?? $this->feed->created_at)
                 && $article->pubDate <= now();
         });
 
         if ($articlesToUse->isNotEmpty()) {
-             $send = $this->feed->templateSend->replicate();
-             $send->content = (new MailContentParser($send->content))->parseForRss($articlesToUse);
-             $send->activated_at = now();
-             $send->save();
-             dispatch(new SendActivationJob($send));
+            $send = $this->feed->templateSend->replicate();
+            $send->content = (new MailContentParser($send->content))->parseForRss($articlesToUse);
+            $send->activated_at = now();
+            $send->save();
+            dispatch(new SendActivationJob($send));
         }
 
         $this->feed->last_reviewed_at = now();

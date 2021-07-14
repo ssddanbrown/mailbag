@@ -39,22 +39,24 @@ class AddUserCommand extends Command
      */
     public function handle()
     {
-        $name = $this->ask("Please provide a name for the user");
-        $email = $this->ask("Please provide an email address for the user");
-        $password = $this->secret("Now please provide a password");
+        $name = $this->ask('Please provide a name for the user');
+        $email = $this->ask('Please provide an email address for the user');
+        $password = $this->secret('Now please provide a password');
 
         foreach (compact('name', 'email', 'password') as $prop => $value) {
             if (empty($value)) {
                 $this->error("Provided {$prop} value is empty");
+
                 return 1;
             }
         }
 
         $user = User::query()->where('email', '=', $email)->first();
         if (!is_null($user)) {
-            $update = $this->confirm("User with that email already exists, Do you want to update them?");
+            $update = $this->confirm('User with that email already exists, Do you want to update them?');
             if (!$update) {
-                $this->error("Taking no action");
+                $this->error('Taking no action');
+
                 return 1;
             }
         } else {
@@ -62,13 +64,14 @@ class AddUserCommand extends Command
         }
 
         $user->fill([
-            'name' => $name,
-            'email' => $email,
+            'name'     => $name,
+            'email'    => $email,
             'password' => Hash::make($password),
         ]);
         $user->save();
 
         $this->info("User created, You can now login with the email {$email} and your provided password.");
+
         return 0;
     }
 }

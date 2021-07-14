@@ -33,7 +33,7 @@ class SendController extends Controller
         }
 
         return view('sends.create', [
-            'send' => $default,
+            'send'     => $default,
             'campaign' => $campaign,
         ]);
     }
@@ -44,17 +44,18 @@ class SendController extends Controller
     public function store(Request $request)
     {
         $validated = $this->validate($request, [
-            'name' => 'required|max:250',
-            'content' => 'required|max:25000',
-            'subject' => 'required|max:250',
+            'name'         => 'required|max:250',
+            'content'      => 'required|max:25000',
+            'subject'      => 'required|max:250',
             'mail_list_id' => 'required|exists:mail_lists,id',
-            'campaign_id' => 'required|exists:campaigns,id',
+            'campaign_id'  => 'required|exists:campaigns,id',
         ]);
 
         $send = new Send($validated);
         $send->save();
 
         $this->showSuccessMessage('Send created!');
+
         return redirect()->route('sends.show', compact('send'));
     }
 
@@ -72,16 +73,17 @@ class SendController extends Controller
     public function update(Request $request, Send $send)
     {
         $validated = $this->validate($request, [
-            'name' => 'required|max:250',
-            'content' => 'required|max:25000',
-            'subject' => 'required|max:250',
+            'name'         => 'required|max:250',
+            'content'      => 'required|max:25000',
+            'subject'      => 'required|max:250',
             'mail_list_id' => 'exists:mail_lists,id',
-            'campaign_id' => 'exists:campaigns,id',
+            'campaign_id'  => 'exists:campaigns,id',
         ]);
 
         $send->update($validated);
 
         $this->showSuccessMessage('Send updated!');
+
         return redirect()->route('sends.show', compact('send'));
     }
 
@@ -92,7 +94,8 @@ class SendController extends Controller
     {
         $campaign = $send->campaign;
         $send->delete();
-        $this->showSuccessMessage("Send deleted!");
+        $this->showSuccessMessage('Send deleted!');
+
         return redirect()->route('campaigns.show', compact('campaign'));
     }
 }

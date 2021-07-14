@@ -17,7 +17,10 @@ use Illuminate\Queue\SerializesModels;
  */
 class ScrubUnsubscribesJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Execute the job.
@@ -29,8 +32,8 @@ class ScrubUnsubscribesJob implements ShouldQueue
         Contact::query()
             ->where('unsubscribed', '=', true)
             ->where('updated_at', '<', now()->subDay())
-            ->chunk(500, function(Collection $contacts) {
-                $contacts->each(function(Contact $contact) {
+            ->chunk(500, function (Collection $contacts) {
+                $contacts->each(function (Contact $contact) {
                     $contact->deleteWithRelations();
                 });
             });

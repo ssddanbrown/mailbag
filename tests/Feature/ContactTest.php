@@ -7,7 +7,6 @@ use Tests\TestCase;
 
 class ContactTest extends TestCase
 {
-
     public function test_contacts_visible_on_index()
     {
         $contact = Contact::factory()->create();
@@ -36,7 +35,7 @@ class ContactTest extends TestCase
         $response = $this->whileLoggedIn()->get('/contacts');
         $response->assertDontSee($contacts[105]->email);
 
-        $response = $this->get('/contacts?search=' . $contacts[105]->email);
+        $response = $this->get('/contacts?search='.$contacts[105]->email);
         $response->assertSee("/contacts/{$contacts[105]->id}");
         $response->assertSee("value=\"{$contacts[105]->email}\"", false);
     }
@@ -55,14 +54,14 @@ class ContactTest extends TestCase
         $contact = Contact::factory()->create();
 
         $response = $this->whileLoggedIn()->followingRedirects()->put("/contacts/{$contact->id}", [
-            'email' => 'updated@example.com',
+            'email'        => 'updated@example.com',
             'unsubscribed' => '1',
         ]);
         $response->assertSee('updated@example.com');
         $response->assertSee('Contact updated!');
         $this->assertDatabaseHas('contacts', [
-            'id' => $contact->id,
-            'email' => 'updated@example.com',
+            'id'           => $contact->id,
+            'email'        => 'updated@example.com',
             'unsubscribed' => true,
         ]);
     }
@@ -81,7 +80,7 @@ class ContactTest extends TestCase
 
     public function test_new_contact_view()
     {
-        $response = $this->whileLoggedIn()->get("/contacts/create");
+        $response = $this->whileLoggedIn()->get('/contacts/create');
         $response->assertStatus(200);
         $response->assertSee('Create new contact');
         $response->assertDontSeeText('Delete');
@@ -89,14 +88,14 @@ class ContactTest extends TestCase
 
     public function test_contact_create_request()
     {
-        $response = $this->whileLoggedIn()->followingRedirects()->post("/contacts", [
+        $response = $this->whileLoggedIn()->followingRedirects()->post('/contacts', [
             'email' => 'barry@example.com',
         ]);
 
         $response->assertSee('barry@example.com');
         $response->assertSee('Contact created');
         $this->assertDatabaseHas('contacts', [
-            'email' => 'barry@example.com',
+            'email'        => 'barry@example.com',
             'unsubscribed' => false,
         ]);
     }

@@ -29,12 +29,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get("/signup-confirm/{signupKey}", [SignupConfirmationController::class, 'show'])->name('signup.confirm.show');
-Route::post("/signup-confirm/{signup:key}", [SignupConfirmationController::class, 'confirm'])->name('signup.confirm.confirm');
-Route::get("/signup-confirm/{list:slug}/thanks", [SignupConfirmationController::class, 'thanks'])->name('signup.confirm.thanks');
+Route::get('/signup-confirm/{signupKey}', [SignupConfirmationController::class, 'show'])->name('signup.confirm.show');
+Route::post('/signup-confirm/{signup:key}', [SignupConfirmationController::class, 'confirm'])->name('signup.confirm.confirm');
+Route::get('/signup-confirm/{list:slug}/thanks', [SignupConfirmationController::class, 'thanks'])->name('signup.confirm.thanks');
 
 Route::get('/signup/{list:slug}', [SignupController::class, 'show'])->name('signup.show');
-Route::middleware(['throttle:signups'])->group(function() {
+Route::middleware(['throttle:signups'])->group(function () {
     Route::post('/signup/{list:slug}', [SignupController::class, 'signup'])->name('signup.signup');
 });
 Route::get('/signup/{list:slug}/thanks', [SignupController::class, 'thanks'])->name('signup.thanks');
@@ -44,8 +44,7 @@ Route::get('/unsubscribe/{sendRecord:key}', [UnsubscribeController::class, 'show
 Route::post('/unsubscribe/{sendRecord:key}/all', [UnsubscribeController::class, 'fromAll'])->name('unsubscribe.all');
 Route::post('/unsubscribe/{sendRecord:key}/list', [UnsubscribeController::class, 'fromList'])->name('unsubscribe.list');
 
-Route::group(['middleware' => 'auth'], function() {
-
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');

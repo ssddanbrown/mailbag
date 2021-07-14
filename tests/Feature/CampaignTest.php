@@ -1,4 +1,6 @@
-<?php namespace Tests\Feature;
+<?php
+
+namespace Tests\Feature;
 
 use App\Models\Campaign;
 use Tests\TestCase;
@@ -33,9 +35,9 @@ class CampaignTest extends TestCase
         $response = $this->whileLoggedIn()->get('/campaigns');
         $response->assertDontSee($campaigns[105]->name);
 
-        $response = $this->get('/campaigns?search=' . $campaigns[105]->name);
+        $response = $this->get('/campaigns?search='.$campaigns[105]->name);
         $response->assertSee("/campaigns/{$campaigns[105]->id}");
-        $response->assertSee("value=\"". e($campaigns[105]->name)."\"", false);
+        $response->assertSee('value="'.e($campaigns[105]->name).'"', false);
     }
 
     public function test_campaign_can_be_viewed()
@@ -85,7 +87,7 @@ class CampaignTest extends TestCase
 
     public function test_new_campaign_view()
     {
-        $response = $this->whileLoggedIn()->get("/campaigns/create");
+        $response = $this->whileLoggedIn()->get('/campaigns/create');
         $response->assertStatus(200);
         $response->assertSee('Create new campaign');
         $response->assertDontSeeText('Delete');
@@ -96,7 +98,7 @@ class CampaignTest extends TestCase
         $details = [
             'name' => 'My new internal campaign',
         ];
-        $response = $this->whileLoggedIn()->followingRedirects()->post("/campaigns", $details);
+        $response = $this->whileLoggedIn()->followingRedirects()->post('/campaigns', $details);
 
         $response->assertSee('Campaign created');
         $this->assertDatabaseHas('campaigns', $details);

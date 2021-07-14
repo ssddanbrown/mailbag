@@ -16,11 +16,12 @@ class UserController extends Controller
         $query = User::query()->orderBy('name');
         $search = $request->get('search');
         if ($search) {
-            $query->where('name', 'like', '%' . $search . '%')
-                ->orWhere('email', 'like', '%' . $search . '%');
+            $query->where('name', 'like', '%'.$search.'%')
+                ->orWhere('email', 'like', '%'.$search.'%');
         }
 
         $users = $query->paginate(100)->withQueryString();
+
         return view('users.index', compact('users'));
     }
 
@@ -30,6 +31,7 @@ class UserController extends Controller
     public function create()
     {
         $default = new User(['unsubscribed' => false]);
+
         return view('users.create', ['user' => $default]);
     }
 
@@ -39,19 +41,20 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email|unique:users,email',
-            'name' => 'required|string|max:250',
+            'email'    => 'required|email|unique:users,email',
+            'name'     => 'required|string|max:250',
             'password' => 'required|string|min:8|max:250',
         ]);
 
         $user = new User([
-            'email' => $request->get('email'),
-            'name' => $request->get('name'),
+            'email'    => $request->get('email'),
+            'name'     => $request->get('name'),
             'password' => Hash::make($request->get('password')),
         ]);
         $user->save();
 
         $this->showSuccessMessage('User created!');
+
         return redirect()->route('users.edit', compact('user'));
     }
 
@@ -69,8 +72,8 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->validate($request, [
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'name' => 'required|string|max:250',
+            'email'    => 'required|email|unique:users,email,'.$user->id,
+            'name'     => 'required|string|max:250',
             'password' => 'nullable|string|min:8|max:250',
         ]);
 
@@ -83,6 +86,7 @@ class UserController extends Controller
         $user->save();
 
         $this->showSuccessMessage('User updated!');
+
         return redirect()->route('users.edit', compact('user'));
     }
 
@@ -92,7 +96,8 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        $this->showSuccessMessage("User deleted!");
+        $this->showSuccessMessage('User deleted!');
+
         return redirect()->route('users.index');
     }
 }
