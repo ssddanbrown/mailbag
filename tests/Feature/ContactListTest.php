@@ -14,11 +14,11 @@ class ContactListTest extends TestCase
         $contact = Contact::factory()->create();
 
         $response = $this->whileLoggedIn()->followingRedirects()->put("/contacts/{$contact->id}/lists", [
-            'lists' => $lists->pluck('id')->values()->toArray()
+            'lists' => $lists->pluck('id')->values()->toArray(),
         ]);
 
         $response->assertStatus(200);
-        $response->assertSee("Added contact to 10 lists");
+        $response->assertSee('Added contact to 10 lists');
         $this->assertEquals(10, $contact->lists()->count());
     }
 
@@ -31,11 +31,11 @@ class ContactListTest extends TestCase
         $this->assertEquals(10, $contact->lists()->count());
 
         $response = $this->whileLoggedIn()->followingRedirects()->delete("/contacts/{$contact->id}/lists", [
-            'lists' => $lists->pluck('id')->values()->toArray()
+            'lists' => $lists->pluck('id')->values()->toArray(),
         ]);
 
         $response->assertStatus(200);
-        $response->assertSee("Removed contact from 10 lists");
+        $response->assertSee('Removed contact from 10 lists');
         $this->assertEquals(0, $contact->lists()->count());
     }
 }

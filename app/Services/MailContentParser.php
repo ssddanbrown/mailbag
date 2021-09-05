@@ -1,4 +1,6 @@
-<?php namespace App\Services;
+<?php
+
+namespace App\Services;
 
 use App\Models\SendRecord;
 use App\Services\Rss\RssArticle;
@@ -6,7 +8,6 @@ use Illuminate\Support\Collection;
 
 class MailContentParser
 {
-
     protected $content;
 
     public function __construct(string $content)
@@ -20,6 +21,7 @@ class MailContentParser
     public function parseForSend(SendRecord $record): string
     {
         $this->addOrReplaceUnsubscribe($record);
+
         return $this->content;
     }
 
@@ -36,7 +38,7 @@ class MailContentParser
 
         foreach ($matches[1] as $index => $matchContent) {
             $rawContent = $matches[0][$index];
-            $newContent = collect($articles)->map(function(RssArticle $article) use ($matchContent) {
+            $newContent = collect($articles)->map(function (RssArticle $article) use ($matchContent) {
                 return $this->replaceArticleTags($matchContent, $article);
             })->join('');
             $this->content = str_replace($rawContent, $newContent, $this->content);
@@ -54,6 +56,7 @@ class MailContentParser
         $content = $this->replaceTag($content, 'rss_article_link', $article->link);
         $content = $this->replaceTag($content, 'rss_article_publish_date', $article->pubDate->format('jS \o\f F, Y'));
         $content = $this->replaceTag($content, 'rss_article_description', $article->description);
+
         return $content;
     }
 
@@ -67,7 +70,7 @@ class MailContentParser
         }
 
         $unsubLink = route('unsubscribe.show', ['sendRecord' => $record]);
-        $this->content = $this->replaceTag($this->content,'unsubscribe_link', $unsubLink);
+        $this->content = $this->replaceTag($this->content, 'unsubscribe_link', $unsubLink);
     }
 
     /**
@@ -91,7 +94,6 @@ class MailContentParser
      */
     protected function tagRegex(string $tagName)
     {
-        return '{{\s*?'.$tagName.'\s*?}}';
+        return '{{\s*?' . $tagName . '\s*?}}';
     }
-
 }

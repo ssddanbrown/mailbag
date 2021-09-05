@@ -1,4 +1,6 @@
-<?php namespace App\Services;
+<?php
+
+namespace App\Services;
 
 use App\Models\Contact;
 use App\Models\MailList;
@@ -19,6 +21,7 @@ class EmailListImporter
     /**
      * Import a newline-separated list of emails as contacts into the
      * system and into the list.
+     *
      * @return array{created: int, updated: int, total: int}
      */
     public function import(string $listOfEmails)
@@ -29,8 +32,8 @@ class EmailListImporter
             return $this->importChunkOfEmails($emailChunk);
         });
 
-        $created = $results->sum("new");
-        $updated = $results->sum("existing");
+        $created = $results->sum('new');
+        $updated = $results->sum('existing');
         $total = $created + $updated;
 
         return compact('created', 'updated', 'total');
@@ -57,18 +60,20 @@ class EmailListImporter
 
         $allIds = $existing->pluck('id')->concat($newContacts->pluck('id'));
         $this->list->contacts()->syncWithoutDetaching($allIds);
+
         return ['new' => count($toCreateData), 'existing' => $existingEmails->count()];
     }
 
     /**
      * Generate the raw data for a new contact model.
      */
-    protected function newContactDataForEmail(string $email) {
+    protected function newContactDataForEmail(string $email)
+    {
         return [
-            'email' => $email,
-            'created_at' => now(),
-            'updated_at' => now(),
-            'unsubscribed' => false
+            'email'        => $email,
+            'created_at'   => now(),
+            'updated_at'   => now(),
+            'unsubscribed' => false,
         ];
     }
 

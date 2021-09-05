@@ -9,13 +9,12 @@ use Tests\TestCase;
 
 class RssFeedTest extends TestCase
 {
-
     public function test_feed_shows_on_feed_view()
     {
         /** @var RssFeed $feed */
         $feed = RssFeed::factory()->create();
 
-        $resp = $this->whileLoggedIn()->get(route("campaigns.show", ['campaign' => $feed->campaign]));
+        $resp = $this->whileLoggedIn()->get(route('campaigns.show', ['campaign' => $feed->campaign]));
         $resp->assertSee($feed->url);
     }
 
@@ -35,12 +34,12 @@ class RssFeedTest extends TestCase
         $feed = RssFeed::factory()->create();
 
         $details = [
-            'active' => '1',
-            'url' => 'https://example.com/feed.xml',
-            'campaign_id' => $feed->campaign->id,
+            'active'           => '1',
+            'url'              => 'https://example.com/feed.xml',
+            'campaign_id'      => $feed->campaign->id,
             'template_send_id' => $feed->templateSend->id,
-            'send_frequency' => 7,
-            'target_hour' => 15,
+            'send_frequency'   => 7,
+            'target_hour'      => 15,
         ];
 
         $response = $this->whileLoggedIn()->put("/campaigns/{$feed->campaign->id}/rss/{$feed->id}", $details);
@@ -82,17 +81,16 @@ class RssFeedTest extends TestCase
         $send = Send::factory()->create(['campaign_id' => $campaign->id]);
 
         $details = [
-            'active' => '1',
-            'url' => 'https://example.com/feed.xml',
-            'campaign_id' => $campaign->id,
+            'active'           => '1',
+            'url'              => 'https://example.com/feed.xml',
+            'campaign_id'      => $campaign->id,
             'template_send_id' => $send->id,
-            'send_frequency' => 7,
-            'target_hour' => 13,
+            'send_frequency'   => 7,
+            'target_hour'      => 13,
         ];
         $response = $this->whileLoggedIn()->followingRedirects()->post("/campaigns/{$campaign->id}/rss", $details);
 
         $response->assertSee('RSS feed created');
         $this->assertDatabaseHas('rss_feeds', $details);
     }
-
 }

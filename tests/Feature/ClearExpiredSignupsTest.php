@@ -10,12 +10,11 @@ use Tests\TestCase;
 
 class ClearExpiredSignupsTest extends TestCase
 {
-
     public function test_job_clears_old_signups()
     {
         $validSignUp = Signup::factory()->create();
         $expiredSignUp = Signup::factory()->create([
-            'created_at' => now()->subDays(8)
+            'created_at' => now()->subDays(8),
         ]);
 
         dispatch_now(new ScrubSignupsJob());

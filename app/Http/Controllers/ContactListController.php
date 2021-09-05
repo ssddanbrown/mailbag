@@ -8,14 +8,13 @@ use Illuminate\Http\Request;
 
 class ContactListController extends Controller
 {
-
     /**
      * Add the lists of the given ids to the given contact.
      */
     public function add(Request $request, Contact $contact)
     {
         $this->validate($request, [
-            'lists' => 'array',
+            'lists'   => 'array',
             'lists.*' => 'integer',
         ]);
 
@@ -23,6 +22,7 @@ class ContactListController extends Controller
         $contact->lists()->syncWithoutDetaching($listIds);
 
         $this->showSuccessMessage("Added contact to {$listIds->count()} lists");
+
         return redirect()->route('contacts.edit', compact('contact'));
     }
 
@@ -32,7 +32,7 @@ class ContactListController extends Controller
     public function remove(Request $request, Contact $contact)
     {
         $this->validate($request, [
-            'lists' => 'array',
+            'lists'   => 'array',
             'lists.*' => 'integer',
         ]);
 
@@ -40,6 +40,7 @@ class ContactListController extends Controller
         $contact->lists()->detach($listIds);
 
         $this->showSuccessMessage("Removed contact from {$listIds->count()} lists");
+
         return redirect()->route('contacts.edit', compact('contact'));
     }
 }

@@ -29,8 +29,8 @@ class SignupController extends Controller
 
         $signup = Signup::query()->where($keys)->first();
         if (is_null($signup)) {
-            $signup = (new Signup)->forceFill(array_merge($keys, [
-                'attempts' => 0
+            $signup = (new Signup())->forceFill(array_merge($keys, [
+                'attempts' => 0,
             ]));
         }
         $signup->attempts += 1;

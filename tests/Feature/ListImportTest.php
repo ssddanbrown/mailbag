@@ -1,4 +1,6 @@
-<?php namespace Tests\Feature;
+<?php
+
+namespace Tests\Feature;
 
 use App\Models\Contact;
 use App\Models\MailList;
@@ -6,7 +8,6 @@ use Tests\TestCase;
 
 class ListImportTest extends TestCase
 {
-
     public function test_list_show_has_link_to_import()
     {
         $list = MailList::factory()->create();
@@ -20,7 +21,7 @@ class ListImportTest extends TestCase
         $response = $this->whileLoggedIn()->get("/lists/{$list->id}/import");
 
         $response->assertOk();
-        $response->assertSee("Import");
+        $response->assertSee('Import');
         $response->assertSee($list->name);
     }
 
@@ -37,7 +38,7 @@ class ListImportTest extends TestCase
         $response->assertRedirect("/lists/{$list->id}");
 
         $response = $this->followRedirects($response);
-        $response->assertSee("Imported 2 contacts. 2 new, 0 existing.");
+        $response->assertSee('Imported 2 contacts. 2 new, 0 existing.');
 
         $this->assertDatabaseHas('contacts', ['email' => 'test@example.com']);
         $this->assertDatabaseHas('contacts', ['email' => 'cat@example.com']);
@@ -64,7 +65,7 @@ class ListImportTest extends TestCase
             'email_list' => " teSt@example.com\n cAt@exaMple.COM ",
         ]);
         $response->assertOk();
-        $response->assertSee("Imported 2 contacts. 0 new, 2 existing.");
+        $response->assertSee('Imported 2 contacts. 0 new, 2 existing.');
         $this->assertEquals(2, $list->contacts()->count());
         $this->assertEquals(1, Contact::query()->where('email', '=', 'test@example.com')->count());
     }
@@ -80,7 +81,7 @@ class ListImportTest extends TestCase
         $this->assertEquals(2, $list->contacts()->count());
 
         $this->whileLoggedIn()->followingRedirects()->post("/lists/{$list->id}/import", [
-            'email_list' => "barry@example.com",
+            'email_list' => 'barry@example.com',
         ])->assertOk();
         $this->assertEquals(3, $list->contacts()->count());
     }
@@ -93,7 +94,7 @@ class ListImportTest extends TestCase
             'email_list' => "a\n@@.sp\ntest@cat@dog.donkey\nhi\"there\"@test.com",
         ]);
         $response->assertOk();
-        $response->assertSee("Imported 0 contacts. 0 new, 0 existing.");
+        $response->assertSee('Imported 0 contacts. 0 new, 0 existing.');
         $this->assertEquals(0, $list->contacts()->count());
     }
 
@@ -105,8 +106,7 @@ class ListImportTest extends TestCase
             'email_list' => "test@example.com\nTEST@Example.com",
         ]);
         $response->assertOk();
-        $response->assertSee("Imported 1 contacts. 1 new, 0 existing.");
+        $response->assertSee('Imported 1 contacts. 1 new, 0 existing.');
         $this->assertEquals(1, $list->contacts()->count());
     }
-
 }

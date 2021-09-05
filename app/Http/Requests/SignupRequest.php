@@ -38,7 +38,7 @@ class SignupRequest extends FormRequest
         ];
 
         if (config('services.hcaptcha.active')) {
-            $rules['h-captcha-response'] = ['required', new ValidHCaptchaResult];
+            $rules['h-captcha-response'] = ['required', new ValidHCaptchaResult()];
         }
 
         return $rules;

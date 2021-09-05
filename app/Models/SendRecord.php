@@ -43,11 +43,11 @@ class SendRecord extends Model
     }
 
     /**
-     * Generate a set of new unique keys to use
+     * Generate a set of new unique keys to use.
      */
     public static function generateNewKeys($count = 1): Collection
     {
-        $keys = Collection::times($count, function() {
+        $keys = Collection::times($count, function () {
             return ['key' => Str::random(16)];
         })->keyBy('key');
 

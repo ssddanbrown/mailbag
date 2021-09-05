@@ -28,6 +28,7 @@ class UnsubscribeController extends Controller
         $list = $sendRecord->send->maillist;
         $contact = $sendRecord->contact;
         $contact->lists()->detach([$list->id]);
+
         return redirect()->route('unsubscribe.confirm', ['type' => 'list']);
     }
 
@@ -38,6 +39,7 @@ class UnsubscribeController extends Controller
     {
         $contact = $sendRecord->contact;
         $contact->markUnsubscribed();
+
         return redirect()->route('unsubscribe.confirm', ['type' => 'all']);
     }
 

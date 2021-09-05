@@ -36,18 +36,19 @@ class SignupTest extends TestCase
         ]);
         $resp->assertRedirect("/signup/{$list->slug}/thanks");
         $this->assertDatabaseHas('signups', [
-            'email' => 'tester@example.com',
+            'email'        => 'tester@example.com',
             'mail_list_id' => $list->id,
-            'attempts' => 1,
+            'attempts'     => 1,
         ]);
 
         $signup = Signup::query()->where('email', '=', 'tester@example.com')->first();
-        Mail::assertQueued(SignupConfirmationMail::class, function(Mailable $mail) use ($list, $signup, $mailer) {
+        Mail::assertQueued(SignupConfirmationMail::class, function (Mailable $mail) use ($list, $signup, $mailer) {
             Mail::swap($mailer);
             $mail->render();
             $this->assertStringContainsString($list->display_name, $mail->subject);
             $mail->assertSeeInText($list->display_name);
             $mail->assertSeeInText($signup->key);
+
             return $mail->hasTo('tester@example.com');
         });
     }
@@ -78,25 +79,25 @@ class SignupTest extends TestCase
         $resp = $this->get("/signup-confirm/{$signup->key}");
         $resp->assertStatus(200);
         $resp->assertSee($list->display_name);
-        $resp->assertSee("Confirm");
+        $resp->assertSee('Confirm');
 
         $resp = $this->post("/signup-confirm/{$signup->key}");
         $resp->assertRedirect("/signup-confirm/{$list->slug}/thanks");
 
         $resp = $this->get("/signup-confirm/{$list->slug}/thanks");
-        $resp->assertSee("Thank you");
+        $resp->assertSee('Thank you');
         $resp->assertSee($list->display_name);
 
         $this->assertDatabaseHas('contacts', [
-            'email' => 'tester@example.com'
+            'email' => 'tester@example.com',
         ]);
         $contact = Contact::query()->where('email', '=', 'tester@example.com')->first();
         $this->assertDatabaseHas('contact_mail_list', [
-            'contact_id' => $contact->id,
+            'contact_id'   => $contact->id,
             'mail_list_id' => $list->id,
         ]);
         $this->assertDatabaseMissing('signups', [
-            'email' => 'tester@example.com'
+            'email' => 'tester@example.com',
         ]);
     }
 
@@ -116,9 +117,9 @@ class SignupTest extends TestCase
 
     public function test_signup_confirmation_with_nonexisting_token_shows_nice_message()
     {
-        $resp = $this->get("/signup-confirm/abc12345");
+        $resp = $this->get('/signup-confirm/abc12345');
         $resp->assertStatus(404);
-        $resp->assertSee("Sorry, sign up not found");
+        $resp->assertSee('Sorry, sign up not found');
     }
 
     public function test_signup_confirmations_over_a_week_old_shows_not_found_and_deletes_confirmation()
@@ -132,7 +133,7 @@ class SignupTest extends TestCase
 
         $resp = $this->get("/signup-confirm/{$signup->key}");
         $resp->assertStatus(404);
-        $resp->assertSee("Sorry, sign up not found");
+        $resp->assertSee('Sorry, sign up not found');
         $this->assertDatabaseMissing('signups', ['id' => $signup->id]);
     }
 
@@ -160,12 +161,12 @@ class SignupTest extends TestCase
         config()->set('services.hcaptcha.active', true);
 
         Http::fake([
-            'https://hcaptcha.com/siteverify' => Http::response(['success' => true])
+            'https://hcaptcha.com/siteverify' => Http::response(['success' => true]),
         ]);
 
         $this->post("/signup/{$list->slug}", [
-            'email' => 'test@example.com',
-            'h-captcha-response' => 'def456'
+            'email'              => 'test@example.com',
+            'h-captcha-response' => 'def456',
         ]);
 
         $this->assertDatabaseHas('signups', [

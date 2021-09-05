@@ -8,7 +8,6 @@ use Tests\TestCase;
 
 class AddUserCommandTest extends TestCase
 {
-
     public function test_create_new_user()
     {
         $this->artisan('mailbag:add-user')
@@ -18,8 +17,8 @@ class AddUserCommandTest extends TestCase
             ->expectsOutput('User created, You can now login with the email barry@example.com and your provided password.');
 
         $this->assertDatabaseHas('users', [
-            'name' => 'Barry',
-            'email' => 'barry@example.com'
+            'name'  => 'Barry',
+            'email' => 'barry@example.com',
         ]);
 
         $this->assertTrue(Auth::attempt(['email' => 'barry@example.com', 'password' => 'testpass']));
@@ -46,9 +45,9 @@ class AddUserCommandTest extends TestCase
             ->expectsOutput('User created, You can now login with the email barry@example.com and your provided password.');
 
         $this->assertDatabaseHas('users', [
-            'id' => $user->id,
-            'name' => 'Barry 123',
-            'email' => 'barry@example.com'
+            'id'    => $user->id,
+            'name'  => 'Barry 123',
+            'email' => 'barry@example.com',
         ]);
     }
 
@@ -64,9 +63,9 @@ class AddUserCommandTest extends TestCase
             ->assertExitCode(1);
 
         $this->assertDatabaseMissing('users', [
-            'id' => $user->id,
-            'name' => 'Barry 123',
-            'email' => 'barry@example.com'
+            'id'    => $user->id,
+            'name'  => 'Barry 123',
+            'email' => 'barry@example.com',
         ]);
     }
 }

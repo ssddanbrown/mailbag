@@ -8,16 +8,15 @@ use Tests\TestCase;
 
 class UnsubscribeTest extends TestCase
 {
-
     public function test_unsubscribe_view_accessible()
     {
         $sendRecord = SendRecord::factory()->create(['sent_at' => now()]);
 
         $resp = $this->get("/unsubscribe/{$sendRecord->key}");
         $resp->assertStatus(200);
-        $resp->assertSee("Remove me from this list");
+        $resp->assertSee('Remove me from this list');
         $resp->assertSee($sendRecord->send->maillist->name);
-        $resp->assertSee("Unsubscribe from all");
+        $resp->assertSee('Unsubscribe from all');
     }
 
     public function test_unsubscribe_view_shows_warning_on_expired_or_invalid_send()
@@ -30,9 +29,9 @@ class UnsubscribeTest extends TestCase
         foreach ($keys as $key) {
             $resp = $this->get("/unsubscribe/{$key}");
             $resp->assertStatus(404);
-            $resp->assertSee("expired");
-            $resp->assertSee("invalid");
-            $resp->assertDontSee("Unsubscribe from all");
+            $resp->assertSee('expired');
+            $resp->assertSee('invalid');
+            $resp->assertDontSee('Unsubscribe from all');
         }
     }
 
@@ -46,7 +45,7 @@ class UnsubscribeTest extends TestCase
         $this->assertEquals(1, $contact->lists()->count());
 
         $resp = $this->post("/unsubscribe/{$sendRecord->key}/list");
-        $resp->assertRedirect("/unsubscribe/confirm?type=list");
+        $resp->assertRedirect('/unsubscribe/confirm?type=list');
 
         $this->assertEquals(0, $contact->lists()->count());
     }
@@ -63,7 +62,7 @@ class UnsubscribeTest extends TestCase
         $this->assertEquals(10, $contact->lists()->count());
 
         $resp = $this->post("/unsubscribe/{$sendRecord->key}/all");
-        $resp->assertRedirect("/unsubscribe/confirm?type=all");
+        $resp->assertRedirect('/unsubscribe/confirm?type=all');
 
         $contact->refresh();
         $this->assertTrue(boolval($contact->unsubscribed));
@@ -72,13 +71,12 @@ class UnsubscribeTest extends TestCase
 
     public function test_unsubscribe_thank_you()
     {
-        $resp = $this->get("/unsubscribe/confirm?type=all");
-        $resp->assertSee("Unsubscribe from all");
-        $resp->assertDontSee("list");
+        $resp = $this->get('/unsubscribe/confirm?type=all');
+        $resp->assertSee('Unsubscribe from all');
+        $resp->assertDontSee('list');
 
-        $resp = $this->get("/unsubscribe/confirm?type=list");
-        $resp->assertSee("You have been removed from the requested list");
-        $resp->assertDontSee("from all");
+        $resp = $this->get('/unsubscribe/confirm?type=list');
+        $resp->assertSee('You have been removed from the requested list');
+        $resp->assertDontSee('from all');
     }
-
 }

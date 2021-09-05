@@ -22,23 +22,23 @@ class ContactFactory extends Factory
     public function definition()
     {
         return [
-            'email' => $this->faker->unique()->email,
+            'email'        => $this->faker->unique()->email,
             'unsubscribed' => rand(0, 1) === 0,
         ];
     }
 
     public function unsubscribed()
     {
-        return $this->state(function(array $attributes) {
-             return [
-                 'unsubscribed' => true,
-             ];
+        return $this->state(function (array $attributes) {
+            return [
+                'unsubscribed' => true,
+            ];
         });
     }
 
     public function subscribed()
     {
-        return $this->state(function(array $attributes) {
+        return $this->state(function (array $attributes) {
             return [
                 'unsubscribed' => false,
             ];
