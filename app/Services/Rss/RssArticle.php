@@ -1,4 +1,6 @@
-<?php namespace App\Services\Rss;
+<?php
+
+namespace App\Services\Rss;
 
 use Carbon\Carbon;
 
@@ -34,6 +36,4 @@ class RssArticle
         $this->description = $description;
         $this->pubDate = $pubDate;
     }
-
-
 }

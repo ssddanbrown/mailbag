@@ -1,4 +1,6 @@
-<?php namespace Tests\Unit;
+<?php
+
+namespace Tests\Unit;
 
 use App\Services\Rss\RssParser;
 use Illuminate\Support\Collection;
@@ -11,10 +13,10 @@ class RssParserTest extends TestCase
     {
         $rss = $this->getRssContent(3);
         Http::fake([
-            'https://example.com/feed.xml' => Http::response($rss, 200)
+            'https://example.com/feed.xml' => Http::response($rss, 200),
         ]);
 
-        $articles = (new RssParser)->getArticles('https://example.com/feed.xml');
+        $articles = (new RssParser())->getArticles('https://example.com/feed.xml');
         $this->assertInstanceOf(Collection::class, $articles);
         $this->assertEquals(3, $articles->count());
         $this->assertEquals('Recent blog post 1', $articles->first()->title);
@@ -24,10 +26,10 @@ class RssParserTest extends TestCase
     {
         $rss = $this->getRssContent(1);
         Http::fake([
-            'https://example.com/feed.xml' => Http::response($rss, 200)
+            'https://example.com/feed.xml' => Http::response($rss, 200),
         ]);
 
-        $articles = (new RssParser)->getArticles('https://example.com/feed.xml');
+        $articles = (new RssParser())->getArticles('https://example.com/feed.xml');
         $this->assertInstanceOf(Collection::class, $articles);
         $this->assertEquals(1, $articles->count());
         $this->assertEquals('Recent blog post 1', $articles->first()->title);
@@ -38,40 +40,40 @@ class RssParserTest extends TestCase
         $rss = $this->getRssContent(1);
         $rss = str_replace('Recent blog post 1', 'This &amp;amp; that', $rss);
         Http::fake([
-            'https://example.com/feed.xml' => Http::response($rss, 200)
+            'https://example.com/feed.xml' => Http::response($rss, 200),
         ]);
 
-        $articles = (new RssParser)->getArticles('https://example.com/feed.xml');
+        $articles = (new RssParser())->getArticles('https://example.com/feed.xml');
         $this->assertEquals('This & that', $articles->first()->title);
     }
 
     public function test_get_articles_returns_null_on_request_failure()
     {
         Http::fake([
-            'https://example.com/feed.xml' => Http::response('', 500)
+            'https://example.com/feed.xml' => Http::response('', 500),
         ]);
 
-        $articles = (new RssParser)->getArticles('https://example.com/feed.xml');
+        $articles = (new RssParser())->getArticles('https://example.com/feed.xml');
         $this->assertNull($articles);
     }
 
     public function test_get_articles_returns_null_on_invalid_xml_content()
     {
         Http::fake([
-            'https://example.com/feed.xml' => Http::response('<html><p>Hello</p></html>', 200)
+            'https://example.com/feed.xml' => Http::response('<html><p>Hello</p></html>', 200),
         ]);
 
-        $articles = (new RssParser)->getArticles('https://example.com/feed.xml');
+        $articles = (new RssParser())->getArticles('https://example.com/feed.xml');
         $this->assertNull($articles);
     }
 
     public function test_get_articles_returns_null_on_non_xml_content()
     {
         Http::fake([
-            'https://example.com/feed.xml' => Http::response('{"cat": "dog"}', 200)
+            'https://example.com/feed.xml' => Http::response('{"cat": "dog"}', 200),
         ]);
 
-        $articles = (new RssParser)->getArticles('https://example.com/feed.xml');
+        $articles = (new RssParser())->getArticles('https://example.com/feed.xml');
         $this->assertNull($articles);
     }
 
@@ -93,6 +95,7 @@ class RssParserTest extends TestCase
         }
         $content .= '  </channel>
 </rss>';
+
         return $content;
     }
 }

@@ -16,7 +16,10 @@ use Illuminate\Queue\SerializesModels;
  */
 class FindRssFeedsToReviewJob implements ShouldQueue, ShouldBeUnique
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Execute the job.
@@ -30,7 +33,7 @@ class FindRssFeedsToReviewJob implements ShouldQueue, ShouldBeUnique
             ->where('next_review_at', '<', now())
             ->get();
 
-        $activeFeeds->each(function($feed) {
+        $activeFeeds->each(function ($feed) {
             dispatch(new ReviewRssFeedJob($feed));
         });
     }

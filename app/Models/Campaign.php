@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property int id
  * @property string name
- * @property Collection<Send> $sends
+ * @property Collection<Send>    $sends
  * @property Collection<RssFeed> $rssFeeds
  */
 class Campaign extends Model
@@ -36,21 +36,21 @@ class Campaign extends Model
     }
 
     /**
-     * Get all the campaign sends formatted for a select list
+     * Get all the campaign sends formatted for a select list.
      */
     public function getSendsForSelect(): array
     {
-        return $this->sends()->orderBy('name')->get(['id', 'name'])->mapWithKeys(function($send) {
+        return $this->sends()->orderBy('name')->get(['id', 'name'])->mapWithKeys(function ($send) {
             return [$send->id => $send->name];
         })->toArray();
     }
 
     /**
-     * Get all the campaigns formatted for a select list
+     * Get all the campaigns formatted for a select list.
      */
     public static function getAllForSelect(): array
     {
-        return static::query()->orderBy('name')->get(['id', 'name'])->mapWithKeys(function($campaign) {
+        return static::query()->orderBy('name')->get(['id', 'name'])->mapWithKeys(function ($campaign) {
             return [$campaign->id => $campaign->name];
         })->toArray();
     }

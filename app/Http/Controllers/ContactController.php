@@ -20,6 +20,7 @@ class ContactController extends Controller
         }
 
         $contacts = $query->paginate(100)->withQueryString();
+
         return view('contacts.index', [
             'contacts' => $contacts,
         ]);
@@ -31,6 +32,7 @@ class ContactController extends Controller
     public function create()
     {
         $default = new Contact(['unsubscribed' => false]);
+
         return view('contacts.create', ['contact' => $default]);
     }
 
@@ -40,17 +42,18 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email|unique:contacts,email',
+            'email'        => 'required|email|unique:contacts,email',
             'unsubscribed' => 'boolean',
         ]);
 
         $contact = new Contact([
-            'email' => $request->get('email'),
+            'email'        => $request->get('email'),
             'unsubscribed' => $request->get('unsubscribed') === '1',
         ]);
         $contact->save();
 
         $this->showSuccessMessage('Contact created!');
+
         return redirect()->route('contacts.edit', compact('contact'));
     }
 
@@ -62,13 +65,12 @@ class ContactController extends Controller
         $allListOptions = MailList::query()->whereNotIn('id', $contact->lists()->pluck('id'))
             ->orderBy('name')
             ->get()
-            ->mapWithKeys(function($list) {
-            return [$list->id => $list->name];
-        })->toArray();
-
+            ->mapWithKeys(function ($list) {
+                return [$list->id => $list->name];
+            })->toArray();
 
         return view('contacts.edit', [
-            'contact' => $contact,
+            'contact'     => $contact,
             'listOptions' => $allListOptions,
         ]);
     }
@@ -79,16 +81,17 @@ class ContactController extends Controller
     public function update(Request $request, Contact $contact)
     {
         $this->validate($request, [
-            'email' => "required|email|unique:contacts,email,{$contact->id}",
+            'email'        => "required|email|unique:contacts,email,{$contact->id}",
             'unsubscribed' => 'boolean',
         ]);
 
         $contact->update([
-            'email' => $request->get('email'),
+            'email'        => $request->get('email'),
             'unsubscribed' => $request->get('unsubscribed') === '1',
         ]);
 
         $this->showSuccessMessage('Contact updated!');
+
         return redirect()->route('contacts.edit', compact('contact'));
     }
 
@@ -98,7 +101,8 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         $contact->deleteWithRelations();
-        $this->showSuccessMessage("Contact deleted!");
+        $this->showSuccessMessage('Contact deleted!');
+
         return redirect()->route('contacts.index');
     }
 }

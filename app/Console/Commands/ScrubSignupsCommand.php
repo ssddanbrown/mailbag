@@ -39,6 +39,7 @@ class ScrubSignupsCommand extends Command
     public function handle()
     {
         dispatch_now(new ScrubSignupsJob());
+
         return 0;
     }
 }

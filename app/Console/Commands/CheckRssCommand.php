@@ -39,6 +39,7 @@ class CheckRssCommand extends Command
     public function handle()
     {
         dispatch_now(new FindRssFeedsToReviewJob());
+
         return 0;
     }
 }

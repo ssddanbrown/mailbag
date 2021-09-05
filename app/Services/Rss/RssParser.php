@@ -1,4 +1,6 @@
-<?php namespace App\Services\Rss;
+<?php
+
+namespace App\Services\Rss;
 
 use DateTime;
 use Exception;
@@ -11,6 +13,7 @@ class RssParser
 {
     /**
      * Get articles from the RSS URL.
+     *
      * @returns ?Collection<RssArticle>
      */
     public function getArticles(string $url): ?Collection
@@ -21,6 +24,7 @@ class RssParser
         }
 
         libxml_use_internal_errors(true);
+
         try {
             $rss = new SimpleXMLElement($response->body());
         } catch (Exception $exception) {
@@ -44,5 +48,4 @@ class RssParser
 
         return $articles;
     }
-
 }

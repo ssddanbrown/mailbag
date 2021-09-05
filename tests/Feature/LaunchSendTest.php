@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Jobs\BuildAndDispatchMailJob;
 use App\Jobs\SendActivationJob;
 use App\Mail\SendMail;
 use App\Models\Contact;
@@ -15,7 +14,6 @@ use Tests\TestCase;
 
 class LaunchSendTest extends TestCase
 {
-
     public function test_activation_marks_job_as_activated_and_dispatched_job()
     {
         $send = Send::factory()->create(['activated_at' => null]);
@@ -25,7 +23,7 @@ class LaunchSendTest extends TestCase
         $resp->assertRedirect("/sends/{$send->id}");
 
         $resp = $this->followRedirects($resp);
-        $resp->assertSee("Send activated and queued for mailing!");
+        $resp->assertSee('Send activated and queued for mailing!');
 
         $send->refresh();
         $this->assertNotNull($send->activated_at);
@@ -41,8 +39,8 @@ class LaunchSendTest extends TestCase
         $resp->assertRedirect("/sends/{$send->id}");
 
         $resp = $this->followRedirects($resp);
-        $resp->assertDontSee("Send activated and queued for mailing!");
-        $resp->assertSee("This send has already been activated!");
+        $resp->assertDontSee('Send activated and queued for mailing!');
+        $resp->assertSee('This send has already been activated!');
 
         Bus::assertNotDispatched(SendActivationJob::class);
     }
@@ -59,7 +57,7 @@ class LaunchSendTest extends TestCase
 
         $this->assertEquals(100, SendRecord::query()->where('send_id', '=', $send->id)->count());
         $this->assertDatabaseHas('send_records', [
-            'send_id' => $send->id,
+            'send_id'    => $send->id,
             'contact_id' => $contacts->first()->id,
         ]);
         $this->assertNotNull($send->records()->first()->key);
@@ -96,14 +94,14 @@ class LaunchSendTest extends TestCase
 
         (new SendActivationJob($send))->handle();
 
-        Mail::assertSent(SendMail::class, function(SendMail $mail) use ($mailer) {
+        Mail::assertSent(SendMail::class, function (SendMail $mail) use ($mailer) {
             Mail::swap($mailer);
             $mail->build();
             $text = $mail->render();
+
             return $mail->subject === 'my testing subject'
                 && Str::contains($text, 'custom content')
                 && $mail->hasTo('tester@example.com');
         });
     }
-
 }
