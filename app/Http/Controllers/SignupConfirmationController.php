@@ -14,6 +14,7 @@ class SignupConfirmationController extends Controller
 {
     /**
      * Show the page for confirming a subscription.
+     *
      * @return View|Response
      */
     public function show(string $signupKey)

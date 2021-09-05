@@ -37,6 +37,7 @@ class Campaign extends Model
 
     /**
      * Get all the campaign sends formatted for a select list.
+     *
      * @return array<int, string>
      */
     public function getSendsForSelect(): array
@@ -50,6 +51,7 @@ class Campaign extends Model
 
     /**
      * Get all the campaigns formatted for a select list.
+     *
      * @return array<int, string>
      */
     public static function getAllForSelect(): array

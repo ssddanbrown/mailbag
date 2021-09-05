@@ -9,17 +9,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 /**
- * @property int      $id
- * @property bool     $active
- * @property string   $url
- * @property Campaign $campaign
- * @property Send     $templateSend
- * @property int      $send_frequency
- * @property int      $target_hour
- * @property CarbonImmutable   $last_reviewed_at
- * @property CarbonImmutable   $next_review_at
- * @property Carbon   $updated_at
- * @property Carbon   $created_at
+ * @property int             $id
+ * @property bool            $active
+ * @property string          $url
+ * @property Campaign        $campaign
+ * @property Send            $templateSend
+ * @property int             $send_frequency
+ * @property int             $target_hour
+ * @property CarbonImmutable $last_reviewed_at
+ * @property CarbonImmutable $next_review_at
+ * @property Carbon          $updated_at
+ * @property Carbon          $created_at
  */
 class RssFeed extends Model
 {
@@ -35,7 +35,7 @@ class RssFeed extends Model
      */
     protected $casts = [
         'last_reviewed_at' => 'immutable_datetime',
-        'next_review_at' => 'immutable_datetime',
+        'next_review_at'   => 'immutable_datetime',
     ];
 
     /**

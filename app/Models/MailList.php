@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @property int $id
+ * @property int    $id
  * @property string $name
  * @property string $slug
  * @property string $description
@@ -41,7 +41,7 @@ class MailList extends Model
             ->orderBy('name')
             ->get(['id', 'name'])
             ->mapWithKeys(function (MailList $list) {
-            return [$list->id => $list->name];
-        })->toArray();
+                return [$list->id => $list->name];
+            })->toArray();
     }
 }

@@ -31,7 +31,7 @@ class Send extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'activated_at' => 'immutable_datetime'
+        'activated_at' => 'immutable_datetime',
     ];
 
     /**

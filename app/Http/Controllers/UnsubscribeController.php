@@ -12,6 +12,7 @@ class UnsubscribeController extends Controller
 {
     /**
      * Show the view with the unsubscribe options.
+     *
      * @return View|Response
      */
     public function show(string $sendRecordKey)
