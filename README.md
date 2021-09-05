@@ -1,7 +1,8 @@
 # MailBag
 
-![PHPUnit](https://github.com/ssddanbrown/mailbag/workflows/PHPUnit/badge.svg)
+[![PHPUnit](https://github.com/ssddanbrown/mailbag/workflows/PHPUnit/badge.svg)](https://github.com/ssddanbrown/mailbag/actions/workflows/phpunit.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/303b6c55a668b92adb5a/maintainability)](https://codeclimate.com/github/ssddanbrown/mailbag/maintainability)
+[![StyleCI](https://github.styleci.io/repos/322943641/shield?branch=master)](https://github.styleci.io/repos/322943641?branch=master)
 
 MailBag is a simple plaintext-focused email manager. The application has been purpose-built for a fairly simple use-case. Due to limited time, I don't have much of a desire to widen the scope.
 
