@@ -9,12 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
- * @property int $id
- * @property string $name
- * @property string $content
- * @property string $subject
- * @property bool $activated
- * @property ?Carbon $activated_at
+ * @property int      $id
+ * @property string   $name
+ * @property string   $content
+ * @property string   $subject
+ * @property bool     $activated
+ * @property ?Carbon  $activated_at
  * @property MailList $maillist
  * @property Campaign $campaign
  */
