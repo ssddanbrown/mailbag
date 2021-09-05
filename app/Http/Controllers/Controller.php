@@ -13,12 +13,12 @@ class Controller extends BaseController
     use DispatchesJobs;
     use ValidatesRequests;
 
-    protected function showSuccessMessage(string $message)
+    protected function showSuccessMessage(string $message): void
     {
         session()->flash('success', $message);
     }
 
-    protected function showErrorMessage(string $message)
+    protected function showErrorMessage(string $message): void
     {
         session()->flash('error', $message);
     }

@@ -29,12 +29,12 @@ class SignupRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, array>
      */
     public function rules()
     {
         $rules = [
-            'email' => 'required|email|max:200',
+            'email' => ['required', 'email', 'max:200'],
         ];
 
         if (config('services.hcaptcha.active')) {

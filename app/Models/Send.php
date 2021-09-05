@@ -22,8 +22,17 @@ class Send extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = ['name', 'content', 'subject', 'mail_list_id', 'campaign_id'];
-    protected $dates = ['activated_at'];
+
+    /**
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'activated_at' => 'immutable_datetime'
+    ];
 
     /**
      * Get the campaign that this send is in.

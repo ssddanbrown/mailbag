@@ -18,7 +18,7 @@ class SendActivationJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    protected $send;
+    protected Send $send;
 
     /**
      * Create a new job instance.

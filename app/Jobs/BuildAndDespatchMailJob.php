@@ -18,7 +18,7 @@ class BuildAndDespatchMailJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    protected $sendRecord;
+    protected SendRecord $sendRecord;
 
     /**
      * Create a new job instance.

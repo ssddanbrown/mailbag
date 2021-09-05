@@ -13,7 +13,7 @@ class SignupConfirmationMail extends Mailable implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    protected $signup;
+    protected Signup $signup;
 
     /**
      * Create a new message instance.

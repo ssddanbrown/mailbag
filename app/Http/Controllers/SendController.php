@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Campaign;
 use App\Models\Send;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class SendController extends Controller
@@ -11,7 +13,7 @@ class SendController extends Controller
     /**
      * Display this particular send.
      */
-    public function show(Send $send)
+    public function show(Send $send): View
     {
         return view('sends.show', compact('send'));
     }
@@ -19,7 +21,7 @@ class SendController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         $default = new Send();
 
@@ -41,7 +43,7 @@ class SendController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validated = $this->validate($request, [
             'name'         => 'required|max:250',
@@ -62,7 +64,7 @@ class SendController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Send $send)
+    public function edit(Send $send): View
     {
         return view('sends.edit', compact('send'));
     }
@@ -70,7 +72,7 @@ class SendController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Send $send)
+    public function update(Request $request, Send $send): RedirectResponse
     {
         $validated = $this->validate($request, [
             'name'         => 'required|max:250',
@@ -90,7 +92,7 @@ class SendController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Send $send)
+    public function destroy(Send $send): RedirectResponse
     {
         $campaign = $send->campaign;
         $send->delete();

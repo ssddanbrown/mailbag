@@ -11,7 +11,7 @@ class SendMail extends Mailable
 {
     use SerializesModels;
 
-    protected $sendRecord;
+    protected SendRecord $sendRecord;
 
     /**
      * Create a new message instance.

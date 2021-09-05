@@ -23,7 +23,7 @@ class Contact extends Model
     /**
      * Unsubscribe a contact in the system.
      */
-    public function markUnsubscribed()
+    public function markUnsubscribed(): void
     {
         $this->update(['unsubscribed' => true]);
         $this->lists()->detach();

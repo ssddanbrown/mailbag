@@ -4,15 +4,13 @@ namespace App\Services;
 
 use App\Models\Contact;
 use App\Models\MailList;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 class EmailListImporter
 {
-    protected $list;
+    protected MailList $list;
 
-    /**
-     * EmailListImporter constructor.
-     */
     public function __construct(MailList $list)
     {
         $this->list = $list;
@@ -43,6 +41,8 @@ class EmailListImporter
      * Import the given chunk of email addresses, Adding them to the list
      * and returning the counts of those added, separated by
      * whether they already existed in the database or not.
+     *
+     * @return array{new: int, existing: int}
      */
     protected function importChunkOfEmails(Collection $emailChunk): array
     {
@@ -66,6 +66,8 @@ class EmailListImporter
 
     /**
      * Generate the raw data for a new contact model.
+     *
+     * @return array{email: string, created_at: Carbon, updated_at: Carbon, unsubscribed: bool}
      */
     protected function newContactDataForEmail(string $email)
     {

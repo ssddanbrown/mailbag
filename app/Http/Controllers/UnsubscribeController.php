@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\SendRecord;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class UnsubscribeController extends Controller
 {
     /**
      * Show the view with the unsubscribe options.
+     * @return View|Response
      */
-    public function show($sendRecord)
+    public function show(string $sendRecordKey)
     {
-        $sendRecord = SendRecord::query()->where('key', '=', $sendRecord)->first();
-        if (!$sendRecord || ($sendRecord && $sendRecord->hasExpired())) {
+        /** @var ?SendRecord $sendRecord */
+        $sendRecord = SendRecord::query()->where('key', '=', $sendRecordKey)->first();
+        if (!$sendRecord || $sendRecord->hasExpired()) {
             return response()->view('unsubscribe.not-found', [], 404);
         }
 
@@ -23,7 +28,7 @@ class UnsubscribeController extends Controller
     /**
      * Unsubscribe from the list.
      */
-    public function fromList(SendRecord $sendRecord)
+    public function fromList(SendRecord $sendRecord): RedirectResponse
     {
         $list = $sendRecord->send->maillist;
         $contact = $sendRecord->contact;
@@ -35,7 +40,7 @@ class UnsubscribeController extends Controller
     /**
      * Unsubscribe at a contact level.
      */
-    public function fromAll(SendRecord $sendRecord)
+    public function fromAll(SendRecord $sendRecord): RedirectResponse
     {
         $contact = $sendRecord->contact;
         $contact->markUnsubscribed();
@@ -46,7 +51,7 @@ class UnsubscribeController extends Controller
     /**
      * Show the confirm (ty) page for unsubscribing.
      */
-    public function confirm(Request $request)
+    public function confirm(Request $request): View
     {
         return view('unsubscribe.confirm', [
             'type' => $request->get('type', 'all'),

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\MailList;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -11,7 +13,7 @@ class ContactController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $query = Contact::query()->orderBy('email')->withCount(['lists']);
         $search = $request->get('search');
@@ -29,7 +31,7 @@ class ContactController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         $default = new Contact(['unsubscribed' => false]);
 
@@ -39,7 +41,7 @@ class ContactController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $this->validate($request, [
             'email'        => 'required|email|unique:contacts,email',
@@ -60,7 +62,7 @@ class ContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Contact $contact)
+    public function edit(Contact $contact): View
     {
         $allListOptions = MailList::query()->whereNotIn('id', $contact->lists()->pluck('id'))
             ->orderBy('name')
@@ -78,7 +80,7 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Contact $contact)
+    public function update(Request $request, Contact $contact): RedirectResponse
     {
         $this->validate($request, [
             'email'        => "required|email|unique:contacts,email,{$contact->id}",
@@ -98,7 +100,7 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contact $contact)
+    public function destroy(Contact $contact): RedirectResponse
     {
         $contact->deleteWithRelations();
         $this->showSuccessMessage('Contact deleted!');

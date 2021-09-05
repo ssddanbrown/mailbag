@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Campaign;
 use App\Models\RssFeed;
 use App\Rules\ValidRssFeedRule;
+use Carbon\CarbonImmutable;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class RssFeedController extends Controller
@@ -12,7 +15,7 @@ class RssFeedController extends Controller
     /**
      * Show the form to create a new RSS feed setup.
      */
-    public function create(Campaign $campaign)
+    public function create(Campaign $campaign): View
     {
         $feed = new RssFeed();
         $feed->campaign = $campaign;
@@ -23,7 +26,7 @@ class RssFeedController extends Controller
     /**
      * Store this RSS feed config in the database.
      */
-    public function store(Request $request, Campaign $campaign)
+    public function store(Request $request, Campaign $campaign): RedirectResponse
     {
         $validated = $this->validate($request, [
             'active'           => 'required|bool',
@@ -34,7 +37,7 @@ class RssFeedController extends Controller
         ]);
 
         $feed = new RssFeed($validated);
-        $feed->last_reviewed_at = now();
+        $feed->last_reviewed_at = CarbonImmutable::now();
         $feed->updateNextReviewDate();
         $campaign->rssFeeds()->save($feed);
 
@@ -46,7 +49,7 @@ class RssFeedController extends Controller
     /**
      * Edit this RSS feed.
      */
-    public function edit(Campaign $campaign, RssFeed $feed)
+    public function edit(Campaign $campaign, RssFeed $feed): View
     {
         return view('rss.edit', compact('campaign', 'feed'));
     }
@@ -54,7 +57,7 @@ class RssFeedController extends Controller
     /**
      * Update the details of this RSS feed.
      */
-    public function update(Request $request, Campaign $campaign, RssFeed $feed)
+    public function update(Request $request, Campaign $campaign, RssFeed $feed): RedirectResponse
     {
         $validated = $this->validate($request, [
             'active'           => 'required|bool',
@@ -76,7 +79,7 @@ class RssFeedController extends Controller
     /**
      * Delete the RSS feed.
      */
-    public function destroy(Campaign $campaign, RssFeed $feed)
+    public function destroy(Campaign $campaign, RssFeed $feed): RedirectResponse
     {
         $feed->delete();
 

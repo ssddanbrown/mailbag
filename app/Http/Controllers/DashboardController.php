@@ -7,10 +7,12 @@ use App\Models\MailList;
 use App\Models\RssFeed;
 use App\Models\Send;
 use App\Models\SendRecord;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         return view('dashboard.index', [
             'recentSends'      => $this->recentSends(),
@@ -21,7 +23,10 @@ class DashboardController extends Controller
         ]);
     }
 
-    protected function getCounts()
+    /**
+     * @return array<string, int>
+     */
+    protected function getCounts(): array
     {
         return [
             'contacts' => Contact::query()->count(),
@@ -30,7 +35,7 @@ class DashboardController extends Controller
         ];
     }
 
-    protected function upcomingRssFeeds()
+    protected function upcomingRssFeeds(): Collection
     {
         return RssFeed::query()
             ->with(['campaign', 'templateSend'])
@@ -39,7 +44,7 @@ class DashboardController extends Controller
             ->get();
     }
 
-    protected function popularLists()
+    protected function popularLists(): Collection
     {
         return MailList::query()
             ->withCount('contacts')
@@ -48,7 +53,7 @@ class DashboardController extends Controller
             ->get();
     }
 
-    protected function latestContacts()
+    protected function latestContacts(): Collection
     {
         return Contact::query()
             ->orderBy('created_at', 'desc')
@@ -57,7 +62,7 @@ class DashboardController extends Controller
             ->get();
     }
 
-    protected function recentSends()
+    protected function recentSends(): Collection
     {
         return Send::query()
             ->whereNotNull('activated_at')

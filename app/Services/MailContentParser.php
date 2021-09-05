@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 
 class MailContentParser
 {
-    protected $content;
+    protected string $content;
 
     public function __construct(string $content)
     {
@@ -63,7 +63,7 @@ class MailContentParser
     /**
      * Add an unsubscribe link to the email, at the tag if existing.
      */
-    protected function addOrReplaceUnsubscribe(SendRecord $record)
+    protected function addOrReplaceUnsubscribe(SendRecord $record): void
     {
         if (!$this->hasTag($this->content, 'unsubscribe_link')) {
             $this->content .= "\n\n" . 'Unsubscribe: {{unsubscribe_link}}';
@@ -92,7 +92,7 @@ class MailContentParser
     /**
      * Get the regex pattern to find a tag of the given name.
      */
-    protected function tagRegex(string $tagName)
+    protected function tagRegex(string $tagName): string
     {
         return '{{\s*?' . $tagName . '\s*?}}';
     }

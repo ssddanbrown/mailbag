@@ -37,21 +37,26 @@ class Campaign extends Model
 
     /**
      * Get all the campaign sends formatted for a select list.
+     * @return array<int, string>
      */
     public function getSendsForSelect(): array
     {
-        return $this->sends()->orderBy('name')->get(['id', 'name'])->mapWithKeys(function ($send) {
-            return [$send->id => $send->name];
-        })->toArray();
+        return $this->sends()
+            ->orderBy('name')
+            ->get(['id', 'name'])
+            ->mapWithKeys(fn (Send $send) => [$send->id => $send->name])
+            ->toArray();
     }
 
     /**
      * Get all the campaigns formatted for a select list.
+     * @return array<int, string>
      */
     public static function getAllForSelect(): array
     {
-        return static::query()->orderBy('name')->get(['id', 'name'])->mapWithKeys(function ($campaign) {
-            return [$campaign->id => $campaign->name];
-        })->toArray();
+        return static::query()
+            ->orderBy('name')
+            ->get(['id', 'name'])
+            ->mapWithKeys(fn (Campaign $campaign) => [$campaign->id => $campaign->name])->toArray();
     }
 }

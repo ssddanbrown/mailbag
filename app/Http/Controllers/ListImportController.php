@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\MailList;
 use App\Services\EmailListImporter;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ListImportController extends Controller
@@ -11,7 +13,7 @@ class ListImportController extends Controller
     /**
      * Show the view to import contacts to the list.
      */
-    public function show(MailList $list)
+    public function show(MailList $list): View
     {
         return view('lists.import', compact('list'));
     }
@@ -19,7 +21,7 @@ class ListImportController extends Controller
     /**
      * Run the import of contacts to a list.
      */
-    public function import(Request $request, MailList $list)
+    public function import(Request $request, MailList $list): RedirectResponse
     {
         $validated = $this->validate($request, [
             'email_list' => 'string|min:2',

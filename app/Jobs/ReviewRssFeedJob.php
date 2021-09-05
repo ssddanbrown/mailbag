@@ -6,6 +6,7 @@ use App\Models\RssFeed;
 use App\Services\MailContentParser;
 use App\Services\Rss\RssArticle;
 use App\Services\Rss\RssParser;
+use Carbon\CarbonImmutable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -20,7 +21,7 @@ class ReviewRssFeedJob implements ShouldQueue, ShouldBeUnique
     use Queueable;
     use SerializesModels;
 
-    protected $feed;
+    protected RssFeed $feed;
 
     /**
      * Create a new job instance.
@@ -34,12 +35,10 @@ class ReviewRssFeedJob implements ShouldQueue, ShouldBeUnique
 
     /**
      * The unique ID of the job.
-     *
-     * @return string
      */
-    public function uniqueId()
+    public function uniqueId(): string
     {
-        return $this->feed->id;
+        return strval($this->feed->id);
     }
 
     /**
@@ -67,7 +66,7 @@ class ReviewRssFeedJob implements ShouldQueue, ShouldBeUnique
             dispatch(new SendActivationJob($send));
         }
 
-        $this->feed->last_reviewed_at = now();
+        $this->feed->last_reviewed_at = CarbonImmutable::now();
         $this->feed->updateNextReviewDate();
         $this->feed->save();
     }

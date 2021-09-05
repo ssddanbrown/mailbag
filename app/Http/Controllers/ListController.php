@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\MailList;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -11,7 +13,7 @@ class ListController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $query = MailList::query()->orderBy('name')->withCount('contacts');
         $search = $request->get('search');
@@ -30,7 +32,7 @@ class ListController extends Controller
     /**
      * Show a single list with the contacts within it.
      */
-    public function show(MailList $list, Request $request)
+    public function show(MailList $list, Request $request): View
     {
         $query = $list->contacts()->orderBy('email');
         $search = $request->get('search');
@@ -49,7 +51,7 @@ class ListController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         $default = new MailList();
 
@@ -59,7 +61,7 @@ class ListController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $this->validate($request, [
             'name'         => 'required|max:250',
@@ -81,7 +83,7 @@ class ListController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MailList $list)
+    public function edit(MailList $list): View
     {
         return view('lists.edit', ['list' => $list]);
     }
@@ -89,7 +91,7 @@ class ListController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MailList $list)
+    public function update(Request $request, MailList $list): RedirectResponse
     {
         $this->validate($request, [
             'name'         => 'required|max:250',
@@ -111,7 +113,7 @@ class ListController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MailList $list)
+    public function destroy(MailList $list): RedirectResponse
     {
         $list->contacts()->detach();
         $list->delete();

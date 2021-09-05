@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,8 +16,8 @@ use Illuminate\Support\Carbon;
  * @property Send     $templateSend
  * @property int      $send_frequency
  * @property int      $target_hour
- * @property Carbon   $last_reviewed_at
- * @property Carbon   $next_review_at
+ * @property CarbonImmutable   $last_reviewed_at
+ * @property CarbonImmutable   $next_review_at
  * @property Carbon   $updated_at
  * @property Carbon   $created_at
  */
@@ -24,8 +25,18 @@ class RssFeed extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = ['url', 'active', 'template_send_id', 'send_frequency', 'target_hour'];
-    public $dates = ['last_reviewed_at', 'next_review_at'];
+
+    /**
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'last_reviewed_at' => 'immutable_datetime',
+        'next_review_at' => 'immutable_datetime',
+    ];
 
     /**
      * Get the campaign that this rss feed sits in.
@@ -57,12 +68,12 @@ class RssFeed extends Model
     /**
      * Update the time when this feed should be next reviewed.
      */
-    public function updateNextReviewDate()
+    public function updateNextReviewDate(): void
     {
         $this->next_review_at = $this->getNextReviewDate();
     }
 
-    protected function getNextReviewDate(): Carbon
+    protected function getNextReviewDate(): CarbonImmutable
     {
         return $this->last_reviewed_at->clone()
              ->addDays($this->send_frequency)

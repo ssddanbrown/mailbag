@@ -21,7 +21,7 @@ class Signup extends Model
     /**
      * The lifetime of signup requests in days.
      */
-    protected static $lifetime = 7;
+    protected static int $lifetime = 7;
 
     public function maillist(): BelongsTo
     {

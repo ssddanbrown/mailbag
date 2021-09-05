@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Campaign;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CampaignController extends Controller
@@ -10,7 +12,7 @@ class CampaignController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $query = Campaign::query()->withCount(['sends', 'rssFeeds'])->orderBy('name');
         $search = $request->get('search');
@@ -26,7 +28,7 @@ class CampaignController extends Controller
     /**
      * Display this particular campaign.
      */
-    public function show(Request $request, Campaign $campaign)
+    public function show(Request $request, Campaign $campaign): View
     {
         $sendQuery = $campaign->sends()
             ->orderByRaw('activated_at desc NULLS FIRST')
@@ -46,7 +48,7 @@ class CampaignController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         $default = new Campaign();
 
@@ -56,7 +58,7 @@ class CampaignController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $this->validate($request, [
             'name' => 'required|max:250',
@@ -75,7 +77,7 @@ class CampaignController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Campaign $campaign)
+    public function edit(Campaign $campaign): View
     {
         return view('campaigns.edit', compact('campaign'));
     }
@@ -83,7 +85,7 @@ class CampaignController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Campaign $campaign)
+    public function update(Request $request, Campaign $campaign): RedirectResponse
     {
         $this->validate($request, [
             'name' => 'required|max:250',
@@ -101,7 +103,7 @@ class CampaignController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Campaign $campaign)
+    public function destroy(Campaign $campaign): RedirectResponse
     {
         $campaign->delete();
         $campaign->sends()->delete();

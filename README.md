@@ -92,7 +92,7 @@ Some guidance and a nginx example can be seen on the Laravel docs here: https://
 
 MailBag has the following requirements:
 
-- PHP > 7.3
+- PHP > 7.4
   - Extensions: BCMath, Ctype, Fileinfo, JSON, Mbstring, OpenSSL, PDO, Tokenizer, XML, SQLite3
 - SQLite > 3.30
 - [Composer](https://getcomposer.org/)
@@ -102,7 +102,7 @@ MailBag has the following requirements:
 
 You'll also need command-line access on the host including the ability to configure cron and process management. Using git will help with keeping the codebase versions for managing updates.
 
-#### Initial Install Steps
+#### Initial Installation Steps
 
 ```shell
 # Clone down the project files using git
@@ -123,7 +123,7 @@ touch storage/database/database.sqlite
 # Migrate the database
 php artisan migrate
 
-# Install and build JS/CSS Dependancies
+# Install and build JS/CSS dependencies
 npm install
 npm run build
 

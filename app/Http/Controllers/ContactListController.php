@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\MailList;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ContactListController extends Controller
@@ -11,7 +12,7 @@ class ContactListController extends Controller
     /**
      * Add the lists of the given ids to the given contact.
      */
-    public function add(Request $request, Contact $contact)
+    public function add(Request $request, Contact $contact): RedirectResponse
     {
         $this->validate($request, [
             'lists'   => 'array',
@@ -29,7 +30,7 @@ class ContactListController extends Controller
     /**
      * Remove the lists of the given ids from the given contact.
      */
-    public function remove(Request $request, Contact $contact)
+    public function remove(Request $request, Contact $contact): RedirectResponse
     {
         $this->validate($request, [
             'lists'   => 'array',

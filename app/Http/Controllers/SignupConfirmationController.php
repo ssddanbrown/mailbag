@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\MailList;
 use App\Models\Signup;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SignupConfirmationController extends Controller
 {
     /**
      * Show the page for confirming a subscription.
+     * @return View|Response
      */
     public function show(string $signupKey)
     {
@@ -32,7 +36,7 @@ class SignupConfirmationController extends Controller
     /**
      * The request to confirm the subscription.
      */
-    public function confirm(Signup $signup)
+    public function confirm(Signup $signup): RedirectResponse
     {
         $contact = Contact::query()->updateOrCreate(['email' => $signup->email], ['unsubscribed' => false]);
 
@@ -46,7 +50,7 @@ class SignupConfirmationController extends Controller
     /**
      * Show the thank-you page for a sign-up.
      */
-    public function thanks(MailList $list)
+    public function thanks(MailList $list): View
     {
         return view('signups.confirm-thanks', compact('list'));
     }
