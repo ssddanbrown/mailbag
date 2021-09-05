@@ -6,16 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
- * @property int id
- * @property string name
- * @property string content
- * @property string subject
- * @property bool activated
- * @property Carbon activated_at
- * @property MailList maillist
- * @property Campaign campaign
+ * @property int $id
+ * @property string $name
+ * @property string $content
+ * @property string $subject
+ * @property bool $activated
+ * @property ?Carbon $activated_at
+ * @property MailList $maillist
+ * @property Campaign $campaign
  */
 class Send extends Model
 {

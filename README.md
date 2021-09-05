@@ -165,3 +165,19 @@ ExecStart=/usr/bin/php /path-to-your-project/artisan queue:work --sleep=3 --trie
 [Install]
 WantedBy=multi-user.target
 ```
+
+## Testing
+
+This project uses phpunit for testing. Tests are located within the `tests/` directory.
+You can run the tests using:
+
+```shell
+./vendor/bin/phpunit
+```
+
+This project uses [Larastan](https://github.com/nunomaduro/larastan), an extension of PHPStan,
+for static analysis. You can run static analysis checks using:
+
+```shell
+./vendor/bin/larastan analyse
+```

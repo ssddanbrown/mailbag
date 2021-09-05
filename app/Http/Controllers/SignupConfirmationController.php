@@ -14,7 +14,7 @@ class SignupConfirmationController extends Controller
      */
     public function show(string $signupKey)
     {
-        /** @var Signup $signup */
+        /** @var ?Signup $signup */
         $signup = Signup::query()->where('key', '=', $signupKey)->first();
 
         if ($signup && $signup->hasExpired()) {
