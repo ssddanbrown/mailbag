@@ -45,6 +45,15 @@ class SendTest extends TestCase
         $response->assertSee($send->name);
     }
 
+    public function test_send_show_view_shows_launch_details_if_launched()
+    {
+        $send = Send::factory()->create(['activated_at' => '2022-05-31 16:10:48']);
+
+        $response = $this->whileLoggedIn()->get("/sends/{$send->id}");
+        $response->assertSee('Launch Details');
+        $response->assertSee('Send launched and sent to 0 people on the 31st of May 2022 at 16:10:48');
+    }
+
     public function test_send_can_be_edited()
     {
         $send = Send::factory()->create();

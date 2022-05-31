@@ -25,8 +25,7 @@
             <div class="mb-10 bg-blue-50 border border-blue-300 p-5 text-blue-900">
                 <h4 class="mt-1 text-2xl mb-1 font-medium">Launch Details</h4>
                 <p class="mb-1">
-                    Send launched and sent to {{ $send->records->count() }} people
-                    on the {{ $send->activated_at->format('jS \\of F Y \\a\\t h:i:s') }}
+                    Send launched and sent to {{ $send->records->count() }} people on the {{ $send->activated_at->format('jS \\of F Y \\a\\t H:i:s') }}
                 </p>
             </div>
         @endif
