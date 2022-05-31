@@ -7,6 +7,8 @@
         "php": "^8.0",
         "ext-libxml": "*",
         "ext-simplexml": "*",
+        "ext-sqlite3": "*",
+        "ext-mbstring": "*",
         "doctrine/dbal": "^3.3",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.14",
