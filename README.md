@@ -2,7 +2,7 @@
 
 [![PHPUnit](https://github.com/ssddanbrown/mailbag/workflows/PHPUnit/badge.svg)](https://github.com/ssddanbrown/mailbag/actions/workflows/phpunit.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/303b6c55a668b92adb5a/maintainability)](https://codeclimate.com/github/ssddanbrown/mailbag/maintainability)
-[![StyleCI](https://github.styleci.io/repos/322943641/shield?branch=master)](https://github.styleci.io/repos/322943641?branch=master)
+[![StyleCI](https://github.styleci.io/repos/322943641/shield?branch=main)](https://github.styleci.io/repos/322943641?branch=main)
 
 MailBag is a simple plaintext-focused email manager. The application has been purpose-built for a fairly simple use-case. Due to limited time, I don't have much of a desire to widen the scope.
 
@@ -13,15 +13,15 @@ MailBag is a simple plaintext-focused email manager. The application has been pu
 		<tr>
 			<td width="33%">
 				Home Dashboard
-				<img src="https://github.com/ssddanbrown/mailbag/raw/master/screenshots/dashboard.png">
+				<img src="https://github.com/ssddanbrown/mailbag/raw/main/screenshots/dashboard.png">
 			</td>
 			<td width="33%">
 				Campaign
-				<img src="https://github.com/ssddanbrown/mailbag/raw/master/screenshots/campaign.png">
+				<img src="https://github.com/ssddanbrown/mailbag/raw/main/screenshots/campaign.png">
 			</td>
 			<td width="33%">
 				Edit Send
-				<img src="https://github.com/ssddanbrown/mailbag/raw/master/screenshots/send.png">
+				<img src="https://github.com/ssddanbrown/mailbag/raw/main/screenshots/send.png">
 			</td>
 		</tr>
 	</tbody>
@@ -32,11 +32,11 @@ MailBag is a simple plaintext-focused email manager. The application has been pu
 		<tr>
 			<td width="50%">
 				List Signup
-				<img src="https://github.com/ssddanbrown/mailbag/raw/master/screenshots/signup.png">
+				<img src="https://github.com/ssddanbrown/mailbag/raw/main/screenshots/signup.png">
 			</td>
 			<td width="50%">
 				Unsubscribe
-				<img src="https://github.com/ssddanbrown/mailbag/raw/master/screenshots/unsubscribe.png">
+				<img src="https://github.com/ssddanbrown/mailbag/raw/main/screenshots/unsubscribe.png">
 			</td>
 		</tr>
 	</tbody>
