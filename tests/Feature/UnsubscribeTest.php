@@ -4,10 +4,13 @@ namespace Tests\Feature;
 
 use App\Models\MailList;
 use App\Models\SendRecord;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UnsubscribeTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_unsubscribe_view_accessible()
     {
         $sendRecord = SendRecord::factory()->create(['sent_at' => now()]);

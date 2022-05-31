@@ -3,11 +3,14 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class AddUserCommandTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_create_new_user()
     {
         $this->artisan('mailbag:add-user')

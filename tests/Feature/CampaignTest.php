@@ -3,10 +3,13 @@
 namespace Tests\Feature;
 
 use App\Models\Campaign;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CampaignTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_campaigns_visible_on_index()
     {
         $campaign = Campaign::factory()->create();

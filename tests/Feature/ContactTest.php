@@ -3,10 +3,13 @@
 namespace Tests\Feature;
 
 use App\Models\Contact;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ContactTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_contacts_visible_on_index()
     {
         $contact = Contact::factory()->create();

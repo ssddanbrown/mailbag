@@ -3,10 +3,13 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_users_visible_on_index()
     {
         $user = User::factory()->create();

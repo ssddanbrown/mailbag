@@ -4,12 +4,15 @@ namespace Tests\Feature;
 
 use App\Jobs\ScrubSignupsJob;
 use App\Models\Signup;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Bus;
 use Tests\TestCase;
 
 class ClearExpiredSignupsTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_job_clears_old_signups()
     {
         $validSignUp = Signup::factory()->create();

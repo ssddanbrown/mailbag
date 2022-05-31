@@ -2,10 +2,13 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class HomeTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_root_url_visit_when_logged_in_redirects_to_dash()
     {
         $response = $this->whileLoggedIn()->get('/');
