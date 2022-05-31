@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Campaign;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CampaignFactory extends Factory
@@ -15,7 +14,7 @@ class CampaignFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->country().' Send '.strval(rand(2000, 2040)),
+            'name' => $this->faker->country() . ' Send ' . strval(rand(2000, 2040)),
         ];
     }
 }

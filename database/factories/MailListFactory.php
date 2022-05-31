@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\MailList;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -15,12 +14,12 @@ class MailListFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->country().' '.Str::random(5).' List';
+        $name = $this->faker->country() . ' ' . Str::random(5) . ' List';
 
         return [
             'name'         => $name,
             'slug'         => Str::slug($name),
-            'display_name' => 'The great '.$name,
+            'display_name' => 'The great ' . $name,
             'description'  => $this->faker->sentence(),
         ];
     }

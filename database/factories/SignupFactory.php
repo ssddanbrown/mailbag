@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\MailList;
-use App\Models\Signup;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 

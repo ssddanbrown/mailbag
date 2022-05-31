@@ -21,6 +21,7 @@ class Campaign extends Model
 
     /**
      * Get the sends assigned to this campaign.
+     *
      * @return HasMany<Send>
      */
     public function sends(): HasMany
@@ -30,6 +31,7 @@ class Campaign extends Model
 
     /**
      * Get the RSS feeds created within this campaign.
+     *
      * @return HasMany<RssFeed>
      */
     public function rssFeeds(): HasMany

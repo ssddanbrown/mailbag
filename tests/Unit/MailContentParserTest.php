@@ -29,7 +29,7 @@ class MailContentParserTest extends TestCase
         $parser = new MailContentParser($content);
         $output = $parser->parseForSend($record);
 
-        $this->assertEquals("ABC DEF\n\n"."Unsubscribe: http://localhost/unsubscribe/{$record->key}", $output);
+        $this->assertEquals("ABC DEF\n\n" . "Unsubscribe: http://localhost/unsubscribe/{$record->key}", $output);
     }
 
     public function test_parse_for_rss_repeats_block_for_each_article()

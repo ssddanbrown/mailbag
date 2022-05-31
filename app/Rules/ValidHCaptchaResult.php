@@ -17,7 +17,7 @@ class ValidHCaptchaResult implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (! config('services.hcaptcha.active')) {
+        if (!config('services.hcaptcha.active')) {
             return true;
         }
 
