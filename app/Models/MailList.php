@@ -24,6 +24,7 @@ class MailList extends Model
 
     /**
      * Get the contacts subscribed to this list.
+     * @return BelongsToMany<Contact>
      */
     public function contacts(): BelongsToMany
     {

@@ -20,6 +20,7 @@ class SendRecord extends Model
 
     /**
      * Get the send that this record is for.
+     * @return BelongsTo<Send, SendRecord>
      */
     public function send(): BelongsTo
     {
@@ -28,6 +29,7 @@ class SendRecord extends Model
 
     /**
      * Get the contact that this record is for.
+     * @return BelongsTo<Contact, SendRecord>
      */
     public function contact(): BelongsTo
     {
@@ -44,6 +46,7 @@ class SendRecord extends Model
 
     /**
      * Generate a set of new unique keys to use.
+     * @return Collection<int, string>
      */
     public static function generateNewKeys(int $count = 1): Collection
     {
@@ -53,7 +56,7 @@ class SendRecord extends Model
 
         while ($keys->count() < $count) {
             $newKey = Str::random(16);
-            $keys->put($newKey, '');
+            $keys->put($newKey, ['key' => $newKey]);
         }
 
         return $keys->keys();

@@ -35,6 +35,9 @@ class DashboardController extends Controller
         ];
     }
 
+    /**
+     * @return Collection<int, RssFeed>
+     */
     protected function upcomingRssFeeds(): Collection
     {
         return RssFeed::query()
@@ -44,6 +47,9 @@ class DashboardController extends Controller
             ->get();
     }
 
+    /**
+     * @return Collection<int, MailList>
+     */
     protected function popularLists(): Collection
     {
         return MailList::query()
@@ -53,6 +59,9 @@ class DashboardController extends Controller
             ->get();
     }
 
+    /**
+     * @return Collection<int, Contact>
+     */
     protected function latestContacts(): Collection
     {
         return Contact::query()
@@ -62,6 +71,9 @@ class DashboardController extends Controller
             ->get();
     }
 
+    /**
+     * @return Collection<int, Send>
+     */
     protected function recentSends(): Collection
     {
         return Send::query()

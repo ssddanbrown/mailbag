@@ -36,6 +36,7 @@ class Send extends Model
 
     /**
      * Get the campaign that this send is in.
+     * @return BelongsTo<Campaign, Send>
      */
     public function campaign(): BelongsTo
     {
@@ -44,6 +45,7 @@ class Send extends Model
 
     /**
      * Get the list assigned to this send.
+     * @return BelongsTo<MailList, Send>
      */
     public function mailList(): BelongsTo
     {
@@ -52,6 +54,7 @@ class Send extends Model
 
     /**
      * Get the per-contact records for this send.
+     * @return HasMany<SendRecord>
      */
     public function records(): HasMany
     {
@@ -60,6 +63,7 @@ class Send extends Model
 
     /**
      * Get the feeds that are using this send.
+     * @return HasMany<RssFeed>
      */
     public function feeds(): HasMany
     {

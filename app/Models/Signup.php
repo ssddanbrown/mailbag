@@ -23,6 +23,10 @@ class Signup extends Model
      */
     protected static int $lifetime = 7;
 
+    /**
+     * Get the list that has been signed up to.
+     * @return BelongsTo<MailList, Signup>
+     */
     public function maillist(): BelongsTo
     {
         return $this->belongsTo(MailList::class, 'mail_list_id');
@@ -40,6 +44,7 @@ class Signup extends Model
 
     /**
      * Start a query for expired sign-ups.
+     * @return Builder<Signup>
      */
     public static function whereExpired(): Builder
     {

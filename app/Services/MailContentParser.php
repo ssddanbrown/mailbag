@@ -28,6 +28,8 @@ class MailContentParser
     /**
      * Parse the content and insert the given RSS articles
      * where tagged in the content.
+     *
+     * @param Collection<int, RssArticle> $articles
      */
     public function parseForRss(Collection $articles): string
     {

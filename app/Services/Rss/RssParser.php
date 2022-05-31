@@ -14,7 +14,7 @@ class RssParser
     /**
      * Get articles from the RSS URL.
      *
-     * @returns ?Collection<RssArticle>
+     * @return ?Collection<int, RssArticle>
      */
     public function getArticles(string $url): ?Collection
     {
@@ -36,7 +36,8 @@ class RssParser
             return null;
         }
 
-        $articles = collect();
+        /** @var Collection<int, RssArticle> $articles */
+        $articles = new Collection();
         foreach ($rss->channel->item as $item) {
             $articles->push(new RssArticle(
                 html_entity_decode(strval($item->title ?? '')),
