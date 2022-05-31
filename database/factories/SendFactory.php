@@ -24,9 +24,9 @@ class SendFactory extends Factory
     public function definition()
     {
         return [
-            'name'         => 'Send '.$this->faker->state.' '.$this->faker->month,
+            'name'         => 'Send '.$this->faker->state().' '.$this->faker->month(),
             'content'      => implode("\n\n", $this->faker->paragraphs(3)),
-            'subject'      => $this->faker->company.' '.$this->faker->sentence,
+            'subject'      => $this->faker->company().' '.$this->faker->sentence(),
             'mail_list_id' => MailList::factory(),
             'campaign_id'  => Campaign::factory(),
             'activated_at' => null,

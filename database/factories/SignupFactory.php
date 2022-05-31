@@ -24,7 +24,7 @@ class SignupFactory extends Factory
     public function definition()
     {
         return [
-            'email'        => $this->faker->email,
+            'email'        => $this->faker->email(),
             'mail_list_id' => MailList::factory(),
             'key'          => Str::random(32),
             'attempts'     => 0,
