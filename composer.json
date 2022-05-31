@@ -9,7 +9,6 @@
         "ext-simplexml": "*",
         "doctrine/dbal": "^3.0",
         "fideloper/proxy": "^4.4",
-        "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.22.1",
         "laravel/tinker": "^2.5"
