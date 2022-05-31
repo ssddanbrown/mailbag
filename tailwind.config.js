@@ -1,8 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-    mode: 'jit',
-    purge: ['./storage/framework/views/*.php', './resources/views/**/*.blade.php'],
+    content: ['./storage/framework/views/*.php', './resources/views/**/*.blade.php'],
 
     theme: {
         screens: {
@@ -18,12 +17,6 @@ module.exports = {
             fontFamily: {
                 sans: ['Roboto', ...defaultTheme.fontFamily.sans],
             },
-        },
-    },
-
-    variants: {
-        extend: {
-            opacity: ['disabled'],
         },
     },
 

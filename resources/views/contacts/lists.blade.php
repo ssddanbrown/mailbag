@@ -8,7 +8,7 @@
                             <a href="{{ route('lists.show', compact('list')) }}">{{ $list->name }}</a> <br>
                             <span class="text-sm text-gray-500">Subscribed {{ $list->pivot->created_at->format('Y-m-d') }}</span>
                         </div>
-                        <div class="flex-shrink pl-1">
+                        <div class="shrink pl-1">
                             <x-delete-dropdown :route="route('contacts.lists.remove', ['contact' => $contact])">
                                 <x-slot name="extraFields">
                                     <input type="hidden" name="lists[]" value="{{ $list->id }}">
