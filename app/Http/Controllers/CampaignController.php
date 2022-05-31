@@ -17,7 +17,7 @@ class CampaignController extends Controller
         $query = Campaign::query()->withCount(['sends', 'rssFeeds'])->orderBy('name');
         $search = $request->get('search');
         if ($search) {
-            $query->where('name', 'like', '%' . $search . '%');
+            $query->where('name', 'like', '%'.$search.'%');
         }
 
         $campaigns = $query->paginate(100)->withQueryString();
@@ -37,7 +37,7 @@ class CampaignController extends Controller
             ->withCount(['feeds']);
         $search = $request->get('search');
         if ($search) {
-            $sendQuery->where('name', 'like', '%' . $search . '%');
+            $sendQuery->where('name', 'like', '%'.$search.'%');
         }
 
         $sends = $sendQuery->paginate(100)->withQueryString();

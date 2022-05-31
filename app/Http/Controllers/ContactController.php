@@ -18,7 +18,7 @@ class ContactController extends Controller
         $query = Contact::query()->orderBy('email')->withCount(['lists']);
         $search = $request->get('search');
         if ($search) {
-            $query->where('email', 'like', '%' . $search . '%');
+            $query->where('email', 'like', '%'.$search.'%');
         }
 
         $contacts = $query->paginate(100)->withQueryString();

@@ -35,7 +35,7 @@ class UserTest extends TestCase
         $response = $this->whileLoggedIn()->get('/users');
         $response->assertDontSee($users[105]->email);
 
-        $response = $this->get('/users?search=' . $users[105]->email);
+        $response = $this->get('/users?search='.$users[105]->email);
         $response->assertSee("/users/{$users[105]->id}");
         $response->assertSee("value=\"{$users[105]->email}\"", false);
     }

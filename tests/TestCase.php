@@ -11,7 +11,7 @@ abstract class TestCase extends BaseTestCase
     use CreatesApplication;
     use DatabaseMigrations;
 
-    protected function whileLoggedIn(): TestCase
+    protected function whileLoggedIn(): self
     {
         $user = User::factory()->create();
 

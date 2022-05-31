@@ -18,8 +18,8 @@ class ListController extends Controller
         $query = MailList::query()->orderBy('name')->withCount('contacts');
         $search = $request->get('search');
         if ($search) {
-            $query->where('name', 'like', '%' . $search . '%')
-                ->orWhere('display_name', 'like', '%' . $search . '%');
+            $query->where('name', 'like', '%'.$search.'%')
+                ->orWhere('display_name', 'like', '%'.$search.'%');
         }
 
         $lists = $query->paginate(100)->withQueryString();
@@ -37,7 +37,7 @@ class ListController extends Controller
         $query = $list->contacts()->orderBy('email');
         $search = $request->get('search');
         if ($search) {
-            $query->where('email', 'like', '%' . $search . '%');
+            $query->where('email', 'like', '%'.$search.'%');
         }
 
         $contacts = $query->paginate(100)->withQueryString();

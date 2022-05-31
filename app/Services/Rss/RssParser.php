@@ -19,7 +19,7 @@ class RssParser
     public function getArticles(string $url): ?Collection
     {
         $response = Http::get($url);
-        if (!$response->ok()) {
+        if (! $response->ok()) {
             return null;
         }
 

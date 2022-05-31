@@ -15,7 +15,7 @@ return [
     */
 
     'hcaptcha' => [
-        'active'    => !empty(env('HCAPTCHA_SITEKEY', null)),
+        'active'    => ! empty(env('HCAPTCHA_SITEKEY', null)),
         'sitekey'   => env('HCAPTCHA_SITEKEY', null),
         'secretkey' => env('HCAPTCHA_SECRETKEY', null),
     ],

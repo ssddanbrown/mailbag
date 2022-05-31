@@ -71,6 +71,6 @@ class Send extends Model
      */
     public function getActivatedAttribute(): bool
     {
-        return !is_null($this->activated_at);
+        return ! is_null($this->activated_at);
     }
 }
