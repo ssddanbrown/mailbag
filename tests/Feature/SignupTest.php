@@ -6,7 +6,6 @@ use App\Mail\SignupConfirmationMail;
 use App\Models\Contact;
 use App\Models\MailList;
 use App\Models\Signup;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Http;
@@ -16,8 +15,6 @@ use Tests\TestCase;
 
 class SignupTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_signup_page_exists_for_a_list()
     {
         $list = MailList::factory()->create(['display_name' => Str::random(12)]);

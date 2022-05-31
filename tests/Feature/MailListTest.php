@@ -4,13 +4,10 @@ namespace Tests\Feature;
 
 use App\Models\Contact;
 use App\Models\MailList;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class MailListTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_lists_visible_on_index()
     {
         $list = MailList::factory()->create();

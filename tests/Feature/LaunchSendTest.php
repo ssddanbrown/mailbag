@@ -7,7 +7,6 @@ use App\Mail\SendMail;
 use App\Models\Contact;
 use App\Models\Send;
 use App\Models\SendRecord;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -15,8 +14,6 @@ use Tests\TestCase;
 
 class LaunchSendTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_activation_marks_job_as_activated_and_dispatched_job()
     {
         $send = Send::factory()->create(['activated_at' => null]);

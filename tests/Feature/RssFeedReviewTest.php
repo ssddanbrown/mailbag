@@ -8,14 +8,11 @@ use App\Jobs\SendActivationJob;
 use App\Models\RssFeed;
 use App\Services\Rss\RssArticle;
 use App\Services\Rss\RssParser;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
 use Tests\TestCase;
 
 class RssFeedReviewTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_find_rss_feeds_to_review_jobs_correctly_creates_review_jobs_for_pending_feeds()
     {
         $pendingFeed = RssFeed::factory()->create([
