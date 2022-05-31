@@ -40,6 +40,7 @@ class RssFeed extends Model
 
     /**
      * Get the campaign that this rss feed sits in.
+     *
      * @return BelongsTo<Campaign, RssFeed>
      */
     public function campaign(): BelongsTo
@@ -49,6 +50,7 @@ class RssFeed extends Model
 
     /**
      * Get the send that's used as a template for this rss feed.
+     *
      * @return BelongsTo<Send, RssFeed>
      */
     public function templateSend(): BelongsTo

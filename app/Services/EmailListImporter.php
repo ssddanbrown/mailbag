@@ -84,6 +84,7 @@ class EmailListImporter
     /**
      * Convert a new-line separated list of emails to a collection
      * of filtered, validated, unique email address strings.
+     *
      * @return Collection<int, string>
      */
     protected function listToFilteredCollection(string $listOfEmails): Collection

@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Campaign;
-use App\Models\RssFeed;
 use App\Models\Send;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +19,7 @@ class RssFeedFactory extends Factory
 
         return [
             'active'           => true,
-            'url'              => $this->faker->url().'.xml',
+            'url'              => $this->faker->url() . '.xml',
             'campaign_id'      => $campaign->id,
             'template_send_id' => Send::factory()->for($campaign),
             'send_frequency'   => 7,

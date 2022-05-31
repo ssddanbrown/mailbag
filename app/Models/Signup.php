@@ -25,6 +25,7 @@ class Signup extends Model
 
     /**
      * Get the list that has been signed up to.
+     *
      * @return BelongsTo<MailList, Signup>
      */
     public function maillist(): BelongsTo
@@ -44,6 +45,7 @@ class Signup extends Model
 
     /**
      * Start a query for expired sign-ups.
+     *
      * @return Builder<Signup>
      */
     public static function whereExpired(): Builder

@@ -18,8 +18,8 @@ class UserController extends Controller
         $query = User::query()->orderBy('name');
         $search = $request->get('search');
         if ($search) {
-            $query->where('name', 'like', '%'.$search.'%')
-                ->orWhere('email', 'like', '%'.$search.'%');
+            $query->where('name', 'like', '%' . $search . '%')
+                ->orWhere('email', 'like', '%' . $search . '%');
         }
 
         $users = $query->paginate(100)->withQueryString();
@@ -74,14 +74,14 @@ class UserController extends Controller
     public function update(Request $request, User $user): RedirectResponse
     {
         $this->validate($request, [
-            'email'    => 'required|email|unique:users,email,'.$user->id,
+            'email'    => 'required|email|unique:users,email,' . $user->id,
             'name'     => 'required|string|max:250',
             'password' => 'nullable|string|min:8|max:250',
         ]);
 
         $user->fill($request->only(['email', 'name']));
 
-        if ($request->has('password') && ! empty($request->get('password'))) {
+        if ($request->has('password') && !empty($request->get('password'))) {
             $user->password = Hash::make($request->get('password'));
         }
 

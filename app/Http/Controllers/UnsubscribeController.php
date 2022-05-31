@@ -19,7 +19,7 @@ class UnsubscribeController extends Controller
     {
         /** @var ?SendRecord $sendRecord */
         $sendRecord = SendRecord::query()->where('key', '=', $sendRecordKey)->first();
-        if (! $sendRecord || $sendRecord->hasExpired()) {
+        if (!$sendRecord || $sendRecord->hasExpired()) {
             return response()->view('unsubscribe.not-found', [], 404);
         }
 

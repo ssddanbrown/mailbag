@@ -35,7 +35,7 @@ class ContactTest extends TestCase
         $response = $this->whileLoggedIn()->get('/contacts');
         $response->assertDontSee($contacts[105]->email);
 
-        $response = $this->get('/contacts?search='.$contacts[105]->email);
+        $response = $this->get('/contacts?search=' . $contacts[105]->email);
         $response->assertSee("/contacts/{$contacts[105]->id}");
         $response->assertSee("value=\"{$contacts[105]->email}\"", false);
     }
