@@ -4,13 +4,10 @@ namespace Tests\Feature;
 
 use App\Models\Contact;
 use App\Models\MailList;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ListImportTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_list_show_has_link_to_import()
     {
         $list = MailList::factory()->create();

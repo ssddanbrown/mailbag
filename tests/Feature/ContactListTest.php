@@ -4,13 +4,10 @@ namespace Tests\Feature;
 
 use App\Models\Contact;
 use App\Models\MailList;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ContactListTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_adding_to_mulitple_lists()
     {
         $lists = MailList::factory()->count(10)->create();

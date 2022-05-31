@@ -4,15 +4,12 @@ namespace Tests\Feature;
 
 use App\Jobs\ScrubUnsubscribesJob;
 use App\Models\Contact;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Bus;
 use Tests\TestCase;
 
 class DeleteUnsubscribedContactsTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_job_deletes_unsubscribed_contacts()
     {
         $weekAgo = now()->subDays(7);

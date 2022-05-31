@@ -5,13 +5,10 @@ namespace Tests\Feature;
 use App\Models\Campaign;
 use App\Models\RssFeed;
 use App\Models\Send;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class RssFeedTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_feed_shows_on_feed_view()
     {
         /** @var RssFeed $feed */
