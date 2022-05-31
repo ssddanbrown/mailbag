@@ -5,10 +5,10 @@
 
 php artisan down && \
 cp storage/database/database.sqlite ./database-backup.sqlite
-git pull origin master && \
+git pull origin main && \
 composer install --optimize-autoloader --no-dev && \
 php artisan migrate --force && \
-npm install && \
+npm ci && \
 npm run build && \
 php artisan queue:restart && \
 php artisan config:cache && \
