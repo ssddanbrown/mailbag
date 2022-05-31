@@ -25,6 +25,11 @@ jobs:
       run: chmod -R 777 storage bootstrap/cache
     - name: Create Database
       run: touch storage/database/database.sqlite
+    - name: Test Migrate
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: storage/database/database.sqlite
+      run: php artisan migrate
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_CONNECTION: sqlite
