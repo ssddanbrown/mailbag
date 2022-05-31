@@ -8,13 +8,12 @@ on:
 
 jobs:
   laravel-tests:
-
-    runs-on: ubuntu-20.04
-
+    runs-on: ubuntu-22.04
     steps:
-    - uses: shivammathur/setup-php@b7d1d9c9a92d8d8463ce36d7f60da34d461724f8
+    - uses: shivammathur/setup-php@v2
       with:
-        php-version: '7.4'
+        php-version: '8.1'
+        extensions: xml, mbstring, sqlite3, curl, bcmath
     - uses: actions/checkout@v2
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"

@@ -11,13 +11,6 @@ use Illuminate\Support\Str;
 class SendRecordFactory extends Factory
 {
     /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = SendRecord::class;
-
-    /**
      * Define the model's default state.
      *
      * @return array
@@ -27,8 +20,8 @@ class SendRecordFactory extends Factory
         return [
             'contact_id' => Contact::factory()->subscribed(),
             'send_id'    => Send::factory(),
-            'sent_at'    => rand(0, 1) === 1 ? null : $this->faker->dateTimeThisDecade,
-            'key'        => Str::random(16) . '-' . Str::random(16),
+            'sent_at'    => rand(0, 1) === 1 ? null : $this->faker->dateTimeThisDecade(),
+            'key'        => Str::random(16).'-'.Str::random(16),
         ];
     }
 }

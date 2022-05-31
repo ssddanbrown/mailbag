@@ -40,7 +40,7 @@ class MailList extends Model
         return static::query()
             ->orderBy('name')
             ->get(['id', 'name'])
-            ->mapWithKeys(function (MailList $list) {
+            ->mapWithKeys(function (self $list) {
                 return [$list->id => $list->name];
             })->toArray();
     }

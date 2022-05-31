@@ -92,7 +92,7 @@ Some guidance and a nginx example can be seen on the Laravel docs here: https://
 
 MailBag has the following requirements:
 
-- PHP > 7.4
+- PHP > 8.0
   - Extensions: BCMath, Ctype, Fileinfo, JSON, Mbstring, OpenSSL, PDO, Tokenizer, XML, SQLite3
 - SQLite > 3.30
 - [Composer](https://getcomposer.org/)
@@ -179,5 +179,5 @@ This project uses [Larastan](https://github.com/nunomaduro/larastan), an extensi
 for static analysis. You can run static analysis checks using:
 
 ```shell
-./vendor/bin/larastan analyse
+./vendor/bin/phpstan analyse
 ```

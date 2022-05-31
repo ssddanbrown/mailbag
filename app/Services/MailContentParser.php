@@ -31,8 +31,8 @@ class MailContentParser
      */
     public function parseForRss(Collection $articles): string
     {
-        $rssSectionRegex = '/' . $this->tagRegex('rss_loop')
-            . '(.*?)' . $this->tagRegex('end_rss_loop') . '/s';
+        $rssSectionRegex = '/'.$this->tagRegex('rss_loop')
+            .'(.*?)'.$this->tagRegex('end_rss_loop').'/s';
         $matches = [];
         preg_match_all($rssSectionRegex, $this->content, $matches);
 
@@ -65,8 +65,8 @@ class MailContentParser
      */
     protected function addOrReplaceUnsubscribe(SendRecord $record): void
     {
-        if (!$this->hasTag($this->content, 'unsubscribe_link')) {
-            $this->content .= "\n\n" . 'Unsubscribe: {{unsubscribe_link}}';
+        if (! $this->hasTag($this->content, 'unsubscribe_link')) {
+            $this->content .= "\n\n".'Unsubscribe: {{unsubscribe_link}}';
         }
 
         $unsubLink = route('unsubscribe.show', ['sendRecord' => $record]);
@@ -78,7 +78,7 @@ class MailContentParser
      */
     protected function hasTag(string $content, string $tagName): bool
     {
-        return preg_match('/' . $this->tagRegex($tagName) . '/', $content);
+        return preg_match('/'.$this->tagRegex($tagName).'/', $content);
     }
 
     /**
@@ -86,7 +86,7 @@ class MailContentParser
      */
     protected function replaceTag(string $content, string $tagName, string $replacement): string
     {
-        return preg_replace('/' . $this->tagRegex($tagName) . '/', $replacement, $content);
+        return preg_replace('/'.$this->tagRegex($tagName).'/', $replacement, $content);
     }
 
     /**
@@ -94,6 +94,6 @@ class MailContentParser
      */
     protected function tagRegex(string $tagName): string
     {
-        return '{{\s*?' . $tagName . '\s*?}}';
+        return '{{\s*?'.$tagName.'\s*?}}';
     }
 }

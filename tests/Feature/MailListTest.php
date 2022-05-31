@@ -36,9 +36,9 @@ class MailListTest extends TestCase
         $response = $this->whileLoggedIn()->get('/lists');
         $response->assertDontSee($lists[105]->name);
 
-        $response = $this->get('/lists?search=' . $lists[105]->name);
+        $response = $this->get('/lists?search='.$lists[105]->name);
         $response->assertSee("/lists/{$lists[105]->id}");
-        $response->assertSee('value="' . e($lists[105]->name) . '"', false);
+        $response->assertSee('value="'.e($lists[105]->name).'"', false);
     }
 
     public function test_can_see_contacts_on_list_show_page()

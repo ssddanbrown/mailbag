@@ -8,13 +8,12 @@ on:
 
 jobs:
   laravel-tests:
-
-    runs-on: ubuntu-20.04
-
+    runs-on: ubuntu-22.04
     steps:
-    - uses: shivammathur/setup-php@b7d1d9c9a92d8d8463ce36d7f60da34d461724f8
+    - uses: shivammathur/setup-php@v2
       with:
-        php-version: '7.4'
+        php-version: '8.1'
+        extensions: xml, mbstring, sqlite3, curl, bcmath
     - uses: actions/checkout@v2
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
@@ -25,11 +24,9 @@ jobs:
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
     - name: Create Database
-      run: |
-        mkdir -p database
-        touch database/database.sqlite
+      run: touch storage/database/database.sqlite
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
+        DB_DATABASE: storage/database/database.sqlite
       run: vendor/bin/phpunit
