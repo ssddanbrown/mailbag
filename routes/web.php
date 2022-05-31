@@ -44,7 +44,7 @@ Route::get('/unsubscribe/{sendRecord:key}', [UnsubscribeController::class, 'show
 Route::post('/unsubscribe/{sendRecord:key}/all', [UnsubscribeController::class, 'fromAll'])->name('unsubscribe.all');
 Route::post('/unsubscribe/{sendRecord:key}/list', [UnsubscribeController::class, 'fromList'])->name('unsubscribe.list');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
