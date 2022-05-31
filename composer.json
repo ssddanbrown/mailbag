@@ -4,24 +4,23 @@
     "description": "A simple plaintext email send app based on Laravel",
     "license": "MIT",
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "ext-libxml": "*",
         "ext-simplexml": "*",
-        "doctrine/dbal": "^3.0",
-        "fideloper/proxy": "^4.4",
-        "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^8.22.1",
-        "laravel/tinker": "^2.5"
+        "doctrine/dbal": "^3.3",
+        "guzzlehttp/guzzle": "^7.2",
+        "laravel/framework": "^9.14",
+        "laravel/tinker": "^2.7"
     },
     "require-dev": {
-        "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
-        "laravel/breeze": "^1.0",
-        "laravel/sail": "^0.0.5",
-        "mockery/mockery": "^1.4.2",
-        "nunomaduro/collision": "^5.0",
-        "nunomaduro/larastan": "^0.7.12",
-        "phpunit/phpunit": "^9.3.3"
+        "laravel/breeze": "^1.9",
+        "laravel/sail": "^1.14",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^6.1",
+        "nunomaduro/larastan": "^1.0",
+        "phpunit/phpunit": "^9.5.10",
+        "spatie/laravel-ignition": "^1.2"
     },
     "config": {
         "optimize-autoloader": true,
@@ -57,6 +56,9 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ]
     }
 }
