@@ -64,6 +64,7 @@ MailBag is a simple plaintext-focused email manager. The application has been pu
 
 Here are some much fuller-featured alternatives to MailBag:
 
+- [Keila](https://github.com/pentacent/keila)
 - [phpList](https://www.phplist.com/)
 - [Mailcoach](https://mailcoach.app/)
 - [listmonk](https://listmonk.app/)
