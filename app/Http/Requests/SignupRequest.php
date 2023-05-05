@@ -11,8 +11,6 @@ class SignupRequest extends FormRequest
     /**
      * Prevent the request if this user has signup up multiple
      * times within the last time period.
-     *
-     * @return bool
      */
     public function authorize(): bool
     {
