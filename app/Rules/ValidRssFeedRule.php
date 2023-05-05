@@ -14,7 +14,7 @@ class ValidRssFeedRule implements Rule
      * @param  mixed  $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes(string $attribute, $value): bool
     {
         if (app()->runningUnitTests()) {
             return true;
@@ -30,7 +30,7 @@ class ValidRssFeedRule implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return 'This provided feed URL does not point to a valid RSS feed.';
     }

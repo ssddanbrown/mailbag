@@ -22,7 +22,7 @@ class EmailListImporter
      *
      * @return array{created: int, updated: int, total: int}
      */
-    public function import(string $listOfEmails)
+    public function import(string $listOfEmails): array{created: int, updated: int, total: int}
     {
         $emails = $this->listToFilteredCollection($listOfEmails);
 
@@ -70,7 +70,7 @@ class EmailListImporter
      *
      * @return array{email: string, created_at: Carbon, updated_at: Carbon, unsubscribed: bool}
      */
-    protected function newContactDataForEmail(string $email)
+    protected function newContactDataForEmail(string $email): array{email: string, created_at: \Carbon, updated_at: \Carbon, unsubscribed: bool}
     {
         return [
             'email' => $email,

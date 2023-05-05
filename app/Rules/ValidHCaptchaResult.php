@@ -14,7 +14,7 @@ class ValidHCaptchaResult implements Rule
      * @param  mixed  $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes(string $attribute, $value): bool
     {
         if (! config('services.hcaptcha.active')) {
             return true;
@@ -34,7 +34,7 @@ class ValidHCaptchaResult implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return 'The captcha result did not verify';
     }

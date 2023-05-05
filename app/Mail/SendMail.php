@@ -28,7 +28,7 @@ class SendMail extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(): static
     {
         $send = $this->sendRecord->send;
         $content = (new MailContentParser($send->content))->parseForSend($this->sendRecord);
