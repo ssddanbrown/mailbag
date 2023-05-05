@@ -38,7 +38,7 @@ class ScrubSignupsCommand extends Command
      */
     public function handle()
     {
-        dispatch_now(new ScrubSignupsJob());
+        dispatch_sync(new ScrubSignupsJob());
 
         return 0;
     }

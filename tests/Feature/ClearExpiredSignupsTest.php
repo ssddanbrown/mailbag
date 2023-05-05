@@ -17,7 +17,7 @@ class ClearExpiredSignupsTest extends TestCase
             'created_at' => now()->subDays(8),
         ]);
 
-        dispatch_now(new ScrubSignupsJob());
+        dispatch_sync(new ScrubSignupsJob());
 
         $this->assertDatabaseHas('signups', ['id' => $validSignUp->id]);
         $this->assertDatabaseMissing('signups', ['id' => $expiredSignUp->id]);

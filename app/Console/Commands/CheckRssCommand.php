@@ -38,7 +38,7 @@ class CheckRssCommand extends Command
      */
     public function handle()
     {
-        dispatch_now(new FindRssFeedsToReviewJob());
+        dispatch_sync(new FindRssFeedsToReviewJob());
 
         return 0;
     }

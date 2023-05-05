@@ -38,7 +38,7 @@ class ScrubUnsubscribesCommand extends Command
      */
     public function handle()
     {
-        dispatch_now(new ScrubUnsubscribesJob());
+        dispatch_sync(new ScrubUnsubscribesJob());
 
         return 0;
     }

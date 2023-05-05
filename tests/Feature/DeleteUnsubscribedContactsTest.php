@@ -16,7 +16,7 @@ class DeleteUnsubscribedContactsTest extends TestCase
         $subscribedContact = Contact::factory()->subscribed()->create(['updated_at' => $weekAgo]);
         $unsubscribedContact = Contact::factory()->unsubscribed()->create(['updated_at' => $weekAgo]);
 
-        dispatch_now(new ScrubUnsubscribesJob());
+        dispatch_sync(new ScrubUnsubscribesJob());
 
         $this->assertDatabaseHas('contacts', ['id' => $subscribedContact->id]);
         $this->assertDatabaseMissing('contacts', ['id' => $unsubscribedContact->id]);
@@ -27,7 +27,7 @@ class DeleteUnsubscribedContactsTest extends TestCase
         $recent = now()->subHours(22);
         $unsubscribedContact = Contact::factory()->unsubscribed()->create(['updated_at' => $recent]);
 
-        dispatch_now(new ScrubUnsubscribesJob());
+        dispatch_sync(new ScrubUnsubscribesJob());
 
         $this->assertDatabaseHas('contacts', ['id' => $unsubscribedContact->id]);
     }
