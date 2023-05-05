@@ -1,5 +1,10 @@
 # MailBag
 
+TODO
+
+- Check rules in `app/Rules` function.
+- Update below readme
+
 [![PHPUnit](https://github.com/ssddanbrown/mailbag/workflows/PHPUnit/badge.svg)](https://github.com/ssddanbrown/mailbag/actions/workflows/phpunit.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/303b6c55a668b92adb5a/maintainability)](https://codeclimate.com/github/ssddanbrown/mailbag/maintainability)
 [![StyleCI](https://github.styleci.io/repos/322943641/shield?branch=main)](https://github.styleci.io/repos/322943641?branch=main)

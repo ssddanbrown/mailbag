@@ -9,11 +9,9 @@ use Illuminate\Support\Collection;
 
 class EmailListImporter
 {
-    protected MailList $list;
-
-    public function __construct(MailList $list)
-    {
-        $this->list = $list;
+    public function __construct(
+        protected MailList $list
+    ) {
     }
 
     /**
@@ -22,7 +20,7 @@ class EmailListImporter
      *
      * @return array{created: int, updated: int, total: int}
      */
-    public function import(string $listOfEmails): array{created: int, updated: int, total: int}
+    public function import(string $listOfEmails): array
     {
         $emails = $this->listToFilteredCollection($listOfEmails);
 
@@ -70,7 +68,7 @@ class EmailListImporter
      *
      * @return array{email: string, created_at: Carbon, updated_at: Carbon, unsubscribed: bool}
      */
-    protected function newContactDataForEmail(string $email): array{email: string, created_at: \Carbon, updated_at: \Carbon, unsubscribed: bool}
+    protected function newContactDataForEmail(string $email): array
     {
         return [
             'email' => $email,

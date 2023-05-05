@@ -2,20 +2,19 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Http;
 
-class ValidHCaptchaResult implements Rule
+class ValidHCaptchaResult implements ValidationRule
 {
     /**
      * Determine if the validation rule passes.
-     *
-     * @param  mixed  $value
      */
-    public function passes(string $attribute, $value): bool
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (! config('services.hcaptcha.active')) {
-            return true;
+            return;
         }
 
         $response = Http::asForm()->post('https://hcaptcha.com/siteverify', [
@@ -24,14 +23,9 @@ class ValidHCaptchaResult implements Rule
             'sitekey' => config('services.hcaptcha.sitekey'),
         ]);
 
-        return $response->json('success', false);
-    }
-
-    /**
-     * Get the validation error message.
-     */
-    public function message(): string
-    {
-        return 'The captcha result did not verify';
+        $isValid = $response->json('success', false);
+        if (!$isValid) {
+            $fail('The captcha result did not verify');
+        }
     }
 }

@@ -21,7 +21,7 @@ class LaunchSendController extends Controller
 
         $send->activated_at = now();
         $send->save();
-        $this->dispatch(new SendActivationJob($send));
+        dispatch(new SendActivationJob($send));
 
         $this->showSuccessMessage('Send activated and queued for mailing!');
 
