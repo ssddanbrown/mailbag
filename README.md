@@ -99,7 +99,7 @@ MailBag has the following requirements:
 - [Composer](https://getcomposer.org/)
 - Ideally Nginx, Apache or similar kind of server to handling incoming requests.
 - SMTP service for sending the emails.
-- NodeJS v16+ & NPM
+- NodeJS v18+ & NPM
 
 You'll also need command-line access on the host including the ability to configure cron and process management. Using git will help with keeping the codebase versions for managing updates.
 

@@ -6,11 +6,11 @@
         "build": "cross-env NODE_ENV=production postcss ./resources/css/app.css -o ./public/css/app.css"
     },
     "devDependencies": {
-        "@tailwindcss/forms": "^0.5.2",
+        "@tailwindcss/forms": "^0.5.3",
         "cross-env": "^7.0.3",
         "livereload": "^0.9.3",
-        "postcss": "^8.4.14",
-        "postcss-cli": "^9.1.0",
-        "tailwindcss": "^3.0.24"
+        "postcss": "^8.4.23",
+        "postcss-cli": "^10.1.0",
+        "tailwindcss": "^3.3.2"
     }
 }
