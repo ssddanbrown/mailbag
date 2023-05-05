@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class ContactTest extends TestCase
 {
-    public function test_contacts_visible_on_index()
+    public function test_contacts_visible_on_index(): void
     {
         $contact = Contact::factory()->create();
 
@@ -16,7 +16,7 @@ class ContactTest extends TestCase
         $response->assertSee($contact->email);
     }
 
-    public function test_contacts_index_paginated_at_100_contacts()
+    public function test_contacts_index_paginated_at_100_contacts(): void
     {
         $contacts = Contact::factory()->count(500)->create()->sortBy('email')->values();
 
@@ -28,7 +28,7 @@ class ContactTest extends TestCase
         $response->assertSee($contacts[140]->email);
     }
 
-    public function test_contacts_index_can_be_searched()
+    public function test_contacts_index_can_be_searched(): void
     {
         $contacts = Contact::factory()->count(500)->create()->sortBy('email')->values();
 
@@ -40,7 +40,7 @@ class ContactTest extends TestCase
         $response->assertSee("value=\"{$contacts[105]->email}\"", false);
     }
 
-    public function test_contact_can_be_edited()
+    public function test_contact_can_be_edited(): void
     {
         $contact = Contact::factory()->create();
 
@@ -49,7 +49,7 @@ class ContactTest extends TestCase
         $response->assertSee('Save');
     }
 
-    public function test_contact_can_be_saved()
+    public function test_contact_can_be_saved(): void
     {
         $contact = Contact::factory()->create();
 
@@ -66,7 +66,7 @@ class ContactTest extends TestCase
         ]);
     }
 
-    public function test_contact_can_be_deleted()
+    public function test_contact_can_be_deleted(): void
     {
         $contact = Contact::factory()->create();
 
@@ -78,7 +78,7 @@ class ContactTest extends TestCase
         $this->assertDatabaseMissing('contacts', ['id' => $contact->id]);
     }
 
-    public function test_new_contact_view()
+    public function test_new_contact_view(): void
     {
         $response = $this->whileLoggedIn()->get('/contacts/create');
         $response->assertStatus(200);
@@ -86,7 +86,7 @@ class ContactTest extends TestCase
         $response->assertDontSeeText('Delete');
     }
 
-    public function test_contact_create_request()
+    public function test_contact_create_request(): void
     {
         $response = $this->whileLoggedIn()->followingRedirects()->post('/contacts', [
             'email' => 'barry@example.com',

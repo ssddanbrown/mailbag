@@ -13,7 +13,7 @@ use Tests\TestCase;
 
 class RssFeedReviewTest extends TestCase
 {
-    public function test_find_rss_feeds_to_review_jobs_correctly_creates_review_jobs_for_pending_feeds()
+    public function test_find_rss_feeds_to_review_jobs_correctly_creates_review_jobs_for_pending_feeds(): void
     {
         $pendingFeed = RssFeed::factory()->create([
             'last_reviewed_at' => now()->subMonth(),
@@ -33,7 +33,7 @@ class RssFeedReviewTest extends TestCase
         Bus::assertDispatchedTimes(ReviewRssFeedJob::class, 1);
     }
 
-    public function test_find_rss_feeds_to_review_job_ignores_inactive_feeds()
+    public function test_find_rss_feeds_to_review_job_ignores_inactive_feeds(): void
     {
         $pendingFeed = RssFeed::factory()->create([
             'last_reviewed_at' => now()->subMonth(),
@@ -47,7 +47,7 @@ class RssFeedReviewTest extends TestCase
         Bus::assertNotDispatched(ReviewRssFeedJob::class);
     }
 
-    public function test_review_rss_feed_job_does_nothing_if_feed_inactive()
+    public function test_review_rss_feed_job_does_nothing_if_feed_inactive(): void
     {
         $lastReviewed = now()->subMonth();
         /** @var RssFeed $pendingFeed */
@@ -65,7 +65,7 @@ class RssFeedReviewTest extends TestCase
         Bus::assertNotDispatched(SendActivationJob::class);
     }
 
-    public function test_review_rss_feed_job_does_nothing_if_feed_not_due()
+    public function test_review_rss_feed_job_does_nothing_if_feed_not_due(): void
     {
         $lastReviewed = now()->subHour();
         /** @var RssFeed $pendingFeed */
@@ -83,7 +83,7 @@ class RssFeedReviewTest extends TestCase
         Bus::assertNotDispatched(SendActivationJob::class);
     }
 
-    public function test_review_rss_feed_job_updates_feed_check_time_if_due()
+    public function test_review_rss_feed_job_updates_feed_check_time_if_due(): void
     {
         $lastReviewed = now()->subDays(10);
         /** @var RssFeed $pendingFeed */
@@ -105,7 +105,7 @@ class RssFeedReviewTest extends TestCase
         Bus::assertDispatchedTimes(SendActivationJob::class, 0);
     }
 
-    public function test_review_rss_feed_job_updates_creates_send_with_content_if_due()
+    public function test_review_rss_feed_job_updates_creates_send_with_content_if_due(): void
     {
         $lastReviewed = now()->subDays(10);
         /** @var RssFeed $pendingFeed */

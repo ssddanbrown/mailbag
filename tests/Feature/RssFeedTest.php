@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class RssFeedTest extends TestCase
 {
-    public function test_feed_shows_on_feed_view()
+    public function test_feed_shows_on_feed_view(): void
     {
         /** @var RssFeed $feed */
         $feed = RssFeed::factory()->create();
@@ -18,7 +18,7 @@ class RssFeedTest extends TestCase
         $resp->assertSee($feed->url);
     }
 
-    public function test_feed_can_be_edited()
+    public function test_feed_can_be_edited(): void
     {
         $feed = RssFeed::factory()->create();
 
@@ -28,7 +28,7 @@ class RssFeedTest extends TestCase
         $response->assertSee('Save');
     }
 
-    public function test_feed_can_be_saved()
+    public function test_feed_can_be_saved(): void
     {
         /** @var RssFeed $feed */
         $feed = RssFeed::factory()->create();
@@ -51,7 +51,7 @@ class RssFeedTest extends TestCase
         $this->assertDatabaseHas('rss_feeds', array_merge($details, ['id' => $feed->id]));
     }
 
-    public function test_feed_can_be_deleted()
+    public function test_feed_can_be_deleted(): void
     {
         /** @var RssFeed $feed */
         $feed = RssFeed::factory()->create();
@@ -65,7 +65,7 @@ class RssFeedTest extends TestCase
         $this->assertDatabaseMissing('rss_feeds', ['id' => $feed->id]);
     }
 
-    public function test_new_feed_view()
+    public function test_new_feed_view(): void
     {
         $campaign = Campaign::factory()->create();
         $response = $this->whileLoggedIn()->get("/campaigns/{$campaign->id}/rss/create");
@@ -75,7 +75,7 @@ class RssFeedTest extends TestCase
         $response->assertDontSeeText('Delete');
     }
 
-    public function test_feed_create_request()
+    public function test_feed_create_request(): void
     {
         $campaign = Campaign::factory()->create();
         $send = Send::factory()->create(['campaign_id' => $campaign->id]);

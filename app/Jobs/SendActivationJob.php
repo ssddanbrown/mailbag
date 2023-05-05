@@ -35,7 +35,7 @@ class SendActivationJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $listMembers = $this->send->maillist->contacts()
             ->where('unsubscribed', '=', false)

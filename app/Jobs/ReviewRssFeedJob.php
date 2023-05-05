@@ -46,7 +46,7 @@ class ReviewRssFeedJob implements ShouldQueue, ShouldBeUnique
      *
      * @return void
      */
-    public function handle(RssParser $rssParser)
+    public function handle(RssParser $rssParser): void
     {
         if (! $this->feed->isPending()) {
             return;

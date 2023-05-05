@@ -15,7 +15,7 @@ use Tests\TestCase;
 
 class SignupTest extends TestCase
 {
-    public function test_signup_page_exists_for_a_list()
+    public function test_signup_page_exists_for_a_list(): void
     {
         $list = MailList::factory()->create(['display_name' => Str::random(12)]);
 
@@ -25,7 +25,7 @@ class SignupTest extends TestCase
         $resp->assertSee($list->description);
     }
 
-    public function test_user_can_sign_up_to_to_list()
+    public function test_user_can_sign_up_to_to_list(): void
     {
         $mailer = Mail::getFacadeRoot();
         Mail::fake();
@@ -53,7 +53,7 @@ class SignupTest extends TestCase
         });
     }
 
-    public function test_more_than_three_signups_to_a_list_will_cause_error()
+    public function test_more_than_three_signups_to_a_list_will_cause_error(): void
     {
         Mail::fake();
         $list = MailList::factory()->create();
@@ -69,7 +69,7 @@ class SignupTest extends TestCase
         }
     }
 
-    public function test_confirming_a_signup()
+    public function test_confirming_a_signup(): void
     {
         Mail::fake();
         $list = MailList::factory()->create(['display_name' => Str::random()]);
@@ -101,7 +101,7 @@ class SignupTest extends TestCase
         ]);
     }
 
-    public function test_signup_subscribes_existing_unsubscribed_contact()
+    public function test_signup_subscribes_existing_unsubscribed_contact(): void
     {
         $contact = Contact::factory()->unsubscribed()->create(['email' => 'test@example.com']);
         $list = MailList::factory()->create();
@@ -115,14 +115,14 @@ class SignupTest extends TestCase
         $this->assertFalse(boolval($contact->unsubscribed));
     }
 
-    public function test_signup_confirmation_with_nonexisting_token_shows_nice_message()
+    public function test_signup_confirmation_with_nonexisting_token_shows_nice_message(): void
     {
         $resp = $this->get('/signup-confirm/abc12345');
         $resp->assertStatus(404);
         $resp->assertSee('Sorry, sign up not found');
     }
 
-    public function test_signup_confirmations_over_a_week_old_shows_not_found_and_deletes_confirmation()
+    public function test_signup_confirmations_over_a_week_old_shows_not_found_and_deletes_confirmation(): void
     {
         Mail::fake();
         $list = MailList::factory()->create(['display_name' => Str::random()]);
@@ -137,7 +137,7 @@ class SignupTest extends TestCase
         $this->assertDatabaseMissing('signups', ['id' => $signup->id]);
     }
 
-    public function test_signup_with_hcaptcha_configured_has_hcaptcha_field_required()
+    public function test_signup_with_hcaptcha_configured_has_hcaptcha_field_required(): void
     {
         $list = MailList::factory()->create();
         config()->set('services.hcaptcha.sitekey', 'abc');
@@ -153,7 +153,7 @@ class SignupTest extends TestCase
         ]);
     }
 
-    public function test_signup_with_hcaptcha_configured_makes_verification_call()
+    public function test_signup_with_hcaptcha_configured_makes_verification_call(): void
     {
         $list = MailList::factory()->create();
         config()->set('services.hcaptcha.sitekey', 'abc');

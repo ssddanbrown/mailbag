@@ -13,7 +13,7 @@ class SendFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'name' => 'Send '.$this->faker->state().' '.$this->faker->month(),

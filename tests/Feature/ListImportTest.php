@@ -8,14 +8,14 @@ use Tests\TestCase;
 
 class ListImportTest extends TestCase
 {
-    public function test_list_show_has_link_to_import()
+    public function test_list_show_has_link_to_import(): void
     {
         $list = MailList::factory()->create();
         $response = $this->whileLoggedIn()->get("/lists/{$list->id}");
         $response->assertSee("/lists/{$list->id}/import");
     }
 
-    public function test_list_import_page_visible()
+    public function test_list_import_page_visible(): void
     {
         $list = MailList::factory()->create();
         $response = $this->whileLoggedIn()->get("/lists/{$list->id}/import");
@@ -25,7 +25,7 @@ class ListImportTest extends TestCase
         $response->assertSee($list->name);
     }
 
-    public function test_list_import_imports_as_expected()
+    public function test_list_import_imports_as_expected(): void
     {
         /** @var MailList $list */
         $list = MailList::factory()->create();
@@ -51,7 +51,7 @@ class ListImportTest extends TestCase
         $this->assertTrue(abs(time() - $contact->created_at->timestamp) < 50);
     }
 
-    public function test_list_import_does_not_create_duplicates_for_existing_contacts()
+    public function test_list_import_does_not_create_duplicates_for_existing_contacts(): void
     {
         /** @var MailList $list */
         $list = MailList::factory()->create();
@@ -70,7 +70,7 @@ class ListImportTest extends TestCase
         $this->assertEquals(1, Contact::query()->where('email', '=', 'test@example.com')->count());
     }
 
-    public function test_import_does_not_detach_existing_contacts_on_list()
+    public function test_import_does_not_detach_existing_contacts_on_list(): void
     {
         /** @var MailList $list */
         $list = MailList::factory()->create();
@@ -86,7 +86,7 @@ class ListImportTest extends TestCase
         $this->assertEquals(3, $list->contacts()->count());
     }
 
-    public function test_import_skips_invalid_emails()
+    public function test_import_skips_invalid_emails(): void
     {
         /** @var MailList $list */
         $list = MailList::factory()->create();
@@ -98,7 +98,7 @@ class ListImportTest extends TestCase
         $this->assertEquals(0, $list->contacts()->count());
     }
 
-    public function test_import_handles_duplicates()
+    public function test_import_handles_duplicates(): void
     {
         /** @var MailList $list */
         $list = MailList::factory()->create();

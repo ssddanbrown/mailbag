@@ -27,7 +27,7 @@ class ScrubUnsubscribesJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         Contact::query()
             ->where('unsubscribed', '=', true)

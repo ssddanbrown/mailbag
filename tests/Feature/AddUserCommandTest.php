@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class AddUserCommandTest extends TestCase
 {
-    public function test_create_new_user()
+    public function test_create_new_user(): void
     {
         $this->artisan('mailbag:add-user')
             ->expectsQuestion('Please provide a name for the user', 'Barry')
@@ -24,7 +24,7 @@ class AddUserCommandTest extends TestCase
         $this->assertTrue(Auth::attempt(['email' => 'barry@example.com', 'password' => 'testpass']));
     }
 
-    public function test_create_new_user_with_empty_detail_returns_error()
+    public function test_create_new_user_with_empty_detail_returns_error(): void
     {
         $this->artisan('mailbag:add-user')
             ->expectsQuestion('Please provide a name for the user', 'Barry')
@@ -34,7 +34,7 @@ class AddUserCommandTest extends TestCase
             ->assertExitCode(1);
     }
 
-    public function test_command_when_email_used()
+    public function test_command_when_email_used(): void
     {
         $user = User::factory()->create(['email' => 'barry@example.com']);
         $this->artisan('mailbag:add-user')
@@ -51,7 +51,7 @@ class AddUserCommandTest extends TestCase
         ]);
     }
 
-    public function test_command_when_email_used_but_reject_update()
+    public function test_command_when_email_used_but_reject_update(): void
     {
         $user = User::factory()->create(['email' => 'barry@example.com']);
         $this->artisan('mailbag:add-user')

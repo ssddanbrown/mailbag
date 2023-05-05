@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class ContactListTest extends TestCase
 {
-    public function test_adding_to_mulitple_lists()
+    public function test_adding_to_mulitple_lists(): void
     {
         $lists = MailList::factory()->count(10)->create();
         $contact = Contact::factory()->create();
@@ -22,7 +22,7 @@ class ContactListTest extends TestCase
         $this->assertEquals(10, $contact->lists()->count());
     }
 
-    public function test_removing_contact_from_lists()
+    public function test_removing_contact_from_lists(): void
     {
         $lists = MailList::factory()->count(10)->create();
         $contact = Contact::factory()->create();

@@ -14,7 +14,7 @@ class SignupRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         $email = $this->request->get('email');
         $twelveHoursAgo = now()->subHours(12);
@@ -31,7 +31,7 @@ class SignupRequest extends FormRequest
      *
      * @return array<string, mixed[]>
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = [
             'email' => ['required', 'email', 'max:200'],

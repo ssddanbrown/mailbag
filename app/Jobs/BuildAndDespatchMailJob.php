@@ -35,7 +35,7 @@ class BuildAndDespatchMailJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         Mail::send(new SendMail($this->sendRecord));
         $this->sendRecord->sent_at = now();

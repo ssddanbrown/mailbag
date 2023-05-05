@@ -14,7 +14,7 @@ class SendRecordFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'contact_id' => Contact::factory()->subscribed(),

@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class MailContentParserTest extends TestCase
 {
-    public function test_parse_for_send_adds_unsub_link_at_tag_if_existing()
+    public function test_parse_for_send_adds_unsub_link_at_tag_if_existing(): void
     {
         $record = SendRecord::factory()->create();
         $content = 'ABC {{unsubscribe_link}} DEF';
@@ -21,7 +21,7 @@ class MailContentParserTest extends TestCase
         $this->assertEquals("ABC http://localhost/unsubscribe/{$record->key} DEF", $output);
     }
 
-    public function test_parse_for_send_adds_unsub_link_at_end_if_no_tag()
+    public function test_parse_for_send_adds_unsub_link_at_end_if_no_tag(): void
     {
         $record = SendRecord::factory()->create();
         $content = 'ABC DEF';
@@ -32,7 +32,7 @@ class MailContentParserTest extends TestCase
         $this->assertEquals("ABC DEF\n\n"."Unsubscribe: http://localhost/unsubscribe/{$record->key}", $output);
     }
 
-    public function test_parse_for_rss_repeats_block_for_each_article()
+    public function test_parse_for_rss_repeats_block_for_each_article(): void
     {
         $articles = $this->getRssArticles(10);
         $content = '{{rss_loop}}{{rss_article_title}}{{end_rss_loop}}';
@@ -43,7 +43,7 @@ class MailContentParserTest extends TestCase
         $this->assertEquals($expected, $output);
     }
 
-    public function test_parse_for_rss_includes_all_details()
+    public function test_parse_for_rss_includes_all_details(): void
     {
         $articles = $this->getRssArticles(1);
         $content = '{{rss_loop}}

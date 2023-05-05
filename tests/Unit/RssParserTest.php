@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class RssParserTest extends TestCase
 {
-    public function test_get_articles_provides_the_rss_articles()
+    public function test_get_articles_provides_the_rss_articles(): void
     {
         $rss = $this->getRssContent(3);
         Http::fake([
@@ -22,7 +22,7 @@ class RssParserTest extends TestCase
         $this->assertEquals('Recent blog post 1', $articles->first()->title);
     }
 
-    public function test_get_articles_works_when_only_one_article()
+    public function test_get_articles_works_when_only_one_article(): void
     {
         $rss = $this->getRssContent(1);
         Http::fake([
@@ -35,7 +35,7 @@ class RssParserTest extends TestCase
         $this->assertEquals('Recent blog post 1', $articles->first()->title);
     }
 
-    public function test_encoded_entities_are_decoded()
+    public function test_encoded_entities_are_decoded(): void
     {
         $rss = $this->getRssContent(1);
         $rss = str_replace('Recent blog post 1', 'This &amp;amp; that', $rss);
@@ -47,7 +47,7 @@ class RssParserTest extends TestCase
         $this->assertEquals('This & that', $articles->first()->title);
     }
 
-    public function test_get_articles_returns_null_on_request_failure()
+    public function test_get_articles_returns_null_on_request_failure(): void
     {
         Http::fake([
             'https://example.com/feed.xml' => Http::response('', 500),
@@ -57,7 +57,7 @@ class RssParserTest extends TestCase
         $this->assertNull($articles);
     }
 
-    public function test_get_articles_returns_null_on_invalid_xml_content()
+    public function test_get_articles_returns_null_on_invalid_xml_content(): void
     {
         Http::fake([
             'https://example.com/feed.xml' => Http::response('<html><p>Hello</p></html>', 200),
@@ -67,7 +67,7 @@ class RssParserTest extends TestCase
         $this->assertNull($articles);
     }
 
-    public function test_get_articles_returns_null_on_non_xml_content()
+    public function test_get_articles_returns_null_on_non_xml_content(): void
     {
         Http::fake([
             'https://example.com/feed.xml' => Http::response('{"cat": "dog"}', 200),

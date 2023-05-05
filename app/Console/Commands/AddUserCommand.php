@@ -37,7 +37,7 @@ class AddUserCommand extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $name = $this->ask('Please provide a name for the user');
         $email = $this->ask('Please provide an email address for the user');

@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class UserTest extends TestCase
 {
-    public function test_users_visible_on_index()
+    public function test_users_visible_on_index(): void
     {
         $user = User::factory()->create();
 
@@ -16,7 +16,7 @@ class UserTest extends TestCase
         $response->assertSee($user->email);
     }
 
-    public function test_users_index_paginated_at_100_users()
+    public function test_users_index_paginated_at_100_users(): void
     {
         $users = User::factory()->count(350)->create()->sortBy('name')->values();
 
@@ -28,7 +28,7 @@ class UserTest extends TestCase
         $response->assertSee($users[140]->email);
     }
 
-    public function test_users_index_can_be_searched()
+    public function test_users_index_can_be_searched(): void
     {
         $users = User::factory()->count(500)->create()->sortBy('name')->values();
 
@@ -40,7 +40,7 @@ class UserTest extends TestCase
         $response->assertSee("value=\"{$users[105]->email}\"", false);
     }
 
-    public function test_user_can_be_edited()
+    public function test_user_can_be_edited(): void
     {
         $user = User::factory()->create();
 
@@ -50,7 +50,7 @@ class UserTest extends TestCase
         $response->assertSee('Save');
     }
 
-    public function test_user_can_be_saved()
+    public function test_user_can_be_saved(): void
     {
         $user = User::factory()->create();
 
@@ -67,7 +67,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function test_user_can_be_deleted()
+    public function test_user_can_be_deleted(): void
     {
         $user = User::factory()->create();
 
@@ -79,7 +79,7 @@ class UserTest extends TestCase
         $this->assertDatabaseMissing('users', ['id' => $user->id]);
     }
 
-    public function test_new_user_view()
+    public function test_new_user_view(): void
     {
         $response = $this->whileLoggedIn()->get('/users/create');
         $response->assertStatus(200);
@@ -87,7 +87,7 @@ class UserTest extends TestCase
         $response->assertDontSeeText('Delete');
     }
 
-    public function test_user_create_request()
+    public function test_user_create_request(): void
     {
         $response = $this->whileLoggedIn()->followingRedirects()->post('/users', [
             'email' => 'barry@example.com',

@@ -13,7 +13,7 @@ class RssFeedFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         $campaign = Campaign::factory()->create();
 

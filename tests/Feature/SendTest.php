@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class SendTest extends TestCase
 {
-    public function test_sends_visible_on_campaign()
+    public function test_sends_visible_on_campaign(): void
     {
         $campaign = Campaign::factory()->create();
         $send = Send::factory()->for($campaign)->create();
@@ -19,7 +19,7 @@ class SendTest extends TestCase
         $response->assertSee($send->name);
     }
 
-    public function test_sends_list_in_campaign_paginated_at_100_sends()
+    public function test_sends_list_in_campaign_paginated_at_100_sends(): void
     {
         $campaign = Campaign::factory()->create();
         $sends = Send::factory()->count(500)
@@ -36,7 +36,7 @@ class SendTest extends TestCase
         $response->assertSee($sends[140]->name);
     }
 
-    public function test_send_can_be_viewed()
+    public function test_send_can_be_viewed(): void
     {
         $send = Send::factory()->create();
 
@@ -45,7 +45,7 @@ class SendTest extends TestCase
         $response->assertSee($send->name);
     }
 
-    public function test_send_show_view_shows_launch_details_if_launched()
+    public function test_send_show_view_shows_launch_details_if_launched(): void
     {
         $send = Send::factory()->create(['activated_at' => '2022-05-31 16:10:48']);
 
@@ -54,7 +54,7 @@ class SendTest extends TestCase
         $response->assertSee('Send launched and sent to 0 people on the 31st of May 2022 at 16:10:48');
     }
 
-    public function test_send_can_be_edited()
+    public function test_send_can_be_edited(): void
     {
         $send = Send::factory()->create();
 
@@ -64,7 +64,7 @@ class SendTest extends TestCase
         $response->assertSee('Save');
     }
 
-    public function test_send_can_be_saved()
+    public function test_send_can_be_saved(): void
     {
         $send = Send::factory()->create();
 
@@ -80,7 +80,7 @@ class SendTest extends TestCase
         $this->assertDatabaseHas('sends', array_merge($details, ['id' => $send->id]));
     }
 
-    public function test_send_can_be_deleted()
+    public function test_send_can_be_deleted(): void
     {
         $send = Send::factory()->create();
         $campaign = $send->campaign;
@@ -93,7 +93,7 @@ class SendTest extends TestCase
         $this->assertDatabaseMissing('sends', ['id' => $send->id]);
     }
 
-    public function test_new_send_view()
+    public function test_new_send_view(): void
     {
         $response = $this->whileLoggedIn()->get('/sends/create');
         $response->assertStatus(200);
@@ -101,7 +101,7 @@ class SendTest extends TestCase
         $response->assertDontSeeText('Delete');
     }
 
-    public function test_send_create_request()
+    public function test_send_create_request(): void
     {
         $campaign = Campaign::factory()->create();
         $list = MailList::factory()->create();
@@ -118,7 +118,7 @@ class SendTest extends TestCase
         $this->assertDatabaseHas('sends', array_merge($details, ['activated_at' => null]));
     }
 
-    public function test_create_send_via_copy()
+    public function test_create_send_via_copy(): void
     {
         /** @var Send $existingSend */
         $existingSend = Send::factory()->create(['name' => 'send to copy']);

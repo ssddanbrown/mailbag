@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class UnsubscribeTest extends TestCase
 {
-    public function test_unsubscribe_view_accessible()
+    public function test_unsubscribe_view_accessible(): void
     {
         $sendRecord = SendRecord::factory()->create(['sent_at' => now()]);
 
@@ -19,7 +19,7 @@ class UnsubscribeTest extends TestCase
         $resp->assertSee('Unsubscribe from all');
     }
 
-    public function test_unsubscribe_view_shows_warning_on_expired_or_invalid_send()
+    public function test_unsubscribe_view_shows_warning_on_expired_or_invalid_send(): void
     {
         $sendRecord = SendRecord::factory()->create();
         $sendRecord->sent_at = now()->subMonths(2);
@@ -35,7 +35,7 @@ class UnsubscribeTest extends TestCase
         }
     }
 
-    public function test_unsubscribe_from_list()
+    public function test_unsubscribe_from_list(): void
     {
         /** @var SendRecord $sendRecord */
         $sendRecord = SendRecord::factory()->create();
@@ -50,7 +50,7 @@ class UnsubscribeTest extends TestCase
         $this->assertEquals(0, $contact->lists()->count());
     }
 
-    public function test_unsubscribe_from_all_unsubs_contact_and_removes_from_all_lists()
+    public function test_unsubscribe_from_all_unsubs_contact_and_removes_from_all_lists(): void
     {
         /** @var SendRecord $sendRecord */
         $sendRecord = SendRecord::factory()->create();
@@ -69,7 +69,7 @@ class UnsubscribeTest extends TestCase
         $this->assertEquals(0, $contact->lists()->count());
     }
 
-    public function test_unsubscribe_thank_you()
+    public function test_unsubscribe_thank_you(): void
     {
         $resp = $this->get('/unsubscribe/confirm?type=all');
         $resp->assertSee('Unsubscribe from all');

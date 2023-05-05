@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class ClearExpiredSignupsTest extends TestCase
 {
-    public function test_job_clears_old_signups()
+    public function test_job_clears_old_signups(): void
     {
         $validSignUp = Signup::factory()->create();
         $expiredSignUp = Signup::factory()->create([
@@ -23,7 +23,7 @@ class ClearExpiredSignupsTest extends TestCase
         $this->assertDatabaseMissing('signups', ['id' => $expiredSignUp->id]);
     }
 
-    public function test_command_calls_job()
+    public function test_command_calls_job(): void
     {
         Bus::fake();
         Artisan::call('mailbag:scrub-signups');

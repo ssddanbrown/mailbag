@@ -12,7 +12,7 @@ class MailListFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         $name = $this->faker->country().' '.Str::random(5).' List';
 

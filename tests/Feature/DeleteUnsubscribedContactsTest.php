@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class DeleteUnsubscribedContactsTest extends TestCase
 {
-    public function test_job_deletes_unsubscribed_contacts()
+    public function test_job_deletes_unsubscribed_contacts(): void
     {
         $weekAgo = now()->subDays(7);
         $subscribedContact = Contact::factory()->subscribed()->create(['updated_at' => $weekAgo]);
@@ -22,7 +22,7 @@ class DeleteUnsubscribedContactsTest extends TestCase
         $this->assertDatabaseMissing('contacts', ['id' => $unsubscribedContact->id]);
     }
 
-    public function test_job_ignores_contacts_with_recent_changes()
+    public function test_job_ignores_contacts_with_recent_changes(): void
     {
         $recent = now()->subHours(22);
         $unsubscribedContact = Contact::factory()->unsubscribed()->create(['updated_at' => $recent]);
@@ -32,7 +32,7 @@ class DeleteUnsubscribedContactsTest extends TestCase
         $this->assertDatabaseHas('contacts', ['id' => $unsubscribedContact->id]);
     }
 
-    public function test_command_calls_job()
+    public function test_command_calls_job(): void
     {
         Bus::fake();
         Artisan::call('mailbag:scrub-unsubscribes');

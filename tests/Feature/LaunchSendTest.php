@@ -14,7 +14,7 @@ use Tests\TestCase;
 
 class LaunchSendTest extends TestCase
 {
-    public function test_activation_marks_job_as_activated_and_dispatched_job()
+    public function test_activation_marks_job_as_activated_and_dispatched_job(): void
     {
         $send = Send::factory()->create(['activated_at' => null]);
         Bus::fake();
@@ -30,7 +30,7 @@ class LaunchSendTest extends TestCase
         Bus::assertDispatched(SendActivationJob::class);
     }
 
-    public function test_activation_of_an_already_activated_send_shows_warning_and_does_not_activate_again()
+    public function test_activation_of_an_already_activated_send_shows_warning_and_does_not_activate_again(): void
     {
         $send = Send::factory()->create(['activated_at' => now()]);
         Bus::fake();
@@ -45,7 +45,7 @@ class LaunchSendTest extends TestCase
         Bus::assertNotDispatched(SendActivationJob::class);
     }
 
-    public function test_send_activation_job_creates_send_records_and_jobs_for_each_person_in_list()
+    public function test_send_activation_job_creates_send_records_and_jobs_for_each_person_in_list(): void
     {
         $send = Send::factory()->create();
         $contacts = Contact::factory()->count(100)
@@ -66,7 +66,7 @@ class LaunchSendTest extends TestCase
         $this->assertNotNull($send->records()->first()->sent_at);
     }
 
-    public function test_sends_not_sent_to_unsubscribed_people_in_list()
+    public function test_sends_not_sent_to_unsubscribed_people_in_list(): void
     {
         $send = Send::factory()->create();
         $contacts = Contact::factory()->count(100)
@@ -80,7 +80,7 @@ class LaunchSendTest extends TestCase
         Mail::assertSent(SendMail::class, 0);
     }
 
-    public function test_mail_sent_with_right_address_subject_and_content()
+    public function test_mail_sent_with_right_address_subject_and_content(): void
     {
         $mailer = Mail::getFacadeRoot();
         Mail::fake();

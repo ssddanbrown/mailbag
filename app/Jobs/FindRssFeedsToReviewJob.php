@@ -26,7 +26,7 @@ class FindRssFeedsToReviewJob implements ShouldQueue, ShouldBeUnique
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $activeFeeds = RssFeed::query()
             ->where('active', '=', true)
