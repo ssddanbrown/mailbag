@@ -14,7 +14,7 @@ class ContactFactory extends Factory
     public function definition()
     {
         return [
-            'email'        => $this->faker->unique()->email(),
+            'email' => $this->faker->unique()->email(),
             'unsubscribed' => rand(0, 1) === 0,
         ];
     }

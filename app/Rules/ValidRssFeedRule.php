@@ -10,9 +10,8 @@ class ValidRssFeedRule implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param string $attribute
-     * @param mixed  $value
-     *
+     * @param  string  $attribute
+     * @param  mixed  $value
      * @return bool
      */
     public function passes($attribute, $value)
@@ -23,7 +22,7 @@ class ValidRssFeedRule implements Rule
 
         $articles = (new RssParser())->getArticles($value);
 
-        return !is_null($articles) && $articles->count() > 0;
+        return ! is_null($articles) && $articles->count() > 0;
     }
 
     /**

@@ -69,7 +69,7 @@ class SendTest extends TestCase
         $send = Send::factory()->create();
 
         $details = [
-            'name'    => 'My new internal send',
+            'name' => 'My new internal send',
             'subject' => 'My new subject',
             'content' => 'Custom content',
         ];
@@ -106,10 +106,10 @@ class SendTest extends TestCase
         $campaign = Campaign::factory()->create();
         $list = MailList::factory()->create();
         $details = [
-            'name'         => 'My new internal send',
-            'subject'      => 'My new subject',
-            'content'      => 'Custom content',
-            'campaign_id'  => $campaign->id,
+            'name' => 'My new internal send',
+            'subject' => 'My new subject',
+            'content' => 'Custom content',
+            'campaign_id' => $campaign->id,
             'mail_list_id' => $list->id,
         ];
         $response = $this->whileLoggedIn()->followingRedirects()->post('/sends', $details);

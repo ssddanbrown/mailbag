@@ -99,4 +99,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

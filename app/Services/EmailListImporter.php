@@ -42,8 +42,7 @@ class EmailListImporter
      * and returning the counts of those added, separated by
      * whether they already existed in the database or not.
      *
-     * @param Collection<int, string> $emailChunk
-     *
+     * @param  Collection<int, string>  $emailChunk
      * @return array{new: int, existing: int}
      */
     protected function importChunkOfEmails(Collection $emailChunk): array
@@ -74,9 +73,9 @@ class EmailListImporter
     protected function newContactDataForEmail(string $email)
     {
         return [
-            'email'        => $email,
-            'created_at'   => now(),
-            'updated_at'   => now(),
+            'email' => $email,
+            'created_at' => now(),
+            'updated_at' => now(),
             'unsubscribed' => false,
         ];
     }

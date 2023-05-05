@@ -10,21 +10,20 @@ class ValidHCaptchaResult implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param string $attribute
-     * @param mixed  $value
-     *
+     * @param  string  $attribute
+     * @param  mixed  $value
      * @return bool
      */
     public function passes($attribute, $value)
     {
-        if (!config('services.hcaptcha.active')) {
+        if (! config('services.hcaptcha.active')) {
             return true;
         }
 
         $response = Http::asForm()->post('https://hcaptcha.com/siteverify', [
             'response' => $value,
-            'secret'   => config('services.hcaptcha.secretkey'),
-            'sitekey'  => config('services.hcaptcha.sitekey'),
+            'secret' => config('services.hcaptcha.secretkey'),
+            'sitekey' => config('services.hcaptcha.sitekey'),
         ]);
 
         return $response->json('success', false);
