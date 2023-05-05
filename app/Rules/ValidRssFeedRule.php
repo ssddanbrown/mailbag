@@ -18,7 +18,7 @@ class ValidRssFeedRule implements ValidationRule
         }
 
         $articles = (new RssParser())->getArticles($value);
-        $isValid = ! is_null($articles) && $articles->count() > 0;
+        $isValid = !is_null($articles) && $articles->count() > 0;
 
         if (!$isValid) {
             $fail('This provided feed URL does not point to a valid RSS feed.');

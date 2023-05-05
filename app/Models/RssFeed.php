@@ -35,7 +35,7 @@ class RssFeed extends Model
      */
     protected $casts = [
         'last_reviewed_at' => 'immutable_datetime',
-        'next_review_at' => 'immutable_datetime',
+        'next_review_at'   => 'immutable_datetime',
     ];
 
     /**

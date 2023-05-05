@@ -35,7 +35,7 @@ final class UserTest extends TestCase
         $response = $this->whileLoggedIn()->get('/users');
         $response->assertDontSee($users[105]->email);
 
-        $response = $this->get('/users?search='.$users[105]->email);
+        $response = $this->get('/users?search=' . $users[105]->email);
         $response->assertSee("/users/{$users[105]->id}");
         $response->assertSee("value=\"{$users[105]->email}\"", false);
     }
@@ -56,14 +56,14 @@ final class UserTest extends TestCase
 
         $response = $this->whileLoggedIn()->followingRedirects()->put("/users/{$user->id}", [
             'email' => 'updated@example.com',
-            'name' => 'Barry Donald',
+            'name'  => 'Barry Donald',
         ]);
         $response->assertSee('updated@example.com');
         $response->assertSee('User updated!');
         $this->assertDatabaseHas('users', [
-            'id' => $user->id,
+            'id'    => $user->id,
             'email' => 'updated@example.com',
-            'name' => 'Barry Donald',
+            'name'  => 'Barry Donald',
         ]);
     }
 
@@ -90,16 +90,16 @@ final class UserTest extends TestCase
     public function test_user_create_request(): void
     {
         $response = $this->whileLoggedIn()->followingRedirects()->post('/users', [
-            'email' => 'barry@example.com',
+            'email'    => 'barry@example.com',
             'password' => 'password1234',
-            'name' => 'Barry Donald',
+            'name'     => 'Barry Donald',
         ]);
 
         $response->assertSee('barry@example.com');
         $response->assertSee('User created');
         $this->assertDatabaseHas('users', [
             'email' => 'barry@example.com',
-            'name' => 'Barry Donald',
+            'name'  => 'Barry Donald',
         ]);
     }
 }
