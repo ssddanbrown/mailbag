@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-class SignupTest extends TestCase
+final class SignupTest extends TestCase
 {
     public function test_signup_page_exists_for_a_list(): void
     {

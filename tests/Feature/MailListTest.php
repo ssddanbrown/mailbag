@@ -6,7 +6,7 @@ use App\Models\Contact;
 use App\Models\MailList;
 use Tests\TestCase;
 
-class MailListTest extends TestCase
+final class MailListTest extends TestCase
 {
     public function test_lists_visible_on_index(): void
     {

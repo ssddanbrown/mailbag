@@ -11,7 +11,7 @@ use App\Services\Rss\RssParser;
 use Illuminate\Support\Facades\Bus;
 use Tests\TestCase;
 
-class RssFeedReviewTest extends TestCase
+final class RssFeedReviewTest extends TestCase
 {
     public function test_find_rss_feeds_to_review_jobs_correctly_creates_review_jobs_for_pending_feeds(): void
     {

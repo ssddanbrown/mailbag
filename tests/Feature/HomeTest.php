@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 
-class HomeTest extends TestCase
+final class HomeTest extends TestCase
 {
     public function test_root_url_visit_when_logged_in_redirects_to_dash(): void
     {

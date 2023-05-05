@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
-class RssParserTest extends TestCase
+final class RssParserTest extends TestCase
 {
     public function test_get_articles_provides_the_rss_articles(): void
     {

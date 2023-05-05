@@ -8,7 +8,7 @@ use App\Services\Rss\RssArticle;
 use Illuminate\Support\Collection;
 use Tests\TestCase;
 
-class MailContentParserTest extends TestCase
+final class MailContentParserTest extends TestCase
 {
     public function test_parse_for_send_adds_unsub_link_at_tag_if_existing(): void
     {

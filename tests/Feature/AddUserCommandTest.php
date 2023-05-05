@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
-class AddUserCommandTest extends TestCase
+final class AddUserCommandTest extends TestCase
 {
     public function test_create_new_user(): void
     {

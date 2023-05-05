@@ -6,7 +6,7 @@ use App\Models\Contact;
 use App\Models\MailList;
 use Tests\TestCase;
 
-class ListImportTest extends TestCase
+final class ListImportTest extends TestCase
 {
     public function test_list_show_has_link_to_import(): void
     {

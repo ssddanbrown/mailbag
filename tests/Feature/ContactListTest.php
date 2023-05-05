@@ -6,7 +6,7 @@ use App\Models\Contact;
 use App\Models\MailList;
 use Tests\TestCase;
 
-class ContactListTest extends TestCase
+final class ContactListTest extends TestCase
 {
     public function test_adding_to_mulitple_lists(): void
     {

@@ -7,7 +7,7 @@ use App\Models\RssFeed;
 use App\Models\Send;
 use Tests\TestCase;
 
-class RssFeedTest extends TestCase
+final class RssFeedTest extends TestCase
 {
     public function test_feed_shows_on_feed_view(): void
     {

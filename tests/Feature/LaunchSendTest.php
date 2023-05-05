@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-class LaunchSendTest extends TestCase
+final class LaunchSendTest extends TestCase
 {
     public function test_activation_marks_job_as_activated_and_dispatched_job(): void
     {

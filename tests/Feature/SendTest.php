@@ -7,7 +7,7 @@ use App\Models\MailList;
 use App\Models\Send;
 use Tests\TestCase;
 
-class SendTest extends TestCase
+final class SendTest extends TestCase
 {
     public function test_sends_visible_on_campaign(): void
     {

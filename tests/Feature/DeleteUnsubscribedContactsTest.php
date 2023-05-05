@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Bus;
 use Tests\TestCase;
 
-class DeleteUnsubscribedContactsTest extends TestCase
+final class DeleteUnsubscribedContactsTest extends TestCase
 {
     public function test_job_deletes_unsubscribed_contacts(): void
     {

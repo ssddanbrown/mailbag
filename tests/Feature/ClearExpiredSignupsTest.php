@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Bus;
 use Tests\TestCase;
 
-class ClearExpiredSignupsTest extends TestCase
+final class ClearExpiredSignupsTest extends TestCase
 {
     public function test_job_clears_old_signups(): void
     {

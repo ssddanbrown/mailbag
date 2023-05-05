@@ -6,7 +6,7 @@ use App\Models\MailList;
 use App\Models\SendRecord;
 use Tests\TestCase;
 
-class UnsubscribeTest extends TestCase
+final class UnsubscribeTest extends TestCase
 {
     public function test_unsubscribe_view_accessible(): void
     {

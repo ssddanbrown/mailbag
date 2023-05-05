@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\Models\Contact;
 use Tests\TestCase;
 
-class ContactTest extends TestCase
+final class ContactTest extends TestCase
 {
     public function test_contacts_visible_on_index(): void
     {

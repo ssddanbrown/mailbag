@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\Models\Campaign;
 use Tests\TestCase;
 
-class CampaignTest extends TestCase
+final class CampaignTest extends TestCase
 {
     public function test_campaigns_visible_on_index(): void
     {
