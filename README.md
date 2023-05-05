@@ -1,10 +1,5 @@
 # MailBag
 
-TODO
-
-- Check rules in `app/Rules` function.
-- Update below readme
-
 [![PHPUnit](https://github.com/ssddanbrown/mailbag/workflows/PHPUnit/badge.svg)](https://github.com/ssddanbrown/mailbag/actions/workflows/phpunit.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/303b6c55a668b92adb5a/maintainability)](https://codeclimate.com/github/ssddanbrown/mailbag/maintainability)
 [![StyleCI](https://github.styleci.io/repos/322943641/shield?branch=main)](https://github.styleci.io/repos/322943641?branch=main)
@@ -98,13 +93,13 @@ Some guidance and a nginx example can be seen on the Laravel docs here: https://
 
 MailBag has the following requirements:
 
-- PHP > 8.0
+- PHP > 8.1
   - Extensions: BCMath, Ctype, Fileinfo, JSON, Mbstring, OpenSSL, PDO, Tokenizer, XML, SQLite3
 - SQLite > 3.30
 - [Composer](https://getcomposer.org/)
 - Ideally Nginx, Apache or similar kind of server to handling incoming requests.
 - SMTP service for sending the emails.
-- NodeJS v12+ & NPM
+- NodeJS v16+ & NPM
 
 You'll also need command-line access on the host including the ability to configure cron and process management. Using git will help with keeping the codebase versions for managing updates.
 
