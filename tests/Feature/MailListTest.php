@@ -36,9 +36,9 @@ final class MailListTest extends TestCase
         $response = $this->whileLoggedIn()->get('/lists');
         $response->assertDontSee($lists[105]->name);
 
-        $response = $this->get('/lists?search='.$lists[105]->name);
+        $response = $this->get('/lists?search=' . $lists[105]->name);
         $response->assertSee("/lists/{$lists[105]->id}");
-        $response->assertSee('value="'.e($lists[105]->name).'"', false);
+        $response->assertSee('value="' . e($lists[105]->name) . '"', false);
     }
 
     public function test_can_see_contacts_on_list_show_page(): void
@@ -56,10 +56,10 @@ final class MailListTest extends TestCase
     {
         /** @var MailList $list */
         $list = MailList::factory()->create([
-            'name' => 'My test list',
-            'description' => 'A test list',
+            'name'         => 'My test list',
+            'description'  => 'A test list',
             'display_name' => 'List display name',
-            'slug' => 'a-list-slug',
+            'slug'         => 'a-list-slug',
         ]);
 
         $response = $this->whileLoggedIn()->get("/lists/{$list->id}");
@@ -83,9 +83,9 @@ final class MailListTest extends TestCase
         $list = MailList::factory()->create();
 
         $details = [
-            'name' => 'My new internal list',
+            'name'         => 'My new internal list',
             'display_name' => 'My cool list',
-            'slug' => 'my_list',
+            'slug'         => 'my_list',
         ];
 
         $response = $this->whileLoggedIn()->followingRedirects()->put("/lists/{$list->id}", $details);
@@ -117,7 +117,7 @@ final class MailListTest extends TestCase
     public function test_list_create_request(): void
     {
         $details = [
-            'name' => 'My new internal list',
+            'name'         => 'My new internal list',
             'display_name' => 'My cool list',
         ];
         $response = $this->whileLoggedIn()->followingRedirects()->post('/lists', $details);

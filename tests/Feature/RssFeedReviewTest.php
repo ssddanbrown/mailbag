@@ -17,15 +17,15 @@ final class RssFeedReviewTest extends TestCase
     {
         $pendingFeed = RssFeed::factory()->create([
             'last_reviewed_at' => now()->subMonth(),
-            'send_frequency' => 7,
-            'next_review_at' => now()->subDays(15),
-            'active' => true,
+            'send_frequency'   => 7,
+            'next_review_at'   => now()->subDays(15),
+            'active'           => true,
         ]);
         $nonPendingFeed = RssFeed::factory()->create([
             'last_reviewed_at' => now()->subDay(),
-            'send_frequency' => 7,
-            'next_review_at' => now()->addHour(),
-            'active' => true,
+            'send_frequency'   => 7,
+            'next_review_at'   => now()->addHour(),
+            'active'           => true,
         ]);
         Bus::fake();
 
@@ -37,9 +37,9 @@ final class RssFeedReviewTest extends TestCase
     {
         $pendingFeed = RssFeed::factory()->create([
             'last_reviewed_at' => now()->subMonth(),
-            'send_frequency' => 7,
-            'next_review_at' => now()->subDays(15),
-            'active' => false,
+            'send_frequency'   => 7,
+            'next_review_at'   => now()->subDays(15),
+            'active'           => false,
         ]);
         Bus::fake();
 
@@ -53,9 +53,9 @@ final class RssFeedReviewTest extends TestCase
         /** @var RssFeed $pendingFeed */
         $pendingFeed = RssFeed::factory()->create([
             'last_reviewed_at' => $lastReviewed,
-            'send_frequency' => 7,
-            'next_review_at' => now()->subDays(15),
-            'active' => false,
+            'send_frequency'   => 7,
+            'next_review_at'   => now()->subDays(15),
+            'active'           => false,
         ]);
         Bus::fake();
 
@@ -71,9 +71,9 @@ final class RssFeedReviewTest extends TestCase
         /** @var RssFeed $pendingFeed */
         $pendingFeed = RssFeed::factory()->create([
             'last_reviewed_at' => $lastReviewed,
-            'send_frequency' => 7,
-            'next_review_at' => now()->subDays(15),
-            'active' => true,
+            'send_frequency'   => 7,
+            'next_review_at'   => now()->subDays(15),
+            'active'           => true,
         ]);
         Bus::fake();
 
@@ -89,8 +89,8 @@ final class RssFeedReviewTest extends TestCase
         /** @var RssFeed $pendingFeed */
         $pendingFeed = RssFeed::factory()->create([
             'last_reviewed_at' => $lastReviewed,
-            'send_frequency' => 7,
-            'active' => true,
+            'send_frequency'   => 7,
+            'active'           => true,
         ]);
         Bus::fake();
 
@@ -111,8 +111,8 @@ final class RssFeedReviewTest extends TestCase
         /** @var RssFeed $pendingFeed */
         $pendingFeed = RssFeed::factory()->create([
             'last_reviewed_at' => $lastReviewed,
-            'send_frequency' => 7,
-            'active' => true,
+            'send_frequency'   => 7,
+            'active'           => true,
         ]);
         $pendingFeed->templateSend->update([
             'content' => 'RSS Test {{rss_loop}}{{rss_article_title}}{{rss_article_link}}{{end_rss_loop}}',

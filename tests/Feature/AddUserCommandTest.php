@@ -17,7 +17,7 @@ final class AddUserCommandTest extends TestCase
             ->expectsOutput('User created, You can now login with the email barry@example.com and your provided password.');
 
         $this->assertDatabaseHas('users', [
-            'name' => 'Barry',
+            'name'  => 'Barry',
             'email' => 'barry@example.com',
         ]);
 
@@ -45,8 +45,8 @@ final class AddUserCommandTest extends TestCase
             ->expectsOutput('User created, You can now login with the email barry@example.com and your provided password.');
 
         $this->assertDatabaseHas('users', [
-            'id' => $user->id,
-            'name' => 'Barry 123',
+            'id'    => $user->id,
+            'name'  => 'Barry 123',
             'email' => 'barry@example.com',
         ]);
     }
@@ -63,8 +63,8 @@ final class AddUserCommandTest extends TestCase
             ->assertExitCode(1);
 
         $this->assertDatabaseMissing('users', [
-            'id' => $user->id,
-            'name' => 'Barry 123',
+            'id'    => $user->id,
+            'name'  => 'Barry 123',
             'email' => 'barry@example.com',
         ]);
     }
