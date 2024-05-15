@@ -47,6 +47,5 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perHour(20)->by($request->ip());
         });
 
-
     }
 }
