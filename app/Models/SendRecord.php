@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /**
- * @property Send $send
+ * @property Send    $send
  * @property Contact $contact
  */
 class SendRecord extends Model

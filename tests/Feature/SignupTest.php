@@ -36,9 +36,9 @@ final class SignupTest extends TestCase
         ]);
         $resp->assertRedirect("/signup/{$list->slug}/thanks");
         $this->assertDatabaseHas('signups', [
-            'email' => 'tester@example.com',
+            'email'        => 'tester@example.com',
             'mail_list_id' => $list->id,
-            'attempts' => 1,
+            'attempts'     => 1,
         ]);
 
         $signup = Signup::query()->where('email', '=', 'tester@example.com')->first();
@@ -93,7 +93,7 @@ final class SignupTest extends TestCase
         ]);
         $contact = Contact::query()->where('email', '=', 'tester@example.com')->first();
         $this->assertDatabaseHas('contact_mail_list', [
-            'contact_id' => $contact->id,
+            'contact_id'   => $contact->id,
             'mail_list_id' => $list->id,
         ]);
         $this->assertDatabaseMissing('signups', [
@@ -165,7 +165,7 @@ final class SignupTest extends TestCase
         ]);
 
         $this->post("/signup/{$list->slug}", [
-            'email' => 'test@example.com',
+            'email'              => 'test@example.com',
             'h-captcha-response' => 'def456',
         ]);
 

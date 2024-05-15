@@ -46,6 +46,5 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('signups', function (Request $request) {
             return Limit::perHour(20)->by($request->ip());
         });
-
     }
 }

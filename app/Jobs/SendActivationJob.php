@@ -44,7 +44,7 @@ class SendActivationJob implements ShouldQueue
         $sendRecords = $listMembers->map(function ($member) use ($sendKey, $recordKeys) {
             return new SendRecord([
                 'contact_id' => $member->id,
-                'key' => $sendKey.'-'.$recordKeys->pop(),
+                'key'        => $sendKey . '-' . $recordKeys->pop(),
             ]);
         });
 

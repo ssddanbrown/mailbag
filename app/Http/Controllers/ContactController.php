@@ -18,7 +18,7 @@ class ContactController extends Controller
         $query = Contact::query()->orderBy('email')->withCount(['lists']);
         $search = $request->get('search');
         if ($search) {
-            $query->where('email', 'like', '%'.$search.'%');
+            $query->where('email', 'like', '%' . $search . '%');
         }
 
         $contacts = $query->paginate(100)->withQueryString();
@@ -44,12 +44,12 @@ class ContactController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $this->validate($request, [
-            'email' => 'required|email|unique:contacts,email',
+            'email'        => 'required|email|unique:contacts,email',
             'unsubscribed' => 'boolean',
         ]);
 
         $contact = new Contact([
-            'email' => $request->get('email'),
+            'email'        => $request->get('email'),
             'unsubscribed' => $request->get('unsubscribed') === '1',
         ]);
         $contact->save();
@@ -72,7 +72,7 @@ class ContactController extends Controller
             })->toArray();
 
         return view('contacts.edit', [
-            'contact' => $contact,
+            'contact'     => $contact,
             'listOptions' => $allListOptions,
         ]);
     }
@@ -83,12 +83,12 @@ class ContactController extends Controller
     public function update(Request $request, Contact $contact): RedirectResponse
     {
         $this->validate($request, [
-            'email' => "required|email|unique:contacts,email,{$contact->id}",
+            'email'        => "required|email|unique:contacts,email,{$contact->id}",
             'unsubscribed' => 'boolean',
         ]);
 
         $contact->update([
-            'email' => $request->get('email'),
+            'email'        => $request->get('email'),
             'unsubscribed' => $request->get('unsubscribed') === '1',
         ]);
 

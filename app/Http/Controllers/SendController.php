@@ -35,7 +35,7 @@ class SendController extends Controller
         }
 
         return view('sends.create', [
-            'send' => $default,
+            'send'     => $default,
             'campaign' => $campaign,
         ]);
     }
@@ -46,11 +46,11 @@ class SendController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $this->validate($request, [
-            'name' => 'required|max:250',
-            'content' => 'required|max:25000',
-            'subject' => 'required|max:250',
+            'name'         => 'required|max:250',
+            'content'      => 'required|max:25000',
+            'subject'      => 'required|max:250',
             'mail_list_id' => 'required|exists:mail_lists,id',
-            'campaign_id' => 'required|exists:campaigns,id',
+            'campaign_id'  => 'required|exists:campaigns,id',
         ]);
 
         $send = new Send($validated);
@@ -75,11 +75,11 @@ class SendController extends Controller
     public function update(Request $request, Send $send): RedirectResponse
     {
         $validated = $this->validate($request, [
-            'name' => 'required|max:250',
-            'content' => 'required|max:25000',
-            'subject' => 'required|max:250',
+            'name'         => 'required|max:250',
+            'content'      => 'required|max:25000',
+            'subject'      => 'required|max:250',
             'mail_list_id' => 'exists:mail_lists,id',
-            'campaign_id' => 'exists:campaigns,id',
+            'campaign_id'  => 'exists:campaigns,id',
         ]);
 
         $send->update($validated);

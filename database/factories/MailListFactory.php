@@ -12,13 +12,13 @@ class MailListFactory extends Factory
      */
     public function definition(): array
     {
-        $name = $this->faker->country().' '.Str::random(5).' List';
+        $name = $this->faker->country() . ' ' . Str::random(5) . ' List';
 
         return [
-            'name' => $name,
-            'slug' => Str::slug($name),
-            'display_name' => 'The great '.$name,
-            'description' => $this->faker->sentence(),
+            'name'         => $name,
+            'slug'         => Str::slug($name),
+            'display_name' => 'The great ' . $name,
+            'description'  => $this->faker->sentence(),
         ];
     }
 }
