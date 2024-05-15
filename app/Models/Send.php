@@ -23,7 +23,7 @@ class Send extends Model
     use HasFactory;
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $fillable = ['name', 'content', 'subject', 'mail_list_id', 'campaign_id'];
 

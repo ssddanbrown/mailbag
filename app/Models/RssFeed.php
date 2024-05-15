@@ -26,7 +26,7 @@ class RssFeed extends Model
     use HasFactory;
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $fillable = ['url', 'active', 'template_send_id', 'send_frequency', 'target_hour'];
 
