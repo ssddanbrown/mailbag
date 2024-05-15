@@ -9,14 +9,12 @@
         "ext-simplexml": "*",
         "ext-sqlite3": "*",
         "ext-mbstring": "*",
-        "doctrine/dbal": "^3.5",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^11.7",
         "laravel/tinker": "^2.9"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
-        "laravel/breeze": "^2.0",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
         "nunomaduro/larastan": "^2.8",
