@@ -57,7 +57,7 @@ final class LaunchSendTest extends TestCase
 
         $this->assertEquals(100, SendRecord::query()->where('send_id', '=', $send->id)->count());
         $this->assertDatabaseHas('send_records', [
-            'send_id'    => $send->id,
+            'send_id' => $send->id,
             'contact_id' => $contacts->first()->id,
         ]);
         $this->assertNotNull($send->records()->first()->key);

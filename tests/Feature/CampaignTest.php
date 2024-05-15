@@ -35,9 +35,9 @@ final class CampaignTest extends TestCase
         $response = $this->whileLoggedIn()->get('/campaigns');
         $response->assertDontSee($campaigns[105]->name);
 
-        $response = $this->get('/campaigns?search=' . $campaigns[105]->name);
+        $response = $this->get('/campaigns?search='.$campaigns[105]->name);
         $response->assertSee("/campaigns/{$campaigns[105]->id}");
-        $response->assertSee('value="' . e($campaigns[105]->name) . '"', false);
+        $response->assertSee('value="'.e($campaigns[105]->name).'"', false);
     }
 
     public function test_campaign_can_be_viewed(): void

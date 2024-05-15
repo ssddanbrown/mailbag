@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
 /**
- * @property string   $email
+ * @property string $email
  * @property MailList $maillist
  */
 class Signup extends Model

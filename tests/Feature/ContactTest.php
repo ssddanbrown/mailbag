@@ -35,7 +35,7 @@ final class ContactTest extends TestCase
         $response = $this->whileLoggedIn()->get('/contacts');
         $response->assertDontSee($contacts[105]->email);
 
-        $response = $this->get('/contacts?search=' . $contacts[105]->email);
+        $response = $this->get('/contacts?search='.$contacts[105]->email);
         $response->assertSee("/contacts/{$contacts[105]->id}");
         $response->assertSee("value=\"{$contacts[105]->email}\"", false);
     }
@@ -54,14 +54,14 @@ final class ContactTest extends TestCase
         $contact = Contact::factory()->create();
 
         $response = $this->whileLoggedIn()->followingRedirects()->put("/contacts/{$contact->id}", [
-            'email'        => 'updated@example.com',
+            'email' => 'updated@example.com',
             'unsubscribed' => '1',
         ]);
         $response->assertSee('updated@example.com');
         $response->assertSee('Contact updated!');
         $this->assertDatabaseHas('contacts', [
-            'id'           => $contact->id,
-            'email'        => 'updated@example.com',
+            'id' => $contact->id,
+            'email' => 'updated@example.com',
             'unsubscribed' => true,
         ]);
     }
@@ -95,7 +95,7 @@ final class ContactTest extends TestCase
         $response->assertSee('barry@example.com');
         $response->assertSee('Contact created');
         $this->assertDatabaseHas('contacts', [
-            'email'        => 'barry@example.com',
+            'email' => 'barry@example.com',
             'unsubscribed' => false,
         ]);
     }

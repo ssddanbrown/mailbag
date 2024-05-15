@@ -16,9 +16,9 @@ class SendRecordFactory extends Factory
     {
         return [
             'contact_id' => Contact::factory()->subscribed(),
-            'send_id'    => Send::factory(),
-            'sent_at'    => rand(0, 1) === 1 ? null : $this->faker->dateTimeThisDecade(),
-            'key'        => Str::random(16) . '-' . Str::random(16),
+            'send_id' => Send::factory(),
+            'sent_at' => rand(0, 1) === 1 ? null : $this->faker->dateTimeThisDecade(),
+            'key' => Str::random(16).'-'.Str::random(16),
         ];
     }
 }

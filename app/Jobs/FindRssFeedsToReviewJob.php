@@ -14,7 +14,7 @@ use Illuminate\Queue\SerializesModels;
  * Finds pending RSS feeds to process and creates new
  * jobs for each that needs to be processed.
  */
-class FindRssFeedsToReviewJob implements ShouldQueue, ShouldBeUnique
+class FindRssFeedsToReviewJob implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;

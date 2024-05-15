@@ -13,18 +13,18 @@ class ValidHCaptchaResult implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (!config('services.hcaptcha.active')) {
+        if (! config('services.hcaptcha.active')) {
             return;
         }
 
         $response = Http::asForm()->post('https://hcaptcha.com/siteverify', [
             'response' => $value,
-            'secret'   => config('services.hcaptcha.secretkey'),
-            'sitekey'  => config('services.hcaptcha.sitekey'),
+            'secret' => config('services.hcaptcha.secretkey'),
+            'sitekey' => config('services.hcaptcha.sitekey'),
         ]);
 
         $isValid = $response->json('success', false);
-        if (!$isValid) {
+        if (! $isValid) {
             $fail('The captcha result did not verify');
         }
     }

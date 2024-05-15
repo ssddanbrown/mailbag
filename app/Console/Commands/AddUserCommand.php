@@ -50,9 +50,9 @@ class AddUserCommand extends Command
         }
 
         $user = User::query()->where('email', '=', $email)->first();
-        if (!is_null($user)) {
+        if (! is_null($user)) {
             $update = $this->confirm('User with that email already exists, Do you want to update them?');
-            if (!$update) {
+            if (! $update) {
                 $this->error('Taking no action');
 
                 return 1;
@@ -62,8 +62,8 @@ class AddUserCommand extends Command
         }
 
         $user->fill([
-            'name'     => $name,
-            'email'    => $email,
+            'name' => $name,
+            'email' => $email,
             'password' => Hash::make($password),
         ]);
         $user->save();

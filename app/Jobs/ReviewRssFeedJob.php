@@ -14,7 +14,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class ReviewRssFeedJob implements ShouldQueue, ShouldBeUnique
+class ReviewRssFeedJob implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;
@@ -46,7 +46,7 @@ class ReviewRssFeedJob implements ShouldQueue, ShouldBeUnique
      */
     public function handle(RssParser $rssParser): void
     {
-        if (!$this->feed->isPending()) {
+        if (! $this->feed->isPending()) {
             return;
         }
 

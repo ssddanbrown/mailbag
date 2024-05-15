@@ -15,7 +15,7 @@ class ContactListController extends Controller
     public function add(Request $request, Contact $contact): RedirectResponse
     {
         $this->validate($request, [
-            'lists'   => 'array',
+            'lists' => 'array',
             'lists.*' => 'integer',
         ]);
 
@@ -33,7 +33,7 @@ class ContactListController extends Controller
     public function remove(Request $request, Contact $contact): RedirectResponse
     {
         $this->validate($request, [
-            'lists'   => 'array',
+            'lists' => 'array',
             'lists.*' => 'integer',
         ]);
 
