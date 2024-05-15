@@ -39,8 +39,8 @@ class RssFeed extends Model
     {
         return [
             'template_send_id' => 'integer',
-            'send_frequency' => 'integer',
-            'target_hour' => 'integer',
+            'send_frequency'   => 'integer',
+            'target_hour'      => 'integer',
             'last_reviewed_at' => 'immutable_datetime',
             'next_review_at'   => 'immutable_datetime',
         ];
