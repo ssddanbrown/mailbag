@@ -31,8 +31,8 @@ class SignupConfirmationMail extends Mailable implements ShouldQueue
     public function build(): static
     {
         return $this->subject("Confirm your subscription to {$this->signup->maillist->display_name}")
-        ->text('signups.confirmation-email', [
-            'signup' => $this->signup,
-        ]);
+            ->text('signups.confirmation-email', [
+                'signup' => $this->signup,
+            ]);
     }
 }

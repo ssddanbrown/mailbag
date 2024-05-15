@@ -26,17 +26,25 @@ class RssFeed extends Model
     use HasFactory;
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $fillable = ['url', 'active', 'template_send_id', 'send_frequency', 'target_hour'];
 
     /**
-     * @var array<string, string>
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
      */
-    protected $casts = [
-        'last_reviewed_at' => 'immutable_datetime',
-        'next_review_at'   => 'immutable_datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'template_send_id' => 'integer',
+            'send_frequency'   => 'integer',
+            'target_hour'      => 'integer',
+            'last_reviewed_at' => 'immutable_datetime',
+            'next_review_at'   => 'immutable_datetime',
+        ];
+    }
 
     /**
      * Get the campaign that this rss feed sits in.
@@ -80,7 +88,7 @@ class RssFeed extends Model
     protected function getNextReviewDate(): CarbonImmutable
     {
         return $this->last_reviewed_at->clone()
-             ->addDays($this->send_frequency)
-             ->setHour($this->target_hour)->setMinutes(0);
+            ->addDays($this->send_frequency)
+            ->setHour($this->target_hour)->setMinutes(0);
     }
 }

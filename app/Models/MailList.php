@@ -18,7 +18,7 @@ class MailList extends Model
     use HasFactory;
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $fillable = ['name', 'display_name', 'slug', 'description'];
 

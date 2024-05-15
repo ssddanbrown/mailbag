@@ -23,16 +23,21 @@ class Send extends Model
     use HasFactory;
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $fillable = ['name', 'content', 'subject', 'mail_list_id', 'campaign_id'];
 
     /**
-     * @var array<string, string>
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
      */
-    protected $casts = [
-        'activated_at' => 'immutable_datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'activated_at' => 'immutable_datetime',
+        ];
+    }
 
     /**
      * Get the campaign that this send is in.
