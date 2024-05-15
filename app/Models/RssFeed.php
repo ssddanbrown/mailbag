@@ -31,12 +31,17 @@ class RssFeed extends Model
     protected $fillable = ['url', 'active', 'template_send_id', 'send_frequency', 'target_hour'];
 
     /**
-     * @var array<string, string>
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
      */
-    protected $casts = [
-        'last_reviewed_at' => 'immutable_datetime',
-        'next_review_at' => 'immutable_datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'last_reviewed_at' => 'immutable_datetime',
+            'next_review_at' => 'immutable_datetime',
+        ];
+    }
 
     /**
      * Get the campaign that this rss feed sits in.
